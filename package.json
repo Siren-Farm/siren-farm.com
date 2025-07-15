@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource-variable/funnel-display": "^5.2.6",
+    "@fontsource-variable/funnel-sans": "^5.2.6",
     "astro": "^5.11.1"
   }
 }
