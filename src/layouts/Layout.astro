@@ -1,5 +1,5 @@
 ---
-import '@fontsource-variable/funnel-display';
+import "../styles/global.css";
 ---
 
 <!doctype html>
@@ -11,7 +11,7 @@ import '@fontsource-variable/funnel-display';
     <meta name='generator' content={Astro.generator} />
     <title>Siren Farm</title>
   </head>
-  <body>
+  <body class="bg-stromboli">
     <slot />
   </body>
 </html>
@@ -19,55 +19,11 @@ import '@fontsource-variable/funnel-display';
 <style is:global>
   html,
   body {
-    margin: 0 auto;
-    max-width: 1200px;
-
-    font: 20px/1.6 'Funnel Sans Variable';
-  }
-
-  body {
-    background-color: #1f3f36;
+    font-family: 'Funnel Sans Variable', sans-serif;
   }
 
   h1,
-  h2,
-  h3,
-  h4 {
-    font: 20px/1.6 'Funnel Display Variable';
-  }
-
-  h1 {
-    font-size: 5.05em;
-    line-height: 1.27em;
-    padding-top: 0.297em;
-    margin-bottom: 0.0198em;
-  }
-
   h2 {
-    font-size: 3.4em;
-    line-height: 1.41em;
-    padding-top: 0.368em;
-    margin-bottom: 0.103em;
-  }
-
-  h3 {
-    font-size: 2.25em;
-    line-height: 1.42em;
-    padding-top: 0.378em;
-    margin-bottom: 0.333em;
-  }
-
-  h4 {
-    font-size: 1.5em;
-    line-height: 1.07em;
-    padding-top: 0.2em;
-    margin-bottom: 0.867em;
-  }
-
-  p {
-    font-size: 1em;
-    line-height: 1.6em;
-    padding-top: 0.45em;
-    margin-bottom: 1.15em;
+    font-family: 'Funnel Display Variable';
   }
 </style>

@@ -1,12 +1,21 @@
 ---
+import { Image } from 'astro:assets';
+
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
 import Work from '../components/Work.astro';
+
+import LogoDark from '../assets/logo-dark.svg';
+import farmImage from '../assets/mask-group.png';
 ---
 
 <Layout>
-  <Hero />
-  <Work />
-  <Footer />
+  <Image class="relative w-full inset-0 z-0" src={farmImage} alt="Farm photo"/>
+  <div class="relative z-1 mt-[-33%] max-w-369 m-auto">
+    <Hero/>
+    <LogoDark class="relative -z-1 mt-6 -mb-4 m-auto"/>
+    <Work />
+    <Footer />
+  </div>
 </Layout>

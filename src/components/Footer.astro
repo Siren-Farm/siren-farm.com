@@ -1,19 +1,23 @@
-<footer>
-  <h2>Say hi</h2>
-  <a href='mailto:hi@siren-farm.com'>hi@siren-farm.com</a>
-  <p>Sitio do Poço, Caparosinha - Tondela Portugal</p>
+---
+import LogoLight from '../assets/logo-light.svg';
+---
+
+<footer class="mt-16 mb-10 text-center">
+  <div class="mb-7 flex flex-row justify-between items-center max-w-95 m-auto bg-rum-swizzle rounded-full px-3 py-3 pl-10">
+    <h2 class="h-16 text-xl text-saffron-mango">Say hi!</h2>
+    <div class="flex justify-center items-center w-24 h-24 rounded-full bg-white">
+      <span class="h-18 text-xl text-saffron-mango">→</span>
+    </div>
+  </div>
+  <a class="text-rum-swizzle text-sm underline decoration-putty" href='mailto:hi@siren-farm.com'>hi@siren-farm.com</a>
+  <div class="mt-28 flex gap-21 justify-center items-center text-base text-left text-rum-swizzle">
+    <div class="flex-1 flex justify-end">
+      <p class="max-w-50 self-right">With love, From Tondela</p>
+    </div>
+    <LogoLight />
+    <div class="flex-1">
+      <p class="max-w-100">Sitio do Poço, Caparosinha Tondela Portugal</p>
+    </div>
+  </div>
 </footer>
 
-<style>
-  h2,
-  a,
-  p {
-    display: block;
-    color: #e6bc68;
-    text-align: center;
-  }
-
-  h2 {
-    margin-bottom: 1em;
-  }
-</style>

@@ -1,63 +1,19 @@
-<ul>
-  <li>
-    <h4>Regenerative Agriculture</h4>
-    <p>
-      We restore soil health, boost biodiversity, and capture carbon through
-      low-impact, outdoor cultivation.
-    </p>
-    <p>
-      This approach goes beyond sustainability — it regenerates ecosystems,
-      builds long-term productivity, and aligns with EU climate goals and
-      conscious consumer demand.
-    </p>
-  </li>
-  <li>
-    <h4>Pharmaceutical-Grade Cannabis</h4>
-    <p>
-      We grow fresh cannabis flowers with strict quality control, full
-      traceability, and compliance with INFARMED and EU pharmaceutical
-      standard.Patient and partner trust depends on consistency, safety, and
-      regulatory alignment. Medical-grade cannabis demands precision at every
-      stage.
-    </p>
-  </li>
-  <li>
-    <h4>Agricultural Technology Integration</h4>
-    <p>
-      We apply digital tools and environmental sensors to monitor crops,
-      forecast risks, and guide decisions through data.
-    </p>
-    <p>
-      Technology increases efficiency, reduces waste, and ensures predictable,
-      high-quality yields — critical in a regulated and competitive market.
-    </p>
-  </li>
-  <li>
-    <h4>Local Impact and Transparency</h4>
-    <p>
-      We create fair rural jobs, support circular economies, and share our
-      results and practices openly.
-    </p>
-    <p>
-      A modern farm should serve the land and its people. Transparency builds
-      trust with investors, regulators, and the public.
-    </p>
-  </li>
+---
+const content = [
+  ["Regenerative Agriculture", ["We restore soil health, boost biodiversity, and capture carbon through low-impact, outdoor cultivation.", "This approach goes beyond sustainability — it regenerates ecosystems, builds long-term productivity, and aligns with EU climate goals and conscious consumer demand."]],
+  ["Pharmaceutical-Grade Cannabis", ["We grow fresh cannabis flowers with strict quality control, full traceability, and compliance with INFARMED and EU pharmaceutical standard.Patient and partner trust depends on consistency, safety, and regulatory alignment. Medical-grade cannabis demands precision at every stage."]],
+  ["Agricultural Technology Integration", ["We apply digital tools and environmental sensors to monitor crops, forecast risks, and guide decisions through data.", "Technology increases efficiency, reduces waste, and ensures predictable, high-quality yields — critical in a regulated and competitive market."]],
+  ["Local Impact and Transparency", ["We create fair rural jobs, support circular economies, and share our results and practices openly.", "A modern farm should serve the land and its people. Transparency builds trust with investors, regulators, and the public."]],
+]
+---
+
+<ul class="grid grid-cols-2 gap-7">
+  {content.map(([title, paragraphs]) => (
+    <li class="rounded-3xl bg-white/10 p-10">
+      <h2 class="text-saffron-mango text-lg mb-7">{title}</h2>
+      {paragraphs.map((paragraph: string) => (
+        <p class="text-white text-xs mb-3">{paragraph}</p>
+      ))}
+    </li>
+  ))}
 </ul>
-
-<style>
-  ul {
-    display: grid;
-    column-gap: 100px;
-    grid-template-columns: auto auto;
-
-    margin-top: 10em;
-
-    list-style: none;
-  }
-
-  h4,
-  p {
-    color: #e6bc68;
-  }
-</style>
