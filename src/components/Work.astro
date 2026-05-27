@@ -1,18 +1,18 @@
 ---
 const content = [
   ["Regenerative Agriculture", ["We restore soil health, boost biodiversity, and capture carbon through low-impact, outdoor cultivation.", "This approach goes beyond sustainability — it regenerates ecosystems, builds long-term productivity, and aligns with EU climate goals and conscious consumer demand."]],
-  ["Pharmaceutical-Grade Cannabis", ["We grow fresh cannabis flowers with strict quality control, full traceability, and compliance with INFARMED and EU pharmaceutical standard.Patient and partner trust depends on consistency, safety, and regulatory alignment. Medical-grade cannabis demands precision at every stage."]],
+  ["Pharmaceutical-Grade Cannabis", ["We grow fresh cannabis flowers with strict quality control, full traceability, and compliance with INFARMED and EU pharmaceutical standards.", "Patient and partner trust depends on consistency, safety, and regulatory alignment. Medical-grade cannabis demands precision at every stage."]],
   ["Agricultural Technology Integration", ["We apply digital tools and environmental sensors to monitor crops, forecast risks, and guide decisions through data.", "Technology increases efficiency, reduces waste, and ensures predictable, high-quality yields — critical in a regulated and competitive market."]],
   ["Local Impact and Transparency", ["We create fair rural jobs, support circular economies, and share our results and practices openly.", "A modern farm should serve the land and its people. Transparency builds trust with investors, regulators, and the public."]],
 ]
 ---
 
-<ul class="grid grid-cols-2 gap-7">
+<ul class="grid gap-7 lg:grid-cols-2">
   {content.map(([title, paragraphs]) => (
-    <li class="rounded-3xl bg-white/10 p-10">
-      <h2 class="text-saffron-mango text-lg mb-7">{title}</h2>
+    <li class="rounded-3xl bg-white/10 p-6 md:p-10">
+      <h2 class="mb-5 text-[2rem] leading-tight text-saffron-mango md:mb-7 md:text-lg">{title}</h2>
       {paragraphs.map((paragraph: string) => (
-        <p class="text-white text-xs mb-3">{paragraph}</p>
+        <p class="mb-3 text-[1.05rem] leading-7 text-white md:text-xs">{paragraph}</p>
       ))}
     </li>
   ))}

@@ -54,3 +54,12 @@
     rgba(47, 99, 87, 0) 100%
   );
 }
+
+img,
+svg {
+  max-width: 100%;
+}
+
+svg {
+  height: auto;
+}
