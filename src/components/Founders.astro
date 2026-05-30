@@ -1,0 +1,90 @@
+---
+import { Image } from 'astro:assets';
+
+import BeatrizPhoto from '../assets/beatriz-photo.png';
+import JoaoPhoto from '../assets/joao-photo.png';
+
+const founders = [
+  {
+    name: 'Beatriz',
+    role: 'Scientific innovation and agricultural strategy',
+    image: BeatrizPhoto,
+    alt: 'Portrait of Beatriz in a laboratory setting',
+    focus: 'object-[50%_42%]',
+    paragraphs: [
+      'Beatriz leads Siren\'s scientific innovation and agricultural strategy, bringing together molecular biology, AI systems architecture, and a deep understanding of plant biology.',
+      'Her background spans contributions to the ENCODE Consortium with Stanford, UCSF, Scripps, and UCSD, as well as predictive AI models for a $1B cybersecurity and executive risk portfolio, reaching 98% accuracy in critical profiles for highly regulated industries.',
+      'At Siren, she is developing an Adaptive Genetics program that combines data-driven selection, epigenetic insight, and Portuguese terroir to guide resilient cultivation decisions.'
+    ],
+    tags: ['Molecular biology', 'AI systems', 'Adaptive genetics']
+  },
+  {
+    name: 'João',
+    role: 'Technical infrastructure and industrial systems',
+    image: JoaoPhoto,
+    alt: 'Portrait of Joao outdoors',
+    focus: 'object-[50%_56%]',
+    paragraphs: [
+      'João brings the infrastructure and industrial systems expertise needed to scale pharmaceutical-grade cultivation.',
+      'As former CTO of Aquaterra, Europe\'s largest avocado farm, he led the engineering team behind a real-time data platform processing IoT sensors, GPS tracking, and aerial imaging across 10,000 hectares under GlobalGAP certification for food safety, traceability, and quality control.',
+      'He also built irrigation control systems from scratch, coordinating pumps, generators, filters, mixers, and sensor data to optimize water and nutrient delivery across 200-hectare production units.'
+    ],
+    tags: ['AgTech systems', 'IoT platforms', 'Operational scale']
+  }
+];
+---
+
+<section class="my-14 px-1 text-rum-swizzle md:my-20 md:px-6">
+  <div class="mb-10 max-w-210">
+    <p class="mb-3 text-[1rem] leading-6 text-putty md:text-xs">The team behind Siren</p>
+    <h2 class="mb-5 text-[2.65rem] leading-tight text-saffron-mango md:mb-6 md:text-xl">The Founders</h2>
+    <p class="text-[1.05rem] leading-7 md:text-xs">
+      Siren is built by two complementary operators: one focused on the science
+      of the plant, the other on the systems that turn agricultural insight into
+      reliable industrial outcomes.
+    </p>
+  </div>
+
+  <div class="grid gap-7 lg:grid-cols-2">
+    {founders.map((founder) => (
+      <article class="overflow-hidden rounded-3xl bg-white/10">
+        <Image
+          class={`h-78 w-full object-cover md:h-106 ${founder.focus}`}
+          src={founder.image}
+          alt={founder.alt}
+        />
+        <div class="p-6 md:p-10">
+          <p class="mb-2 text-[1rem] leading-6 text-putty md:text-xs">{founder.role}</p>
+          <h3 class="mb-5 font-['Funnel_Display_Variable'] text-[2rem] leading-tight text-saffron-mango md:mb-6 md:text-lg">
+            {founder.name}
+          </h3>
+          <div class="space-y-4">
+            {founder.paragraphs.map((paragraph) => (
+              <p class="text-[1.15rem] leading-8 text-white">{paragraph}</p>
+            ))}
+          </div>
+          <ul class="mt-7 flex flex-wrap gap-3">
+            {founder.tags.map((tag) => (
+              <li class="rounded-full border border-putty/60 px-4 py-2 text-[1rem] leading-none text-putty">
+                {tag}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="mt-7 rounded-3xl bg-te-papa-green p-6 md:p-10">
+    <h3 class="mb-5 font-['Funnel_Display_Variable'] text-[2rem] leading-tight text-putty md:text-lg">
+      Science in the lab, intelligence in the field
+    </h3>
+    <p class="max-w-260 text-[1.05rem] leading-7 text-white md:text-xs">
+      Together, João and Beatriz bring a rare combination to European cannabis:
+      proven agricultural technology at scale, rigorous genetics, and applied
+      AI. Their partnership allows Siren to connect field sensor data,
+      cultivation operations, and genetic selection into a vertically integrated
+      intelligence layer for pharmaceutical-grade consistency.
+    </p>
+  </div>
+</section>

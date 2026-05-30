@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
+import Founders from '../components/Founders.astro';
+import NameStory from '../components/NameStory.astro';
 import Work from '../components/Work.astro';
 
 import LogoDark from '../assets/logo-dark.svg';
@@ -11,10 +13,12 @@ import farmImage from '../assets/mask-group.png';
 ---
 
 <Layout>
-  <Image class="relative w-full inset-0 z-0" src={farmImage} alt="Farm photo"/>
-  <div class="relative z-1 mt-[-33%] max-w-369 m-auto">
+  <Image class="relative inset-0 z-0 h-[620px] w-full object-cover md:h-auto" src={farmImage} alt="Farm photo"/>
+  <div class="relative z-1 mt-[-470px] max-w-369 px-5 md:mt-[-33%] md:px-6 lg:m-auto lg:mt-[-33%]">
     <Hero/>
-    <LogoDark class="relative -z-1 mt-6 -mb-4 m-auto"/>
+    <LogoDark class="relative -z-1 m-auto mt-6 -mb-4 w-full max-w-[620px]"/>
+    <NameStory />
+    <Founders />
     <Work />
     <Footer />
   </div>
