@@ -1,0 +1,18 @@
+---
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about/', label: 'About' },
+  { href: '/why-siren/', label: 'Why Siren' }
+];
+---
+
+<nav class="mx-auto mb-10 flex max-w-369 flex-wrap items-center justify-center gap-3 px-5 pt-6 md:justify-end md:px-6">
+  {links.map((link) => (
+    <a
+      class="rounded-full border border-putty/50 px-5 py-2 text-[1rem] leading-6 text-rum-swizzle transition hover:bg-rum-swizzle hover:text-te-papa-green"
+      href={link.href}
+    >
+      {link.label}
+    </a>
+  ))}
+</nav>

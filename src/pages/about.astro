@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import Founders from '../components/Founders.astro';
+import Nav from '../components/Nav.astro';
+---
+
+<Layout>
+  <Nav />
+  <main class="mx-auto max-w-369 px-5 md:px-6">
+    <section class="pt-12 text-rum-swizzle md:pt-20">
+      <p class="mb-3 text-[1rem] leading-6 text-putty md:text-xs">About Siren</p>
+      <h1 class="mb-6 text-[3.5rem] leading-none text-saffron-mango md:text-2xl">
+        Built for intelligent cultivation
+      </h1>
+      <p class="max-w-230 text-[1.18rem] leading-8 text-white md:text-sm">
+        Siren brings together plant science, agricultural technology, and
+        pharmaceutical-grade operations to build a resilient outdoor medical
+        cannabis project in Portugal.
+      </p>
+    </section>
+    <Founders />
+  </main>
+  <Footer />
+</Layout>

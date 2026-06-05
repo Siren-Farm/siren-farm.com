@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import NameStory from '../components/NameStory.astro';
+import Nav from '../components/Nav.astro';
+---
+
+<Layout>
+  <Nav />
+  <main class="mx-auto max-w-369 px-5 md:px-6">
+    <section class="pt-12 text-rum-swizzle md:pt-20">
+      <p class="mb-3 text-[1rem] leading-6 text-putty md:text-xs">The meaning of Siren</p>
+      <h1 class="mb-6 text-[3.5rem] leading-none text-saffron-mango md:text-2xl">
+        A name rooted in Tondela
+      </h1>
+      <p class="max-w-230 text-[1.18rem] leading-8 text-white md:text-sm">
+        Our name carries the memory of a local signal: foresight, courage, and
+        preparation at the exact moment they matter most.
+      </p>
+    </section>
+    <NameStory />
+  </main>
+  <Footer />
+</Layout>
