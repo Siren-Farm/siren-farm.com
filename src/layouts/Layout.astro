@@ -1,30 +1,62 @@
 ---
 import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  theme?: "green" | "cream";
+  /** Color Safari paints behind the iOS status bar — override to blend
+   *  with whatever sits at the top of the page (e.g. the hero photo). */
+  themeColor?: string;
+}
+
+const {
+  title = "Siren Farm",
+  description = "Siren is an outdoor medical cannabis project in Portugal that blends regenerative agriculture and advanced technology to produce high-quality fresh cannabis under INFARMED regulation.",
+  theme = "green",
+  themeColor = theme === "cream" ? "#f5f5e1" : "#2f6357",
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
+<!-- html background = themeColor: iOS Safari samples it (not body) for the
+     status-bar strip at scrollY 0, so the strip blends with the page top -->
+<html lang='en' style={`background-color: ${themeColor};`}>
   <head>
     <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
+    <meta name='theme-color' content={themeColor} />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
+    <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
     <meta name='generator' content={Astro.generator} />
-    <title>Siren Farm</title>
+    <meta name='description' content={description} />
+    <title>{title}</title>
   </head>
-  <body class="bg-stromboli">
-    <slot />
+  <!-- the page background lives on a wrapper, not body — iOS Safari's
+       status-bar sampler falls back to the body/html background, and it
+       must find the blending themeColor there, not the solid page green -->
+  <body>
+    <div
+      class={`relative min-h-screen ${theme === "cream" ? "bg-rum-swizzle" : "bg-stromboli"}`}
+    >
+      <slot />
+    </div>
   </body>
 </html>
 
 <style is:global>
   html,
   body {
-    font-family: 'Funnel Sans Variable', sans-serif;
+    font-family: var(--font-sans);
     overflow-x: hidden;
   }
 
   h1,
-  h2 {
-    font-family: 'Funnel Display Variable';
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
   }
 </style>

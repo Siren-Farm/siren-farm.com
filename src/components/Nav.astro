@@ -1,18 +1,192 @@
 ---
+import Logo from "./Logo.astro";
+
+// Shared sticky nav: transparent over the page at top, condenses into a
+// floating frosted capsule once scrolled, tucks away scrolling down and
+// glides back the moment you scroll up.
+//  - "dark"  sits on the green home page (gold leaf, cream pills)
+//  - "light" sits on the cream About page (green leaf, green pills)
+interface Props {
+  variant?: "dark" | "light";
+  active: "home" | "about";
+}
+
+const { variant = "dark", active } = Astro.props;
+
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/about/', label: 'About' },
-  { href: '/why-siren/', label: 'Why Siren' }
+  { href: "/", label: "Home", key: "home" },
+  { href: "/about/", label: "About", key: "about" },
 ];
 ---
 
-<nav class="mx-auto mb-10 flex max-w-369 flex-wrap items-center justify-center gap-3 px-5 pt-6 md:justify-end md:px-6">
-  {links.map((link) => (
-    <a
-      class="rounded-full border border-putty/50 px-5 py-2 text-[1rem] leading-6 text-rum-swizzle transition hover:bg-rum-swizzle hover:text-te-papa-green"
-      href={link.href}
-    >
-      {link.label}
+<div id='site-nav-wrap' class={`nav-${variant}`}>
+  <nav id='site-nav'>
+    <div class='nav-bg' aria-hidden='true'></div>
+    <a class='nav-brand' href='/'>
+      <Logo tone={variant === "dark" ? "gold" : "dark"} class='nav-leaf' />
+      <span>Siren Farm</span>
     </a>
-  ))}
-</nav>
+    {
+      links.map((link) => (
+        <a
+          class:list={["nav-pill", { active: active === link.key }]}
+          href={link.href}
+          aria-current={active === link.key ? "page" : undefined}
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</div>
+
+<style>
+  #site-nav-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: env(safe-area-inset-top, 0px) clamp(12px, 2vw, 24px) 0;
+    transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  #site-nav-wrap.nav-hidden {
+    transform: translateY(-115%);
+  }
+  #site-nav {
+    position: relative;
+    max-width: 1556px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: clamp(14px, 1.6vw, 22px) clamp(14px, 1.8vw, 26px);
+    border-radius: 999px;
+    transition:
+      margin 320ms ease,
+      padding 320ms ease;
+  }
+  #site-nav-wrap.nav-scrolled #site-nav {
+    margin-top: 12px;
+    padding: 10px clamp(14px, 1.8vw, 26px);
+  }
+  /* the capsule glass lives on an absolute child: iOS Safari samples fixed
+     elements near the top edge to tint the status bar, but skips absolutely
+     positioned children — keeping the photo composited behind the island */
+  .nav-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 999px;
+    background: transparent;
+    transition:
+      background 320ms ease,
+      box-shadow 320ms ease;
+  }
+  #site-nav-wrap.nav-scrolled .nav-bg {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+  .nav-dark.nav-scrolled .nav-bg {
+    background: var(--color-glass);
+    box-shadow: 0 16px 60px rgba(31, 63, 55, 0.18);
+  }
+  .nav-light.nav-scrolled .nav-bg {
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 16px 60px rgba(31, 63, 55, 0.16);
+  }
+
+
+  .nav-brand {
+    margin-right: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .nav-brand :global(.nav-leaf) {
+    width: 38px;
+  }
+  .nav-brand span {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1;
+  }
+  .nav-dark .nav-brand span {
+    color: var(--color-putty);
+  }
+  .nav-light .nav-brand span {
+    color: var(--color-te-papa-green);
+  }
+
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background 250ms ease,
+      color 250ms ease;
+  }
+  .nav-dark .nav-pill {
+    border-color: rgba(240, 207, 135, 0.5);
+    color: var(--color-rum-swizzle);
+  }
+  .nav-dark .nav-pill:hover,
+  .nav-dark .nav-pill.active {
+    border-color: transparent;
+    background: var(--color-rum-swizzle);
+    color: var(--color-te-papa-green);
+  }
+  .nav-light .nav-pill {
+    border-color: rgba(47, 99, 87, 0.45);
+    color: var(--color-te-papa-green);
+  }
+  .nav-light .nav-pill:hover,
+  .nav-light .nav-pill.active {
+    border-color: transparent;
+    background: var(--color-stromboli);
+    color: var(--color-rum-swizzle);
+  }
+
+  @media (max-width: 760px) {
+    /* compact single-line nav on mobile */
+    #site-nav {
+      gap: 8px;
+    }
+    .nav-brand {
+      gap: 10px;
+    }
+    .nav-brand span {
+      font-size: 17px;
+    }
+    .nav-pill {
+      padding: 0.4rem 0.9rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  const wrap = document.getElementById("site-nav-wrap")!;
+  let lastY = window.scrollY;
+
+  const onScroll = () => {
+    const y = window.scrollY;
+    wrap.classList.toggle("nav-scrolled", y > 64);
+    if (y < 320) wrap.classList.remove("nav-hidden");
+    else if (y > lastY + 6) wrap.classList.add("nav-hidden");
+    else if (y < lastY - 6) wrap.classList.remove("nav-hidden");
+    lastY = y;
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+</script>

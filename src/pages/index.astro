@@ -1,25 +1,20 @@
 ---
-import { Image } from 'astro:assets';
-
-import Layout from '../layouts/Layout.astro';
-import DroneVideo from '../components/DroneVideo.astro';
-import Hero from '../components/Hero.astro';
-import Footer from '../components/Footer.astro';
-import Nav from '../components/Nav.astro';
-import Work from '../components/Work.astro';
-
-import LogoDark from '../assets/logo-dark.svg';
-import farmImage from '../assets/mask-group.png';
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Pillars from "../components/Pillars.astro";
+import Collaborate from "../components/Collaborate.astro";
+import SayHi from "../components/SayHi.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
-  <Nav />
-  <Image class="relative inset-0 z-0 h-[620px] w-full object-cover md:h-auto" src={farmImage} alt="Farm photo"/>
-  <div class="relative z-1 mt-[-470px] max-w-369 px-5 md:mt-[-33%] md:px-6 lg:m-auto lg:mt-[-33%]">
-    <Hero/>
-    <LogoDark class="relative -z-1 m-auto mt-6 -mb-4 w-full max-w-[620px]"/>
-    <Work />
-  </div>
-  <DroneVideo />
-  <Footer />
+  <Nav variant='dark' active='home' />
+  <Hero />
+  <main class='relative z-2 mx-auto max-w-[1556px] px-6 pt-[clamp(40px,4vw,70px)]'>
+    <Pillars />
+    <Collaborate />
+    <SayHi variant='green' />
+  </main>
+  <Footer variant='green' />
 </Layout>

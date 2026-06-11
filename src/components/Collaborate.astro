@@ -1,0 +1,111 @@
+---
+import GlassCard from "./GlassCard.astro";
+
+const audiences = [
+  {
+    title: "Pharmaceutical companies",
+    paragraphs: [
+      "We produce high-grade outdoor cannabis flower, grown under EU-GACP compliance and aimed at full EU-GMP compatibility through controlled post-harvest curing.",
+      "Contact us to secure flower supply or develop long-term sourcing agreements for medical markets.",
+    ],
+  },
+  {
+    title: "Seed banks and breeders",
+    paragraphs: [
+      "We are building a genetic and chemotype library with full tracking of genotype, phenotype, and environmental conditions.",
+      "We welcome research collaborations, joint breeding programs, and field trials under formal partnership agreements.",
+    ],
+  },
+  {
+    title: "Investors and partners",
+    paragraphs: [
+      "We are building Siren with partners who believe in cannabis as a stable, medical-grade crop — and in Portugal's role in leading that transformation.",
+      "If that sounds like you, we'd love to talk.",
+    ],
+  },
+];
+---
+
+<div class='collab'>
+  <div class='collab-header'>
+    <h2>How we collaborate</h2>
+    <p>
+      From flower supply to breeding programs, we build long-term relationships
+      across the medical cannabis chain.
+    </p>
+  </div>
+
+  <div id='collab-grid'>
+    {
+      audiences.map((audience) => (
+        <GlassCard>
+          <div class='collab-body'>
+            <h2>{audience.title}</h2>
+            {audience.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </GlassCard>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  /* a new topic begins here — major section break */
+  .collab {
+    padding: clamp(96px, 10vw, 168px) 0 0;
+  }
+  .collab-header {
+    max-width: 52em;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+  .collab-header h2 {
+    margin: 0;
+    font-size: clamp(36px, 3.2vw, 52px);
+    line-height: 1.12;
+    color: var(--color-saffron-mango);
+  }
+  .collab-header p {
+    margin: clamp(6px, 1vw, 14px) 0 0;
+    max-width: 36em;
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+  #collab-grid {
+    margin-top: clamp(36px, 4vw, 60px);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+    align-items: stretch;
+  }
+  @media (max-width: 1100px) {
+    #collab-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .collab-body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .collab-body h2 {
+    margin: 0;
+    font-size: clamp(28px, 2.4vw, 36px);
+    line-height: 1.25;
+    color: var(--color-saffron-mango);
+  }
+  .collab-body p {
+    margin: 0;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.4;
+    color: var(--color-white);
+  }
+</style>

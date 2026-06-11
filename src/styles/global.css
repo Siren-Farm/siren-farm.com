@@ -34,6 +34,10 @@
   --color-saffron-mango: #eeba58;
   --color-putty: #f0cf87;
   --color-rum-swizzle: #f5f5e1;
+  --color-glass: rgba(255, 255, 255, 0.1);
+
+  --font-display: "Funnel Display Variable", sans-serif;
+  --font-sans: "Funnel Sans Variable", sans-serif;
 
   --text-xs: 1.25rem; /* 20/28 */
   --text-xs--line-height: 1.75rem;

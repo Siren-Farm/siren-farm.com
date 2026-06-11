@@ -1,25 +1,76 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Footer from '../components/Footer.astro';
-import Founders from '../components/Founders.astro';
-import Nav from '../components/Nav.astro';
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Logo from "../components/Logo.astro";
+import Founders from "../components/Founders.astro";
+import NameStory from "../components/NameStory.astro";
+import SayHi from "../components/SayHi.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<Layout>
-  <Nav />
-  <main class="mx-auto max-w-369 px-5 md:px-6">
-    <section class="pt-12 text-rum-swizzle md:pt-20">
-      <p class="mb-3 text-[1rem] leading-6 text-putty md:text-xs">About Siren</p>
-      <h1 class="mb-6 text-[3.5rem] leading-none text-saffron-mango md:text-2xl">
-        Built for intelligent cultivation
-      </h1>
-      <p class="max-w-230 text-[1.18rem] leading-8 text-white md:text-sm">
-        Siren brings together plant science, agricultural technology, and
-        pharmaceutical-grade operations to build a resilient outdoor medical
-        cannabis project in Portugal.
-      </p>
-    </section>
-    <Founders />
-  </main>
-  <Footer />
+<Layout title='About — Siren Farm' theme='cream'>
+  <Nav variant='light' active='about' />
+
+  <!-- page header — centered, echoing the home hero -->
+  <header class='about-header'>
+    <h1>Built for intelligent cultivation</h1>
+    <p>
+      Siren brings together plant science, agricultural technology, and
+      pharmaceutical-grade operations to build a resilient outdoor medical
+      cannabis project in Portugal.
+    </p>
+  </header>
+
+  <!-- centered soft-gold leaf below the copy, content overlapping it -->
+  <div class='about-leaf'>
+    <Logo tone='putty' class='about-leaf-mark' />
+  </div>
+
+  <Founders />
+  <NameStory />
+  <SayHi variant='cream' />
+  <Footer variant='cream' />
 </Layout>
+
+<style>
+  .about-header {
+    position: relative;
+    z-index: 1;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: calc(clamp(150px, 14vw, 220px) + env(safe-area-inset-top, 0px)) 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .about-header h1 {
+    margin: 0;
+    font-size: clamp(40px, 4vw, 60px);
+    line-height: 1.08;
+    color: var(--color-stromboli);
+    text-wrap: pretty;
+  }
+  .about-header p {
+    margin: clamp(20px, 2vw, 28px) 0 0;
+    max-width: 38em;
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.5;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+
+  /* same move as the home hero — the founders grid overlaps the leaf */
+  .about-leaf {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(16px, 2.5vw, 40px);
+    margin-bottom: clamp(-96px, -5.5vw, -60px);
+    pointer-events: none;
+  }
+  .about-leaf :global(.about-leaf-mark) {
+    width: clamp(330px, 29vw, 500px);
+  }
+</style>

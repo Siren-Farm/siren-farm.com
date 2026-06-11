@@ -1,22 +1,85 @@
 ---
-import LogoLight from '../assets/logo-light.svg';
+import Logo from "./Logo.astro";
+
+// "With love, from Tondela" · leaf · address. Gold leaf on the green home
+// gradient; the About page flips it — dark-green leaf on the cream page.
+interface Props {
+  variant?: "green" | "cream";
+}
+
+const { variant = "green" } = Astro.props;
 ---
 
-<footer class="mb-10 mt-14 px-1 text-center md:mt-16 md:px-6">
-  <div class="m-auto mb-7 flex max-w-95 flex-row items-center justify-between rounded-full bg-rum-swizzle py-3 pl-8 pr-3 md:pl-10">
-    <h2 class="h-12 text-[2.25rem] leading-none text-saffron-mango md:h-16 md:text-xl">Say hi!</h2>
-    <div class="flex h-18 w-18 items-center justify-center rounded-full bg-white md:h-24 md:w-24">
-      <span class="h-12 text-[2.25rem] leading-none text-saffron-mango md:h-18 md:text-xl">→</span>
+<footer class={`footer on-${variant}`}>
+  <div class='footer-row'>
+    <p>With love,<br />from Tondela</p>
+    <div class='footer-leaf'>
+      <Logo tone={variant === "green" ? "gold" : "dark"} class='footer-leaf-mark' />
     </div>
-  </div>
-  <a class="text-[1.25rem] leading-8 text-rum-swizzle underline decoration-putty md:text-sm" href='mailto:hi@siren-farm.com'>hi@siren-farm.com</a>
-  <div class="mt-16 flex flex-col items-center justify-center gap-7 text-center text-[1.35rem] leading-8 text-rum-swizzle md:mt-28 md:flex-row md:gap-21 md:text-left md:text-base">
-    <div class="flex-1 md:flex md:justify-end">
-      <p class="max-w-60 md:max-w-50 md:self-right">With love, From Tondela</p>
-    </div>
-    <LogoLight class="w-32 md:w-auto" />
-    <div class="flex-1">
-      <p class="max-w-100">Sitio do Poço, Caparosinha Tondela Portugal</p>
-    </div>
+    <p class='footer-address'>Sítio do Poço, Caparosinha<br />Tondela Portugal</p>
   </div>
 </footer>
+
+<style>
+  .footer {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  .on-green {
+    background: linear-gradient(180deg, #2f6357 0%, #447368 100%);
+    padding: clamp(56px, 7vw, 96px) 24px clamp(48px, 6vw, 72px);
+  }
+  .on-cream {
+    padding: clamp(40px, 5vw, 72px) 24px clamp(48px, 6vw, 72px);
+  }
+
+  .footer-row {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .footer-row p {
+    margin: 0;
+    flex: 1 1 200px;
+    min-width: 180px;
+    font-size: clamp(20px, 1.85vw, 28px);
+    line-height: 1.3;
+  }
+  .on-green .footer-row p {
+    color: var(--color-white);
+  }
+  .on-cream .footer-row p {
+    color: var(--color-te-papa-green);
+  }
+  .footer-address {
+    text-align: right;
+  }
+  .footer-leaf {
+    flex: 0 0 auto;
+  }
+  /* the leaf scales with the viewport so it reads as an accent
+     between the two text blocks rather than dominating the band */
+  .footer-leaf :global(.footer-leaf-mark) {
+    width: clamp(170px, 20.5vw, 354px);
+  }
+
+  @media (max-width: 760px) {
+    .footer-row {
+      flex-direction: column;
+      justify-content: center;
+    }
+    .footer-row p {
+      text-align: center;
+      flex: 0 0 auto;
+    }
+    /* on stacked mobile the leaf stays proportionally larger */
+    .footer-leaf :global(.footer-leaf-mark) {
+      width: min(300px, 72vw);
+    }
+  }
+</style>

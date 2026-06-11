@@ -1,89 +1,213 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
-import BeatrizPhoto from '../assets/beatriz-photo.png';
-import JoaoPhoto from '../assets/joao-photo.png';
+import BeatrizPhoto from "../assets/beatriz-photo.png";
+import JoaoPhoto from "../assets/joao-photo.png";
 
 const founders = [
   {
-    name: 'Beatriz',
-    role: 'Scientific innovation and agricultural strategy',
+    name: "Beatriz",
+    role: "Scientific innovation and agricultural strategy",
     image: BeatrizPhoto,
-    alt: 'Portrait of Beatriz in a laboratory setting',
-    focus: 'object-[50%_42%]',
+    alt: "Portrait of Beatriz in a laboratory setting",
+    focus: "50% 42%",
     paragraphs: [
-      'Beatriz leads Siren\'s scientific innovation and agricultural strategy, bringing together molecular biology, AI systems architecture, and a deep understanding of plant biology.',
-      'At Siren, she is developing an Adaptive Genetics program that combines data-driven selection, epigenetic insight, and Portuguese terroir to guide resilient cultivation decisions.'
+      "Beatriz leads Siren's scientific innovation and agricultural strategy, bringing together molecular biology, AI systems architecture, and a deep understanding of plant biology.",
+      "At Siren, she is developing an Adaptive Genetics program that combines data-driven selection, epigenetic insight, and Portuguese terroir to guide resilient cultivation decisions.",
     ],
-    tags: ['Molecular biology', 'AI systems', 'Adaptive genetics']
+    tags: ["Molecular biology", "AI systems", "Adaptive genetics"],
   },
   {
-    name: 'João',
-    role: 'Technical infrastructure and industrial systems',
+    name: "João",
+    role: "Technical infrastructure and industrial systems",
     image: JoaoPhoto,
-    alt: 'Portrait of Joao outdoors',
-    focus: 'object-[50%_56%]',
+    alt: "Portrait of Joao outdoors",
+    focus: "50% 56%",
     paragraphs: [
-      'João brings the infrastructure and industrial systems expertise needed to scale pharmaceutical-grade cultivation.',
-      'As former CTO of Aquaterra, Europe\'s largest avocado farm, he led the engineering team behind a real-time data platform processing IoT sensors, GPS tracking, and aerial imaging across 10,000 hectares under GlobalGAP certification for food safety, traceability, and quality control.',
-      'He also built irrigation control systems from scratch, coordinating pumps, generators, filters, mixers, and sensor data to optimize water and nutrient delivery across 200-hectare production units.'
+      "João brings the infrastructure and industrial systems expertise needed to scale pharmaceutical-grade cultivation.",
+      "As former CTO of Aquaterra, Europe's largest avocado farm, he led the engineering team behind a real-time data platform processing IoT sensors, GPS tracking, and aerial imaging across 10,000 hectares under GlobalGAP certification for food safety, traceability, and quality control.",
+      "He also built irrigation control systems from scratch, coordinating pumps, generators, filters, mixers, and sensor data to optimize water and nutrient delivery across 200-hectare production units.",
     ],
-    tags: ['AgTech systems', 'IoT platforms', 'Operational scale']
-  }
+    tags: ["AgTech systems", "IoT platforms", "Operational scale"],
+  },
 ];
 ---
 
-<section class="my-14 px-1 text-rum-swizzle md:my-20 md:px-6">
-  <div class="mb-10 max-w-210">
-    <p class="mb-3 text-[1rem] leading-6 text-putty md:text-xs">The team behind Siren</p>
-    <h2 class="mb-5 text-[2.65rem] leading-tight text-saffron-mango md:mb-6 md:text-xl">The Founders</h2>
-    <p class="text-[1.05rem] leading-7 md:text-xs">
+<section class='founders'>
+  <div class='founders-intro'>
+    <h2>The Founders</h2>
+    <p>
       Siren is built by two complementary operators: one focused on the science
-      of the plant, the other on the systems that turn agricultural insight into
-      reliable industrial outcomes.
+      of the plant, the other on the systems that turn agricultural insight
+      into reliable industrial outcomes.
     </p>
   </div>
 
-  <div class="grid gap-7 lg:grid-cols-2">
-    {founders.map((founder) => (
-      <article class="overflow-hidden rounded-3xl bg-white/10">
-        <Image
-          class={`h-78 w-full object-cover md:h-106 ${founder.focus}`}
-          src={founder.image}
-          alt={founder.alt}
-        />
-        <div class="p-6 md:p-10">
-          <p class="mb-2 text-[1rem] leading-6 text-putty md:text-xs">{founder.role}</p>
-          <h3 class="mb-5 font-['Funnel_Display_Variable'] text-[2rem] leading-tight text-saffron-mango md:mb-6 md:text-lg">
-            {founder.name}
-          </h3>
-          <div class="space-y-4">
+  <div id='founders-grid'>
+    {
+      founders.map((founder) => (
+        <article>
+          <Image
+            src={founder.image}
+            alt={founder.alt}
+            widths={[480, 760, 1080]}
+            sizes='(max-width: 960px) 100vw, 50vw'
+            style={`object-position: ${founder.focus};`}
+          />
+          <div class='founder-body'>
+            <div class='founder-id'>
+              <p class='founder-role'>{founder.role}</p>
+              <h3>{founder.name}</h3>
+            </div>
             {founder.paragraphs.map((paragraph) => (
-              <p class="text-[1.15rem] leading-8 text-white">{paragraph}</p>
+              <p>{paragraph}</p>
             ))}
+            <div class='founder-tags'>
+              {founder.tags.map((tag) => (
+                <span>{tag}</span>
+              ))}
+            </div>
           </div>
-          <ul class="mt-7 flex flex-wrap gap-3">
-            {founder.tags.map((tag) => (
-              <li class="rounded-full border border-putty/60 px-4 py-2 text-[1rem] leading-none text-putty">
-                {tag}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </article>
-    ))}
+        </article>
+      ))
+    }
   </div>
 
-  <div class="mt-7 rounded-3xl bg-te-papa-green p-6 md:p-10">
-    <h3 class="mb-5 font-['Funnel_Display_Variable'] text-[2rem] leading-tight text-putty md:text-lg">
-      Science in the lab, intelligence in the field
-    </h3>
-    <p class="max-w-260 text-[1.05rem] leading-7 text-white md:text-xs">
+  <!-- closing statement — light, centered, no heavy surface -->
+  <div class='founders-closing'>
+    <h2>Science in the lab, intelligence in the field</h2>
+    <p>
       Together, João and Beatriz bring a rare combination to European cannabis:
       proven agricultural technology at scale, rigorous genetics, and applied
       AI. Their partnership allows Siren to connect field sensor data,
-      cultivation operations, and genetic selection into a vertically integrated
-      intelligence layer for pharmaceutical-grade consistency.
+      cultivation operations, and genetic selection into a vertically
+      integrated intelligence layer for pharmaceutical-grade consistency.
     </p>
   </div>
 </section>
+
+<style>
+  .founders {
+    position: relative;
+    z-index: 1;
+    max-width: 1556px;
+    margin: 0 auto;
+    padding: clamp(48px, 5vw, 80px) 24px 0;
+  }
+
+  .founders-intro {
+    max-width: 52em;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .founders-intro h2 {
+    margin: 0;
+    font-size: clamp(32px, 2.8vw, 44px);
+    line-height: 1.15;
+    color: var(--color-stromboli);
+  }
+  .founders-intro p {
+    margin: clamp(20px, 2vw, 32px) 0 0;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.5;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+
+  #founders-grid {
+    margin-top: clamp(40px, 4.5vw, 72px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+    align-items: start;
+  }
+  @media (max-width: 960px) {
+    #founders-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  article {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: var(--color-white);
+    box-shadow: 0 8px 60px rgba(31, 63, 55, 0.1);
+  }
+  article img {
+    display: block;
+    width: 100%;
+    height: clamp(280px, 26vw, 424px);
+    object-fit: cover;
+  }
+  .founder-body {
+    padding: clamp(24px, 2.6vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .founder-id {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .founder-role {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    color: var(--color-aquamarine);
+  }
+  .founder-body h3 {
+    margin: 0;
+    font-size: clamp(28px, 2.2vw, 36px);
+    line-height: 1.15;
+    color: var(--color-stromboli);
+  }
+  .founder-body > p {
+    margin: 0;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.5;
+    color: var(--color-te-papa-green);
+  }
+  .founder-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .founder-tags span {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(47, 99, 87, 0.45);
+    color: var(--color-stromboli);
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .founders-closing {
+    margin-top: clamp(80px, 8vw, 136px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(18px, 2vw, 28px);
+    padding: 0 24px;
+  }
+  .founders-closing h2 {
+    margin: 0;
+    max-width: 22em;
+    font-size: clamp(28px, 2.4vw, 40px);
+    line-height: 1.2;
+    color: var(--color-stromboli);
+    text-wrap: pretty;
+  }
+  .founders-closing p {
+    margin: 0;
+    max-width: 46em;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.55;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+</style>

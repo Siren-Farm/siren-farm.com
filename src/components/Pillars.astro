@@ -1,0 +1,79 @@
+---
+import GlassCard from "./GlassCard.astro";
+
+const pillars = [
+  {
+    title: "Regenerative Agriculture",
+    paragraphs: [
+      "We restore soil health, boost biodiversity, and capture carbon through low-impact, outdoor cultivation.",
+      "This approach goes beyond sustainability — it regenerates ecosystems, builds long-term productivity, and aligns with EU climate goals and conscious consumer demand.",
+    ],
+  },
+  {
+    title: "Pharmaceutical-Grade Cannabis",
+    paragraphs: [
+      "We grow fresh cannabis flowers with strict quality control, full traceability, and compliance with INFARMED and EU pharmaceutical standards.",
+      "Patient and partner trust depends on consistency, safety, and regulatory alignment. Medical-grade cannabis demands precision at every stage.",
+    ],
+  },
+  {
+    title: "Agricultural Technology Integration",
+    paragraphs: [
+      "We apply digital tools and environmental sensors to monitor crops, forecast risks, and guide decisions through data.",
+      "Technology increases efficiency, reduces waste, and ensures predictable, high-quality yields — critical in a regulated and competitive market.",
+    ],
+  },
+  {
+    title: "Local Impact and Transparency",
+    paragraphs: [
+      "We create fair rural jobs, support circular economies, and share our results and practices openly.",
+      "A modern farm should serve the land and its people. Transparency builds trust with investors, regulators, and the public.",
+    ],
+  },
+];
+---
+
+<div id='pillar-grid'>
+  {
+    pillars.map((pillar) => (
+      <GlassCard>
+        <div class='pillar-body'>
+          <h2>{pillar.title}</h2>
+          {pillar.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </GlassCard>
+    ))
+  }
+</div>
+
+<style>
+  #pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+  }
+  @media (max-width: 760px) {
+    #pillar-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .pillar-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .pillar-body h2 {
+    margin: 0;
+    font-size: clamp(28px, 2.4vw, 36px);
+    line-height: 1.25;
+    color: var(--color-saffron-mango);
+  }
+  .pillar-body p {
+    margin: 0;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.4;
+    color: var(--color-white);
+  }
+</style>

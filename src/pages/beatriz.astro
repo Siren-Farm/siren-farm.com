@@ -1,0 +1,114 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BizCard from "../components/BizCard.astro";
+
+import BeatrizPhoto from "../assets/beatriz-photo.png";
+
+const publications = [
+  {
+    href: "https://medium.com/@sousablde/pot-tech-13db07392d5d",
+    title: "Pot-Tech",
+    summary:
+      "Designing ag-tech that respects and enhances biological intelligence rather than replacing it.",
+  },
+  {
+    href: "https://medium.com/@sousablde/potato-potahto-d30cdc046255",
+    title: "Potato, Potahto",
+    summary:
+      "Why “strain” is not a mistake — the informal language of cannabis is living history.",
+  },
+  {
+    href: "https://medium.com/@sousablde/gattaca-7eb997a08574",
+    title: "GATTACA",
+    summary:
+      "Clone-heavy propagation skips the selection that would truly domesticate cannabis — the blueprint isn't the whole story.",
+  },
+  {
+    href: "https://medium.com/@sousablde/aging-gracefully-treat-your-bud-like-a-bordeaux-b677bf0820f1",
+    title: "Aging gracefully",
+    summary:
+      "Treat your bud like a Bordeaux — traditional curing ages cannabis into its most potent, aromatic form.",
+  },
+  {
+    href: "https://medium.com/@sousablde/not-for-them-us-ce7fa033568b",
+    title: "Not for them",
+    summary:
+      "Portugal exports 647 times more medical cannabis than it makes available to its own patients.",
+  },
+];
+---
+
+<Layout title='Beatriz Sousa — Siren Farm' theme='cream'>
+  <BizCard
+    name='Beatriz Sousa'
+    role='CEO & Co-Founder'
+    photo={BeatrizPhoto}
+    photoAlt='Portrait of Beatriz Sousa'
+    photoFocus='50% 30%'
+    saveHref='https://drive.google.com/file/d/1AthFFZ779LJ6lJ34NUdzNRFZQk0h9Coa/view?usp=drive_link'
+    bioLabel='About Beatriz'
+    paragraphs={[
+      "Beatriz leads scientific innovation and agricultural strategy at Siren. Her work spans molecular biology and AI systems — from contributing to the ENCODE Consortium with Stanford, UCSF, Scripps, and UCSD, to engineering predictive AI models for a $1B cybersecurity and executive risk portfolio.",
+      "At Siren, she leads an Adaptive Genetics program that applies data-driven selection and epigenetic insight to Portuguese terroir. Her understanding of plant biology and ecosystem interactions guides every cultivation decision.",
+    ]}
+    tags={["Molecular biology", "Epigenetics", "AI systems", "Adaptive genetics"]}
+  >
+    <!-- publications -->
+    <div class='pubs'>
+      <p class='pubs-label'>Writing</p>
+      {
+        publications.map((publication) => (
+          <a class='pub-link' href={publication.href} target='_blank' rel='noopener'>
+            <h4>{publication.title}</h4>
+            <p>{publication.summary}</p>
+          </a>
+        ))
+      }
+    </div>
+  </BizCard>
+</Layout>
+
+<style>
+  .pubs {
+    border-radius: 1.5rem;
+    background: var(--color-white);
+    box-shadow: 0 8px 60px rgba(31, 63, 55, 0.1);
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .pubs-label {
+    margin: 0 0 14px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-aquamarine);
+  }
+  .pub-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(47, 99, 87, 0.14);
+    text-decoration: none;
+  }
+  .pub-link:last-child {
+    border-bottom: none;
+    padding-bottom: 2px;
+  }
+  .pub-link h4 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--color-te-papa-green);
+    transition: color 250ms ease;
+  }
+  .pub-link:hover h4 {
+    color: var(--color-stromboli);
+  }
+  .pub-link p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(31, 63, 55, 0.72);
+  }
+</style>

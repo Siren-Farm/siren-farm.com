@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BizCard from "../components/BizCard.astro";
+
+import JoaoPhoto from "../assets/joao-photo.png";
+---
+
+<Layout title='João Justo — Siren Farm' theme='cream'>
+  <BizCard
+    name='João Justo'
+    role='CTO & Co-Founder'
+    photo={JoaoPhoto}
+    photoAlt='Portrait of João Justo'
+    photoFocus='50% 40%'
+    saveHref='mailto:hi@siren-farm.com'
+    bioLabel='About João'
+    paragraphs={[
+      "João brings the infrastructure and industrial-systems expertise needed to scale pharmaceutical-grade cultivation. As former CTO of Aquaterra, Europe's largest avocado farm, he led the engineering team behind a real-time data platform processing IoT sensors, GPS tracking, and aerial imaging across 10,000 hectares under GlobalGAP certification.",
+      "At Siren, he builds the systems that turn agricultural insight into reliable industrial outcomes — from irrigation control coordinating pumps, generators, filters, and mixers, to the data layer behind traceability and quality control.",
+    ]}
+    tags={["AgTech systems", "IoT platforms", "Industrial automation", "Operational scale"]}
+  />
+</Layout>

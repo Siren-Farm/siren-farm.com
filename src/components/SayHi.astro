@@ -1,0 +1,139 @@
+---
+// The "Say hi!" CTA pill + email link.
+//  - "green" page: cream pill, gold label (arrow matches the label color)
+//  - "cream" page: gold pill, dark-green label — the cream pill would vanish
+const email = "hi@siren-farm.com";
+
+interface Props {
+  variant?: "green" | "cream";
+}
+
+const { variant = "green" } = Astro.props;
+---
+
+<div class={`say-hi on-${variant}`}>
+  <a class='say-hi-cta' href={`mailto:${email}`}>
+    <span>Say hi!</span>
+    <span class='cta-circle' aria-hidden='true'>→</span>
+  </a>
+  <a class='email-link' href={`mailto:${email}`}>{email}</a>
+</div>
+
+<style>
+  .say-hi {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(28px, 3.5vw, 48px);
+  }
+  .on-green {
+    padding: clamp(64px, 8vw, 112px) 0 clamp(48px, 6vw, 80px);
+  }
+  .on-cream {
+    padding: clamp(88px, 10vw, 152px) 24px clamp(56px, 7vw, 96px);
+  }
+
+  .say-hi-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem 1rem 1rem 2.5rem;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(40px, 3.7vw, 56px);
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 320ms ease;
+  }
+  .on-green .say-hi-cta {
+    background: var(--color-rum-swizzle);
+    color: var(--color-saffron-mango);
+  }
+  .on-cream .say-hi-cta {
+    background: var(--color-saffron-mango);
+    color: var(--color-te-papa-green);
+  }
+  .on-green .say-hi-cta:hover {
+    box-shadow: 0 18px 50px rgba(31, 63, 55, 0.3);
+  }
+  .on-cream .say-hi-cta:hover {
+    box-shadow: 0 18px 50px rgba(31, 63, 55, 0.22);
+  }
+  .say-hi-cta:active {
+    filter: brightness(0.96);
+  }
+
+  /* hover choreography — the text chases the arrow */
+  .say-hi-cta > span {
+    transition:
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 320ms ease;
+  }
+  .say-hi-cta:hover > span:first-child {
+    transform: translateX(12px);
+  }
+  .say-hi-cta:hover > .cta-circle {
+    transform: translateX(5px);
+    box-shadow:
+      0 0 0 8px rgba(255, 255, 255, 0.35),
+      0 0 60px rgba(31, 63, 55, 0.1);
+  }
+
+  .cta-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    background: var(--color-white);
+    box-shadow: 0 0 60px rgba(31, 63, 55, 0.08);
+    flex-shrink: 0;
+  }
+  /* arrow = text color, consistent on both pages */
+  .on-green .cta-circle {
+    color: var(--color-saffron-mango);
+  }
+  .on-cream .cta-circle {
+    color: var(--color-te-papa-green);
+  }
+
+  .email-link {
+    position: relative;
+    font-size: clamp(24px, 1.85vw, 28px);
+    line-height: 1.42;
+    text-decoration: none;
+    transition: color 250ms ease;
+  }
+  .on-green .email-link {
+    color: var(--color-rum-swizzle);
+  }
+  .on-cream .email-link {
+    color: var(--color-te-papa-green);
+  }
+  /* gold underline that rises toward the text on hover */
+  .email-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: var(--color-putty);
+    transition:
+      transform 250ms ease,
+      background 250ms ease;
+  }
+  .email-link:hover {
+    color: var(--color-saffron-mango);
+  }
+  .email-link:hover::after {
+    transform: translateY(-3px);
+    background: var(--color-saffron-mango);
+  }
+</style>
