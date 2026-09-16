@@ -20,12 +20,12 @@ const capabilities = [
   {
     status: "pilot",
     title: "Strain identity and provenance",
-    body: "A genetic fingerprint that cuts through the notorious unreliability of cannabis strain names. It underpins authentication, intellectual property, and a supply chain a pharmacist can trace backwards.",
+    body: "A genetic fingerprint that cuts through the unreliability of cannabis strain names. It underpins authentication, intellectual property, and a supply chain a pharmacist can trace backwards.",
   },
   {
     status: "pilot",
     title: "Chemotype from DNA",
-    body: "Reading the cannabinoid and terpene biosynthesis panel — the THCAS/CBDAS/CBCAS synthases, the CsPT prenyltransferases, the CsTPS terpene synthase family and the MEP/MEV precursor pathways — to anticipate cannabinoid ratio and aroma profile before a plant is grown out or lab-tested. It compresses the breeding cycle from seasons to sequencing runs.",
+    body: "Reading the cannabinoid and terpene biosynthesis panel, from the THCAS/CBDAS/CBCAS synthases to the CsPT prenyltransferases, the CsTPS terpene synthase family and the MEP/MEV precursor pathways, to anticipate cannabinoid ratio and aroma before a plant is grown out. It compresses the breeding cycle from seasons to sequencing runs.",
   },
   {
     status: "pilot",
@@ -35,7 +35,7 @@ const capabilities = [
   {
     status: "pilot",
     title: "Breeding and population genomics",
-    body: "Relatedness, structure and marker discovery to guide crosses and track desirable alleles across generations — the groundwork for selecting on traits we cannot yet see.",
+    body: "Relatedness, structure and marker discovery to guide crosses and track desirable alleles across generations. It is the groundwork for selecting on traits we cannot yet see.",
   },
 ];
 
@@ -43,12 +43,12 @@ const frontier = [
   {
     status: "frontier",
     title: "Epigenetic selection",
-    body: "Cannabis is propagated clonally and increasingly through tissue culture — exactly the contexts where somaclonal variation arises, and that change is often epigenetic rather than sequence-level. Two plants with identical DNA can differ in vigour, chemotype stability and stress response because their methylation landscapes differ. Short-read DNA sequencing is blind to this. Adding EM-seq would let us screen clonal lines for epigenetic drift and select for stable epigenomes, not merely stable genomes. Durable, directed epigenetic breeding is an active research area, not a turnkey technique, and we describe it that way.",
+    body: "Cannabis is propagated clonally and increasingly through tissue culture, exactly the contexts where somaclonal variation arises, and that change is often epigenetic rather than sequence-level. Two plants with identical DNA can differ in vigour, chemotype stability and stress response because their methylation landscapes differ. Short-read sequencing is blind to this. Adding EM-seq would let us screen clonal lines for epigenetic drift and select for stable epigenomes, not merely stable genomes. Directed epigenetic breeding is an active research area, not a turnkey technique, and we describe it that way.",
   },
   {
     status: "frontier",
     title: "Multi-omics and genotype × environment",
-    body: "The full picture is genome plus epigenome plus transcriptome plus metabolome, read against the environment a cultivar will actually face. The goal is selecting for plasticity — the capacity to perform across a range of climates — which is the trait a destabilising climate makes most valuable, and the one pure genetics under-predicts.",
+    body: "The full picture is genome plus epigenome plus transcriptome plus metabolome, read against the environment a cultivar will actually face. The goal is selecting for plasticity, the capacity to perform across a range of climates. It is the trait a destabilising climate makes most valuable, and the one pure genetics under-predicts.",
   },
 ];
 
@@ -70,8 +70,8 @@ const badgeLabel: Record<string, string> = {
 ---
 
 <Layout
-  title='Adaptive Genetics — the science at Siren'
-  description='Siren runs a reproducible genomics pipeline from sequencing to chemotype, clone identity and population structure — with every claim labelled in pilot, frontier or speculative.'
+  title='Adaptive Genetics | Siren'
+  description='Siren runs a reproducible genomics pipeline from sequencing to chemotype, clone identity and population structure, with every claim labelled in pilot, frontier or speculative.'
 >
   <Nav variant='dark' active='science' />
 
@@ -82,12 +82,12 @@ const badgeLabel: Record<string, string> = {
       <p class='lede'>
         A reproducible, manifest-driven genomics pipeline that takes raw
         sequencing of Cannabis sativa through to variants, coverage, population
-        structure and clone identity — interpreted against a curated panel of
+        structure and clone identity, interpreted against a curated panel of
         cannabinoid and terpene biosynthesis genes.
       </p>
       <p class='sub'>
         The pipeline runs end to end today. The selection tools built on top of
-        it are in development and under pilot — every stage hands off through a
+        it are in development and under pilot. Every stage hands off through a
         manifest, and observed evidence is kept separate from computational
         inference and from biological interpretation. That separation is what
         makes it auditable rather than a black box.
@@ -117,8 +117,8 @@ const badgeLabel: Record<string, string> = {
         <p class='section-sub'>
           Four capabilities in development and under pilot on our own crop. Each
           connects genotype to something a buyer, a regulator or a breeder will
-          be able to act on — and each is on its way to routine practice, not
-          there yet.
+          be able to act on. Each is on its way to routine practice, not there
+          yet.
         </p>
       </div>
       <div class='claim-grid'>
@@ -257,7 +257,7 @@ const badgeLabel: Record<string, string> = {
     text-wrap: pretty;
   }
 
-  /* ── pipeline ──────────────────────────────────────────────── */
+  /* pipeline */
   .pipeline {
     padding: clamp(80px, 8vw, 140px) 0 0;
     text-align: center;
@@ -312,7 +312,7 @@ const badgeLabel: Record<string, string> = {
     text-wrap: pretty;
   }
 
-  /* ── claims ────────────────────────────────────────────────── */
+  /* claims */
   .claims {
     padding: clamp(80px, 8vw, 140px) 0 0;
   }
@@ -368,7 +368,7 @@ const badgeLabel: Record<string, string> = {
     border: 1px dashed rgba(245, 245, 225, 0.45);
   }
 
-  /* ── legend ────────────────────────────────────────────────── */
+  /* legend */
   .legend {
     margin-top: clamp(80px, 8vw, 140px);
     border-top: 1px solid rgba(240, 207, 135, 0.28);

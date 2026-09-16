@@ -6,7 +6,7 @@ import heroField from "../assets/hero-field.jpg";
 ---
 
 <section class='hero'>
-  <!-- vivid aerial drone photo dissolving into the green page -->
+  <!-- aerial drone photo dissolving into the green page -->
   <div class='hero-photo'>
     <Image
       src={heroField}
@@ -24,10 +24,9 @@ import heroField from "../assets/hero-field.jpg";
     <p class='hero-eyebrow'>Tondela · Portugal</p>
     <h1>The farm is the instrument.</h1>
     <p class='hero-lede'>
-      Siren builds agricultural intelligence — DNA-guided cultivar selection and
-      field-scale sensing — and trains it on medical cannabis in the Dão: a crop
-      valuable enough to fund the science, needed enough to matter, and the best
-      biological model we could have chosen.
+      Siren builds agricultural intelligence and trains it on medical cannabis
+      in the Dão. The crop pays for the science, and it teaches our models
+      faster than anything else we could plant.
     </p>
     <div class='hero-actions'>
       <a class='hero-cta primary' href='/why/'>Why cannabis?</a>
@@ -35,14 +34,14 @@ import heroField from "../assets/hero-field.jpg";
     </div>
   </div>
 
-  <!-- dark leaf mark below the copy — its lower branches tuck behind the cards -->
+  <!-- dark leaf mark below the copy; its lower branches tuck behind the cards -->
   <div class='hero-leaf'>
     <Logo tone='dark' class='hero-leaf-mark' />
   </div>
 </section>
 
 <style>
-  /* no overflow:hidden here — the leaf must run past the section
+  /* no overflow:hidden here; the leaf must run past the section
      and tuck behind the frosted cards below */
   .hero {
     position: relative;
@@ -172,7 +171,7 @@ import heroField from "../assets/hero-field.jpg";
     width: clamp(330px, 29vw, 500px);
   }
 
-  /* the photo is the backdrop for the copy — on a narrow, tall phone the
+  /* the photo is the backdrop for the copy. On a narrow, tall phone the
      text block grows, so give it more room before the green takes over */
   @media (max-width: 760px) {
     .hero-photo {

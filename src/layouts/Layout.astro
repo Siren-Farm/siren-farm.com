@@ -5,8 +5,8 @@ interface Props {
   title?: string;
   description?: string;
   theme?: "green" | "cream";
-  /** Color Safari paints behind the iOS status bar — override to blend
-   *  with whatever sits at the top of the page (e.g. the hero photo). */
+  /** Color Safari paints behind the iOS status bar. Override it to blend
+   *  with whatever sits at the top of the page, e.g. the hero photo. */
   themeColor?: string;
   /** Social-card image, relative to the site root. */
   ogImage?: string;
@@ -15,8 +15,8 @@ interface Props {
 }
 
 const {
-  title = "Siren — agricultural intelligence, grown in the Dão",
-  description = "Siren builds agricultural intelligence — DNA-guided cultivar selection and field-scale sensing — and trains it on medical cannabis in Tondela, Portugal.",
+  title = "Siren | Agricultural intelligence, grown in the Dão",
+  description = "Siren builds agricultural intelligence and trains it on medical cannabis in Tondela, Portugal. The crop pays for the science and teaches the models.",
   theme = "green",
   themeColor = theme === "cream" ? "#f5f5e1" : "#2f6357",
   ogImage = "/og-cover.png",
@@ -27,8 +27,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(ogImage, Astro.site).href;
 
 // Organization data is identical on every page, so it lives here rather than
-// being repeated per-page. Keep every claim here consistent with what is
-// filed in grant applications — this is the public corroboration layer.
+// being repeated per-page. Keep every claim consistent with what is filed in
+// grant applications. This is the public corroboration layer.
 const organization = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -69,7 +69,7 @@ const organization = {
     <meta name='description' content={description} />
     <link rel='canonical' href={canonical} />
 
-    <!-- social cards: without these every link pasted into an email, a DM or
+    <!-- social cards: without these, every link pasted into an email, a DM or
          LinkedIn renders as a naked URL -->
     <meta property='og:type' content='website' />
     <meta property='og:site_name' content='Siren' />
@@ -79,7 +79,7 @@ const organization = {
     <meta property='og:image' content={ogImageUrl} />
     <meta property='og:image:width' content='1200' />
     <meta property='og:image:height' content='630' />
-    <meta property='og:image:alt' content='Siren — agricultural intelligence, grown in the Dão' />
+    <meta property='og:image:alt' content='Siren, agricultural intelligence grown in the Dão' />
     <meta property='og:locale' content='en_GB' />
     <meta name='twitter:card' content='summary_large_image' />
     <meta name='twitter:title' content={title} />
@@ -96,7 +96,7 @@ const organization = {
       )
     }
   </head>
-  <!-- the page background lives on a wrapper, not body — iOS Safari's
+  <!-- the page background lives on a wrapper, not body. iOS Safari's
        status-bar sampler falls back to the body/html background, and it
        must find the blending themeColor there, not the solid page green -->
   <body>

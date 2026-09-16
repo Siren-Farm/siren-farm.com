@@ -6,25 +6,25 @@ import Footer from "../components/Footer.astro";
 
 // Products are named but never implied to ship. Each carries an explicit
 // stage. A named roadmap with honest dates is not the same thing as a claim,
-// and the distinction is the whole reason this page is credible.
+// and that distinction is why this page is credible.
 const products = [
   {
     name: "Sprout Heavy",
     domain: "Cultivation intelligence",
-    stage: "In development · first field trials 2027",
-    body: "Genotype, sensor and season data fused into cultivation decisions — what to plant where, when to intervene, and what the crop is likely to express. It is the layer that turns our genomics work into something a grower can act on in the morning.",
+    stage: "In development, first field trials 2027",
+    body: "Genotype, sensor and season data fused into cultivation decisions: what to plant where, when to intervene, and what the crop is likely to express. It turns our genomics work into something a grower can act on in the morning.",
   },
   {
     name: "Pluvora",
     domain: "Water and irrigation",
-    stage: "In development · first field trials 2027",
+    stage: "In development, first field trials 2027",
     body: "Irrigation control that coordinates pumps, filters, mixers and sensor data against soil moisture and forecast, optimising water and nutrient delivery rather than merely scheduling it. The intelligence layer is built by our CTO, drawing on his experience scaling farm operations.",
   },
   {
     name: "Plantologist",
     domain: "Plant health and propagation",
-    stage: "In development · first field trials 2027",
-    body: "Imaging and diagnostics for plant health, vigour and propagation quality — from verifying that a mother line has not drifted, through to grading nursery and reforestation stock.",
+    stage: "In development, first field trials 2027",
+    body: "Imaging and diagnostics for plant health, vigour and propagation quality, from verifying that a mother line has not drifted through to grading nursery and reforestation stock.",
   },
 ];
 
@@ -49,7 +49,7 @@ const markets = [
 ---
 
 <Layout
-  title='Technology — what Siren is building'
+  title='Technology | Siren'
   description='Sprout Heavy, Pluvora and Plantologist: the cultivation, water and plant-health systems Siren is building, trained and field-tested on its own crop in Portugal.'
   theme='cream'
 >
@@ -61,8 +61,8 @@ const markets = [
       <h1>Built on our own crop, at our own risk</h1>
       <p class='lede'>
         Three systems are in development at Siren. Each one is trained and
-        field-tested on the farm we own before it is offered to anyone else —
-        which means we carry the cost of being wrong first.
+        field-tested on the farm we own before it is offered to anyone else, so
+        we carry the cost of being wrong first.
       </p>
     </header>
 
@@ -100,9 +100,9 @@ const markets = [
         <h2 id='markets-title'>Where it goes beyond cannabis</h2>
         <p>
           Almost nothing we are building is species-specific. Cannabis is where
-          it gets trained hardest — under a traceability regime that keeps us
-          honest — but a model of how a genotype behaves across a season does
-          not care what is in the ground.
+          it gets trained hardest, under a traceability regime that keeps us
+          honest, but a model of how a genotype behaves across a season does not
+          care what is in the ground.
         </p>
       </div>
       <ul class='market-grid'>
@@ -172,7 +172,7 @@ const markets = [
     white-space: nowrap;
   }
 
-  /* ── products ──────────────────────────────────────────────── */
+  /* products */
   .products {
     margin-top: clamp(56px, 6vw, 96px);
     border-top: 1px solid rgba(47, 99, 87, 0.22);
@@ -217,7 +217,7 @@ const markets = [
     text-wrap: pretty;
   }
 
-  /* ── honesty block ─────────────────────────────────────────── */
+  /* honesty block */
   .honesty {
     margin-top: clamp(56px, 6vw, 96px);
     border-radius: 1.5rem;
@@ -242,7 +242,7 @@ const markets = [
     margin-bottom: 0;
   }
 
-  /* ── markets ───────────────────────────────────────────────── */
+  /* markets */
   .markets {
     margin-top: clamp(80px, 8vw, 140px);
   }

@@ -6,7 +6,7 @@ import Logo from "./Logo.astro";
 // glides back the moment you scroll up.
 //  - "dark"  sits on the green pages (gold leaf, cream pills)
 //  - "light" sits on the cream pages (green leaf, green pills)
-// Below 960px the pills collapse into a full-screen drawer — five
+// Below 960px the pills collapse into a full-screen drawer; five
 // destinations will not fit on a phone next to the wordmark.
 interface Props {
   variant?: "dark" | "light";
@@ -112,7 +112,7 @@ const links = [
   }
   /* the capsule glass lives on an absolute child: iOS Safari samples fixed
      elements near the top edge to tint the status bar, but skips absolutely
-     positioned children — keeping the photo composited behind the island */
+     positioned children; keeping the photo composited behind the island */
   .nav-bg {
     position: absolute;
     inset: 0;
@@ -333,7 +333,7 @@ const links = [
       font-size: 19px;
     }
   }
-  /* a short landscape phone cannot centre five big links — let it scroll */
+  /* a short landscape phone cannot centre five big links; let it scroll */
   @media (max-height: 520px) {
     .nav-drawer {
       justify-content: flex-start;
@@ -349,7 +349,7 @@ const links = [
   let lastY = window.scrollY;
 
   const onScroll = () => {
-    // while the drawer is open the page behind is locked — ignore scroll
+    // while the drawer is open the page behind is locked; ignore scroll
     if (drawer.classList.contains("open")) return;
     const y = window.scrollY;
     wrap.classList.toggle("nav-scrolled", y > 64);
@@ -393,7 +393,7 @@ const links = [
   window.addEventListener("pageshow", () => {
     document.body.style.overflow = "";
   });
-  // the drawer is a phone affordance — drop it if the viewport grows
+  // the drawer is a phone affordance; drop it if the viewport grows
   window.matchMedia("(min-width: 961px)").addEventListener("change", (event) => {
     if (event.matches && drawer.classList.contains("open")) setDrawer(false);
   });

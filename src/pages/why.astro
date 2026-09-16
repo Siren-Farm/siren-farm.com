@@ -7,78 +7,78 @@ import Footer from "../components/Footer.astro";
 // One source of truth: the same array renders the page and the FAQPage
 // structured data, so search results can never drift from the copy.
 //
-// Accuracy rules for this file — do not soften:
-//  · the INFARMED licence is applied for, never held
-//  · no revenue or yield projections
-//  · no research partner is named as a partner
+// Accuracy rules for this file, do not soften:
+//  . the INFARMED licence is applied for, never held
+//  . no revenue or yield projections
+//  . no research partner is named as a partner
 const faqs: { q: string; a: string[] }[] = [
   {
     q: "Why cannabis?",
     a: [
-      "Because it is three things at once: a real medical need, a crop valuable enough to pay for serious instrumentation, and an unusually good biological model.",
-      "The need is not abstract. Portugal has become a significant European producer while its own patients see very little of what is grown here — on our reading of the export and dispensing figures, the country ships out on the order of 647 times more medical cannabis than it makes available domestically. We think that gap is worth closing.",
-      "The economics matter because sequencing, sensing and imaging never pencil out on a commodity crop. They do on this one. And once the methods are trained, they transfer down to crops that could never have funded their development.",
-      "But the biology is the real reason. Cannabis is propagated clonally, so a genotype can be held literally constant while the environment around it varies — that is the experimental design for genotype × environment, and almost no field crop offers it at scale. It expresses dozens of quantifiable cannabinoid and terpene readouts per plant, where a cereal gives you yield and perhaps protein; machine learning needs labels, and this plant produces them by the hundred. Decades of prohibition left it genomically under-characterised, so there is genuine white space. And pharmaceutical-grade cultivation legally requires the per-plant record that every other agricultural-AI company has to persuade a farmer to keep.",
-      "Cannabis is not incidental to Siren, and it is not the whole of Siren. It is the right first crop.",
+      "Three reasons at once: a real medical need, a crop valuable enough to pay for serious instrumentation, and an unusually good biological model.",
+      "The need is not abstract. Portugal has become a significant European producer while its own patients see very little of what is grown here. On our reading of the export and dispensing figures, the country ships out around 647 times more medical cannabis than it makes available at home.",
+      "The economics matter because sequencing and sensing never pencil out on a commodity crop. They do on this one, and once the methods are trained they transfer down to crops that could never have funded them.",
+      "The biology is the real reason. Cannabis is propagated clonally, so a genotype can be held constant while the environment varies. It expresses dozens of measurable cannabinoid and terpene readouts per plant, where a cereal gives you yield and perhaps protein. Prohibition left it genomically under-characterised, so there is real white space. And pharmaceutical-grade cultivation legally requires the per-plant record that every other agricultural-AI company has to persuade a farmer to keep.",
+      "Cannabis is not incidental to Siren, and it is not all of Siren. It is the right first crop.",
     ],
   },
   {
     q: "Why outdoors, when almost all medical cannabis is grown indoors?",
     a: [
       "Because you cannot learn a climate in a sealed room.",
-      "Indoor cultivation exists to remove variance. That variance is precisely what we are trying to model. An indoor grower is optimising a machine; an outdoor season teaches you about a place — and as European growing conditions become less predictable, understanding how a genotype behaves across real weather is the asset, not the obstacle.",
-      "Outdoor cultivation is also dramatically lower-carbon and lower-cost. We grow one crop a year, March to October, under the sun rather than under lights.",
-      "It is harder. Weather is not a parameter we control, and a bad season is a real season. That is exactly why the resulting data is worth having.",
+      "Indoor cultivation exists to remove variance, and that variance is what we are trying to model. An indoor grower is optimising a machine. An outdoor season teaches you about a place, and as European growing conditions get less predictable, knowing how a genotype behaves across real weather is the asset.",
+      "Outdoor is also far lower-carbon and lower-cost. We grow one crop a year, March to October, under the sun.",
+      "It is harder. Weather is not a parameter we control, and a bad season is a real season. That is why the data is worth having.",
     ],
   },
   {
     q: "So is Siren a farm or a technology company?",
     a: [
       "Today, honestly: an agriculture company that trains data and tests hardware.",
-      "Stage one is a working outdoor medical cannabis operation in the Dão, earning from flower. Stage two is platform revenue from the tools that farm proves out. We expect the boundary to fall around 2028–2029.",
-      "Four things join the two stages, and without them this would just be a pivot story. Cash: flower revenue funds the engineering years before the platform earns. Data: every season adds labelled genotype × environment × chemistry records that cannot be bought. Model training: the farm is the ground truth the models are fitted against, and the place they get proven wrong. Hardware testing: sensors and machines run on our own crop, at our own risk, before they reach anyone else's.",
+      "Stage one is a working outdoor medical cannabis operation in the Dão, earning from flower. Stage two is platform revenue from the tools that farm proves out. We expect the boundary around 2028 to 2029.",
+      "Four things join the stages. Cash: flower revenue funds the engineering years. Data: every season adds labelled records that cannot be bought. Model training: the farm is the ground truth. Hardware testing: sensors run on our own crop first.",
       "The farm is not a side business and not a cover story. It is the instrument.",
     ],
   },
   {
     q: "Why Tondela?",
     a: [
-      "Partly because it is home, and because the land was securable — we own it freehold, outright, which means we can run an experiment that costs a season without asking anyone's permission.",
-      "And partly because the Dão is a serious growing region for reasons that matter to an aromatic crop. Granite-derived soils, shelter from the Caramulo and Estrela ranges, and a pronounced day–night temperature swing are what made it one of Portugal's great wine regions. For a plant whose value sits in its volatile chemistry, diurnal amplitude is not a romantic detail.",
-      "The name comes from here too. Local legend tells of a woman who kept watch from a hilltop in the Serra do Caramulo and sounded her horn — her tone, tom dela — when danger appeared, giving her people time to prepare. Tondela is said to take its name from her. Foresight, and acting on it early, is a reasonable thing for this company to be named after.",
-      "It also means the jobs, the spending and the rural tax base land in a part of Portugal that needs them, within reach of a regional polytechnic and a skilled agricultural workforce.",
+      "Partly because it is home, and because the land was securable. We own it freehold, which means we can run an experiment that costs a season without asking permission.",
+      "And partly because the Dão is a serious growing region. Granite soils, shelter from the Caramulo and Estrela ranges, and a wide swing between day and night temperature are what made it one of Portugal's great wine regions. For a plant whose value sits in its volatile chemistry, that swing is not a romantic detail.",
+      "The name comes from here too. Local legend tells of a woman who kept watch from a hilltop in the Serra do Caramulo and sounded her horn, her tone, tom dela, when danger appeared. Tondela is said to take its name from her.",
+      "It also means the jobs and the spending land in a part of Portugal that needs them.",
     ],
   },
   {
     q: "Why should anyone who doesn't grow cannabis care?",
     a: [
       "Because almost nothing we are building is cannabis-specific.",
-      "A model that predicts how a genotype expresses across a season, a controller that coordinates irrigation against soil and weather, a vision system that reads plant health from imagery — none of those care what species is in the ground. Cannabis is where they get trained hardest and fastest, under a traceability regime that keeps us honest.",
-      "Three products are in development on that basis: Sprout Heavy for cultivation intelligence, Pluvora for water and irrigation, and Plantologist for plant health and nursery stock. All three are pre-release, with first field trials planned for 2027 on our own crop.",
-      "The methods also transfer directly to other specialised-metabolite crops — medicinal plants, hops, aromatics — and the water and plant-health work reaches further still, into nurseries, reforestation and managed turf.",
+      "A model that predicts how a genotype expresses across a season, a controller that coordinates irrigation against soil and weather, a vision system that reads plant health: none of them care what species is in the ground. Cannabis is where they get trained hardest, under a traceability regime that keeps us honest.",
+      "Three products are in development on that basis. Sprout Heavy for cultivation intelligence, Pluvora for water and irrigation, Plantologist for plant health. All three are pre-release, with first field trials planned for 2027 on our own crop.",
+      "The methods transfer to other specialised-metabolite crops such as medicinal plants, hops and aromatics. The water and plant-health work reaches further still, into nurseries, reforestation and managed turf.",
     ],
   },
   {
     q: "Is Siren licensed?",
     a: [
-      "No — and we will not describe ourselves as licensed until we are.",
-      "Our cultivation licence application is filed with INFARMED, Portugal's medicines regulator. It has been submitted. It has not been issued. We model the outcome as a genuine binary and we plan for delay rather than assuming approval.",
+      "No, and we will not say we are until we are.",
+      "Our cultivation licence application is filed with INFARMED, Portugal's medicines regulator. It has been submitted. It has not been issued. We plan for delay rather than assuming approval.",
       "We say this plainly because a company that is careful with this sentence is more likely to be careful with the others.",
     ],
   },
   {
     q: "What actually exists today?",
     a: [
-      "Real, now: the land, owned freehold in Tondela. A Portuguese company registered since 2022. A cultivation licence application filed and paid for. Legal and financial counsel on retainer. And a genomics pipeline running end to end — sequencing through alignment, variant calling, a curated cannabinoid and terpene biosynthesis panel, population structure, and clone-fidelity screening. The selection tools built on that pipeline are in development and under pilot, not yet routine practice.",
-      "Not yet: the licence itself. A first commercial harvest, planned for 2027. Any platform product in general release. Any formalised research partnership — where we have discussions under way, they are discussions, and we describe them that way.",
+      "Real, now: the land, owned freehold in Tondela. A Portuguese company registered since 2022. A cultivation licence application filed and paid for. Legal and financial counsel on retainer. And a genomics pipeline running end to end, from sequencing through alignment, variant calling, a curated cannabinoid and terpene biosynthesis panel, population structure and clone-fidelity screening. The selection tools built on that pipeline are in development and under pilot, not yet routine practice.",
+      "Not yet: the licence itself. A first commercial harvest, planned for 2027. Any platform product in general release. Any formalised research partnership. Where we have discussions under way, they are discussions, and we describe them that way.",
       "We would rather you check this list than take our word for it.",
     ],
   },
   {
     q: "Who is behind Siren?",
     a: [
-      "Two founders. Beatriz Sousa, CEO, holds 60% and leads the science — molecular biology, epigenetics and AI systems. João Justo, CTO, holds 40% and leads infrastructure; he was previously CTO of Europe's largest avocado farm, running a real-time platform across 10,000 hectares under GlobalGAP certification. Siren is majority women-owned.",
-      "Siren is bootstrapped. Founder capital plus €100,000 from friends and family — no institutional investor, no closed round, no bank debt. That money bought the land outright, funded and filed the licence application, and put legal and financial counsel on retainer.",
+      "Two founders. Beatriz Sousa, CEO, holds 60% and leads the science: molecular biology, epigenetics and AI systems. João Justo, CTO, holds 40% and leads infrastructure. He was previously CTO of Europe's largest avocado farm, running a real-time platform across 10,000 hectares under GlobalGAP certification. Siren is majority women-owned.",
+      "Siren is bootstrapped. Founder capital plus €100,000 from friends and family, with no institutional investor, no closed round and no bank debt. That money bought the land outright, funded and filed the licence application, and put legal and financial counsel on retainer.",
       "We say what the bootstrap bought rather than the bootstrap alone, because the second is a story and the first is a balance sheet.",
     ],
   },
@@ -96,8 +96,8 @@ const schema = {
 ---
 
 <Layout
-  title='Why cannabis, why outdoors, why Tondela — Siren'
-  description='Straight answers on why Siren grows medical cannabis outdoors in the Dão, what it is building beyond the crop, and exactly what exists today.'
+  title='Why cannabis, why outdoors, why Tondela | Siren'
+  description='Straight answers on why Siren grows medical cannabis outdoors in the Dão, what it is building beyond the crop, and what exists today.'
   theme='cream'
   schema={schema}
 >
@@ -108,9 +108,9 @@ const schema = {
       <p class='why-eyebrow'>Questions we actually get asked</p>
       <h1>Why cannabis, why outdoors, why here</h1>
       <p class='why-lede'>
-        The short version: the crop pays for the science, teaches the models
+        The short version: the crop pays for the science, teaches our models
         faster than anything else we could plant, and is needed by patients in
-        the country that grows it. The longer versions are below.
+        the country that grows it.
       </p>
     </header>
 
@@ -201,7 +201,7 @@ const schema = {
     color: var(--color-stromboli);
     text-wrap: pretty;
   }
-  /* a plus that becomes a minus — cheaper than an icon and always crisp */
+  /* a plus that becomes a minus, cheaper than an icon and always crisp */
   .faq-sign {
     position: relative;
     flex: 0 0 auto;

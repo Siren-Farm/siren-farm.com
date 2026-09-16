@@ -1,7 +1,7 @@
 ---
 // The "Say hi!" CTA pill + email link.
 //  - "green" page: cream pill, gold label (arrow matches the label color)
-//  - "cream" page: gold pill, dark-green label — the cream pill would vanish
+//  - "cream" page: gold pill, dark-green label; the cream pill would vanish
 const email = "hi@siren-farm.com";
 
 interface Props {
@@ -68,7 +68,7 @@ const { variant = "green" } = Astro.props;
     filter: brightness(0.96);
   }
 
-  /* hover choreography — the text chases the arrow */
+  /* hover choreography; the text chases the arrow */
   .say-hi-cta > span {
     transition:
       transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
