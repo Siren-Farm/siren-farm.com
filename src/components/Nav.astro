@@ -6,19 +6,18 @@ import Logo from "./Logo.astro";
 // glides back the moment you scroll up.
 //  - "dark"  sits on the green pages (gold leaf, cream pills)
 //  - "light" sits on the cream pages (green leaf, green pills)
-// Below 960px the pills collapse into a full-screen drawer; five
-// destinations will not fit on a phone next to the wordmark.
+// Below 960px the pills collapse into a full-screen drawer, which a phone
+// cannot fit next to the wordmark.
 interface Props {
   variant?: "dark" | "light";
   /** omitted on pages that are not in the menu, e.g. 404 */
-  active?: "home" | "science" | "technology" | "why" | "about";
+  active?: "home" | "technology" | "why" | "about";
 }
 
 const { variant = "dark", active } = Astro.props;
 
 const links = [
   { href: "/", label: "Home", key: "home" },
-  { href: "/science/", label: "Science", key: "science" },
   { href: "/technology/", label: "Technology", key: "technology" },
   { href: "/why/", label: "Why", key: "why" },
   { href: "/about/", label: "About", key: "about" },
@@ -333,7 +332,7 @@ const links = [
       font-size: 19px;
     }
   }
-  /* a short landscape phone cannot centre five big links; let it scroll */
+  /* a short landscape phone cannot centre the links; let it scroll */
   @media (max-height: 520px) {
     .nav-drawer {
       justify-content: flex-start;

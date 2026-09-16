@@ -16,6 +16,8 @@ export default defineConfig({
   redirects: {
     // the name story now lives at the bottom of About
     "/why-siren": "/about",
+    // the Adaptive Genetics page was retired; anything shared lands here
+    "/science": "/technology",
   },
   vite: {
     plugins: [tailwindcss()],
