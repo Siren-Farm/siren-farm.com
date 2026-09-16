@@ -1,0 +1,85 @@
+---
+import { Image } from "astro:assets";
+
+// A plain row of partner marks, no text. Drop files into
+// src/assets/partners/ and they appear here, ordered by filename:
+//   1-tech-foundry.png   2-upv.png   3-omplo.png
+//
+// Requirements for each file, or the row will look wrong:
+//  . dark or full-colour version, NOT the white-on-dark variant. This sits
+//    on the cream page and a white logo is invisible on it.
+//  . transparent background, trimmed, no padding baked in.
+//  . svg preferred, otherwise png at 3x the display height (~180px tall).
+//
+// The folder is read at build time, so an empty folder renders nothing
+// rather than a broken row. Only add a mark once that organisation has
+// agreed to appear: a logo reads as endorsement in a way a sentence does not.
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/partners/*.{png,jpg,jpeg,svg,webp}",
+  { eager: true }
+);
+
+const logos = Object.entries(files)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([path, mod]) => ({
+    src: mod.default,
+    // filename without the ordering prefix or extension, for the alt text
+    alt: path.split("/").pop()!.replace(/^\d+[-_]/, "").replace(/\.\w+$/, "").replace(/[-_]/g, " "),
+  }));
+---
+
+{
+  logos.length > 0 && (
+    <section class='partners' aria-label='Organisations we work with'>
+      <ul>
+        {logos.map((logo) => (
+          <li>
+            <Image src={logo.src} alt={logo.alt} height={60} densities={[1, 2]} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .partners {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(56px, 6vw, 96px) 24px 0;
+  }
+  .partners ul {
+    margin: 0;
+    padding: clamp(28px, 3vw, 44px) 0 0;
+    list-style: none;
+    border-top: 1px solid rgba(47, 99, 87, 0.2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(28px, 5vw, 72px);
+  }
+  .partners li {
+    display: flex;
+  }
+  /* height-matched rather than width-matched, so marks of different
+     proportions read as one row */
+  .partners :global(img) {
+    height: clamp(34px, 3.4vw, 50px);
+    width: auto;
+    opacity: 0.75;
+    transition: opacity 250ms ease;
+  }
+  .partners :global(img:hover) {
+    opacity: 1;
+  }
+
+  @media (max-width: 560px) {
+    .partners ul {
+      gap: 26px 32px;
+    }
+    .partners :global(img) {
+      height: 30px;
+    }
+  }
+</style>
