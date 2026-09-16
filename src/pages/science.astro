@@ -20,22 +20,22 @@ const capabilities = [
   {
     status: "pilot",
     title: "Strain identity and provenance",
-    body: "A genetic fingerprint that cuts through the unreliability of cannabis strain names. It underpins authentication, intellectual property, and a supply chain a pharmacist can trace backwards.",
+    body: "A genetic fingerprint that cuts through unreliable strain names. It underpins authentication, intellectual property, and a supply chain a pharmacist can trace backwards.",
   },
   {
     status: "pilot",
     title: "Chemotype from DNA",
-    body: "Reading the cannabinoid and terpene biosynthesis panel, from the THCAS/CBDAS/CBCAS synthases to the CsPT prenyltransferases, the CsTPS terpene synthase family and the MEP/MEV precursor pathways, to anticipate cannabinoid ratio and aroma before a plant is grown out. It compresses the breeding cycle from seasons to sequencing runs.",
+    body: "Reading the biosynthesis panel: THCAS/CBDAS/CBCAS synthases, CsPT prenyltransferases, the CsTPS terpene synthase family, MEP/MEV precursor pathways. It anticipates cannabinoid ratio and aroma before a plant is grown out, compressing the breeding cycle from seasons to sequencing runs.",
   },
   {
     status: "pilot",
     title: "Clonal fidelity and quality control",
-    body: "Screening whether plants propagated as a single clone genuinely are one genetic individual, and localising where a mother line has drifted. For a clonally propagated crop, verifying that the mother has not changed is a direct quality function, not an academic one.",
+    body: "Checking whether plants propagated as a single clone really are one genetic individual, and where a mother line has drifted. For a clonally propagated crop that is a quality function, not an academic one.",
   },
   {
     status: "pilot",
     title: "Breeding and population genomics",
-    body: "Relatedness, structure and marker discovery to guide crosses and track desirable alleles across generations. It is the groundwork for selecting on traits we cannot yet see.",
+    body: "Relatedness, structure and marker discovery, to guide crosses and track alleles across generations. Groundwork for selecting on traits we cannot yet see.",
   },
 ];
 
@@ -43,12 +43,12 @@ const frontier = [
   {
     status: "frontier",
     title: "Epigenetic selection",
-    body: "Cannabis is propagated clonally and increasingly through tissue culture, exactly the contexts where somaclonal variation arises, and that change is often epigenetic rather than sequence-level. Two plants with identical DNA can differ in vigour, chemotype stability and stress response because their methylation landscapes differ. Short-read sequencing is blind to this. Adding EM-seq would let us screen clonal lines for epigenetic drift and select for stable epigenomes, not merely stable genomes. Directed epigenetic breeding is an active research area, not a turnkey technique, and we describe it that way.",
+    body: "Clonal propagation and tissue culture are where somaclonal variation arises, and that change is often epigenetic rather than sequence-level. Two plants with identical DNA can differ in vigour and stress response because their methylation differs, and short-read sequencing is blind to it. EM-seq would let us select for stable epigenomes, not just stable genomes. This is active research, not a turnkey technique.",
   },
   {
     status: "frontier",
     title: "Multi-omics and genotype × environment",
-    body: "The full picture is genome plus epigenome plus transcriptome plus metabolome, read against the environment a cultivar will actually face. The goal is selecting for plasticity, the capacity to perform across a range of climates. It is the trait a destabilising climate makes most valuable, and the one pure genetics under-predicts.",
+    body: "Genome, epigenome, transcriptome and metabolome, read against the environment a cultivar will face. The goal is plasticity: performing across a range of climates. It is the trait a destabilising climate makes most valuable, and the one pure genetics under-predicts.",
   },
 ];
 
@@ -86,11 +86,10 @@ const badgeLabel: Record<string, string> = {
         cannabinoid and terpene biosynthesis genes.
       </p>
       <p class='sub'>
-        The pipeline runs end to end today. The selection tools built on top of
-        it are in development and under pilot. Every stage hands off through a
-        manifest, and observed evidence is kept separate from computational
-        inference and from biological interpretation. That separation is what
-        makes it auditable rather than a black box.
+        The pipeline runs end to end today. The selection tools built on it are
+        in development and under pilot. Observed evidence is kept separate from
+        inference and from interpretation, which is what makes it auditable
+        rather than a black box.
       </p>
     </header>
 
@@ -115,10 +114,8 @@ const badgeLabel: Record<string, string> = {
       <div class='section-head'>
         <h2 id='today-title' class='section-title'>What we are building</h2>
         <p class='section-sub'>
-          Four capabilities in development and under pilot on our own crop. Each
-          connects genotype to something a buyer, a regulator or a breeder will
-          be able to act on. Each is on its way to routine practice, not there
-          yet.
+          Four capabilities in development and under pilot on our own crop. On
+          their way to routine practice, not there yet.
         </p>
       </div>
       <div class='claim-grid'>
@@ -163,8 +160,8 @@ const badgeLabel: Record<string, string> = {
       <h2 id='legend-title'>How we label claims</h2>
       <p class='legend-intro'>
         Cannabis science is full of confident statements that do not survive
-        contact with a dataset. We would rather be checkable than impressive, so
-        every claim we publish carries one of three labels.
+        contact with a dataset. Every claim we publish carries one of three
+        labels.
       </p>
       <ul class='legend-list'>
         {

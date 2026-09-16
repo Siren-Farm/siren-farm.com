@@ -5,7 +5,7 @@
 //
 // Hard rules, do not soften:
 //  . the INFARMED cultivation licence is SUBMITTED, never "granted" or "licensed"
-//  . no financial projections belong on this page
+//  . no financial projections, and no figure for what friends and family put in
 //  . no partner is named until an agreement is actually signed
 const asOf = "September 2026";
 
@@ -24,6 +24,11 @@ const items = [
     label: "Science",
     value:
       "Genomics pipeline running end to end. The selection tools built on it, including the chemotype panel and clone-fidelity screening, are in development and under pilot.",
+  },
+  {
+    label: "Funding",
+    value:
+      "Bootstrapped on founder capital and friends and family. The goal has been to de-risk as much as possible before raising.",
   },
   {
     label: "Next",
@@ -100,7 +105,7 @@ const items = [
   .status-grid {
     margin: clamp(20px, 2.2vw, 30px) 0 0;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: clamp(18px, 2vw, 30px);
   }
   .status-item dt {
@@ -119,11 +124,6 @@ const items = [
     text-wrap: pretty;
   }
 
-  @media (max-width: 900px) {
-    .status-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
   @media (max-width: 560px) {
     .status-grid {
       grid-template-columns: 1fr;
