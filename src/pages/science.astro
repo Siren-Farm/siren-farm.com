@@ -5,9 +5,10 @@ import GlassCard from "../components/GlassCard.astro";
 import SayHi from "../components/SayHi.astro";
 import Footer from "../components/Footer.astro";
 
-// Every claim on this page carries its own confidence label. That discipline
-// is borrowed from the pipeline's own documentation and it is the point:
-// a reader should be able to tell what is routine from what is research.
+// Every claim on this page carries its own confidence label. Nothing here is
+// routine practice yet: the pipeline runs, the selection tools on top of it are
+// in development and under pilot on our own crop. Do not promote a claim to
+// routine until it actually is one.
 const stages = [
   { name: "Sequence", detail: "Short-read whole-genome sequencing of each line." },
   { name: "Align", detail: "Reads mapped against a curated Cannabis sativa reference." },
@@ -17,22 +18,22 @@ const stages = [
 
 const capabilities = [
   {
-    status: "established",
+    status: "pilot",
     title: "Strain identity and provenance",
     body: "A genetic fingerprint that cuts through the notorious unreliability of cannabis strain names. It underpins authentication, intellectual property, and a supply chain a pharmacist can trace backwards.",
   },
   {
-    status: "established",
+    status: "pilot",
     title: "Chemotype from DNA",
     body: "Reading the cannabinoid and terpene biosynthesis panel — the THCAS/CBDAS/CBCAS synthases, the CsPT prenyltransferases, the CsTPS terpene synthase family and the MEP/MEV precursor pathways — to anticipate cannabinoid ratio and aroma profile before a plant is grown out or lab-tested. It compresses the breeding cycle from seasons to sequencing runs.",
   },
   {
-    status: "established",
+    status: "pilot",
     title: "Clonal fidelity and quality control",
     body: "Screening whether plants propagated as a single clone genuinely are one genetic individual, and localising where a mother line has drifted. For a clonally propagated crop, verifying that the mother has not changed is a direct quality function, not an academic one.",
   },
   {
-    status: "established",
+    status: "pilot",
     title: "Breeding and population genomics",
     body: "Relatedness, structure and marker discovery to guide crosses and track desirable alleles across generations — the groundwork for selecting on traits we cannot yet see.",
   },
@@ -52,15 +53,25 @@ const frontier = [
 ];
 
 const legend = [
-  { status: "established", note: "Routine practice. We run this today." },
+  {
+    status: "pilot",
+    note: "Being built and piloted now, on our own crop. Intended to become routine practice as the programme matures.",
+  },
   { status: "frontier", note: "Active research. Promising, not turnkey." },
   { status: "speculative", note: "A direction, not a plan. Labelled as such." },
 ];
+
+// badge text is separate from the status key so the CSS class stays short
+const badgeLabel: Record<string, string> = {
+  pilot: "In pilot",
+  frontier: "Frontier",
+  speculative: "Speculative",
+};
 ---
 
 <Layout
   title='Adaptive Genetics — the science at Siren'
-  description='Siren runs a reproducible genomics pipeline from sequencing to chemotype, clone identity and population structure — with every claim labelled established, frontier or speculative.'
+  description='Siren runs a reproducible genomics pipeline from sequencing to chemotype, clone identity and population structure — with every claim labelled in pilot, frontier or speculative.'
 >
   <Nav variant='dark' active='science' />
 
@@ -75,10 +86,11 @@ const legend = [
         cannabinoid and terpene biosynthesis genes.
       </p>
       <p class='sub'>
-        Every stage hands off through a manifest, and observed evidence is kept
-        separate from computational inference and from biological
-        interpretation. That separation is what makes it auditable rather than a
-        black box.
+        The pipeline runs end to end today. The selection tools built on top of
+        it are in development and under pilot — every stage hands off through a
+        manifest, and observed evidence is kept separate from computational
+        inference and from biological interpretation. That separation is what
+        makes it auditable rather than a black box.
       </p>
     </header>
 
@@ -101,10 +113,12 @@ const legend = [
 
     <section class='claims' aria-labelledby='today-title'>
       <div class='section-head'>
-        <h2 id='today-title' class='section-title'>What it does today</h2>
+        <h2 id='today-title' class='section-title'>What we are building</h2>
         <p class='section-sub'>
-          Four capabilities we run now. Each connects genotype to something a
-          buyer, a regulator or a breeder can act on.
+          Four capabilities in development and under pilot on our own crop. Each
+          connects genotype to something a buyer, a regulator or a breeder will
+          be able to act on — and each is on its way to routine practice, not
+          there yet.
         </p>
       </div>
       <div class='claim-grid'>
@@ -112,7 +126,7 @@ const legend = [
           capabilities.map((item) => (
             <GlassCard>
               <div class='claim-body'>
-                <span class={`badge badge-${item.status}`}>{item.status}</span>
+                <span class={`badge badge-${item.status}`}>{badgeLabel[item.status]}</span>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
               </div>
@@ -135,7 +149,7 @@ const legend = [
           frontier.map((item) => (
             <GlassCard>
               <div class='claim-body'>
-                <span class={`badge badge-${item.status}`}>{item.status}</span>
+                <span class={`badge badge-${item.status}`}>{badgeLabel[item.status]}</span>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
               </div>
@@ -156,7 +170,7 @@ const legend = [
         {
           legend.map((item) => (
             <li>
-              <span class={`badge badge-${item.status}`}>{item.status}</span>
+              <span class={`badge badge-${item.status}`}>{badgeLabel[item.status]}</span>
               <span class='legend-note'>{item.note}</span>
             </li>
           ))
@@ -338,7 +352,7 @@ const legend = [
     text-transform: uppercase;
     white-space: nowrap;
   }
-  .badge-established {
+  .badge-pilot {
     background: rgba(238, 186, 88, 0.2);
     color: var(--color-putty);
     border: 1px solid rgba(238, 186, 88, 0.45);
