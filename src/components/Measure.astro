@@ -1,0 +1,134 @@
+---
+// The evidence strip: what the instrument actually records. This is the
+// section that turns "we use technology" into something checkable.
+const layers = [
+  {
+    name: "DNA",
+    detail:
+      "Whole-genome sequencing of our lines, read against a curated panel of cannabinoid and terpene biosynthesis genes — so chemotype is anticipated before a plant is grown out.",
+  },
+  {
+    name: "Soil",
+    detail:
+      "Moisture, temperature and nutrient movement through granite-derived Dão soil, logged continuously across the season rather than sampled at harvest.",
+  },
+  {
+    name: "Canopy",
+    detail:
+      "Aerial and ground imaging tracking vigour, stress and phenology plant by plant instead of block by block.",
+  },
+  {
+    name: "Climate",
+    detail:
+      "On-site weather measured against the day–night swing that made the Dão a wine region. Outdoors, variance is the signal — not the noise.",
+  },
+  {
+    name: "Chemistry",
+    detail:
+      "Cannabinoid and terpene assay at harvest, closing the loop from genotype and season back to what the plant actually produced.",
+  },
+];
+---
+
+<section class='measure' aria-labelledby='measure-title'>
+  <div class='measure-header'>
+    <h2 id='measure-title'>What we measure</h2>
+    <p>
+      Five layers, one plant, one season — recorded under a regulatory regime
+      that requires the record to exist. Most agri-AI companies negotiate for
+      data. We grow it.
+    </p>
+  </div>
+
+  <ol class='measure-list'>
+    {
+      layers.map((layer, index) => (
+        <li class='measure-row'>
+          <span class='measure-index' aria-hidden='true'>
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3>{layer.name}</h3>
+          <p>{layer.detail}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .measure {
+    padding: clamp(96px, 10vw, 168px) 0 0;
+  }
+  .measure-header {
+    max-width: 52em;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .measure-header h2 {
+    margin: 0;
+    font-size: clamp(36px, 3.2vw, 52px);
+    line-height: 1.12;
+    color: var(--color-saffron-mango);
+  }
+  .measure-header p {
+    margin: clamp(10px, 1vw, 16px) 0 0;
+    max-width: 36em;
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  .measure-list {
+    margin: clamp(36px, 4vw, 60px) 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(240, 207, 135, 0.28);
+  }
+  .measure-row {
+    display: grid;
+    grid-template-columns: auto minmax(140px, 1.1fr) 3fr;
+    align-items: baseline;
+    gap: clamp(16px, 2.4vw, 40px);
+    padding: clamp(22px, 2.4vw, 34px) clamp(4px, 1vw, 14px);
+    border-bottom: 1px solid rgba(240, 207, 135, 0.28);
+  }
+  .measure-index {
+    font-family: var(--font-display);
+    font-size: clamp(13px, 1.1vw, 16px);
+    color: var(--color-saffron-mango);
+    opacity: 0.75;
+    font-variant-numeric: tabular-nums;
+  }
+  .measure-row h3 {
+    margin: 0;
+    font-size: clamp(24px, 2.3vw, 36px);
+    line-height: 1.15;
+    color: var(--color-putty);
+  }
+  .measure-row p {
+    margin: 0;
+    font-size: clamp(16px, 1.45vw, 20px);
+    line-height: 1.45;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  /* stack on tablet and below — three columns squeeze the prose too hard */
+  @media (max-width: 900px) {
+    .measure-row {
+      grid-template-columns: auto 1fr;
+      gap: 10px clamp(12px, 3vw, 20px);
+      align-items: start;
+    }
+    .measure-row h3 {
+      align-self: center;
+    }
+    .measure-row p {
+      grid-column: 2;
+    }
+  }
+</style>

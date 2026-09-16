@@ -1,0 +1,151 @@
+---
+// Beatriz's published essays. They were previously reachable only from the
+// unlinked business-card page — they are the cheapest credibility Siren has
+// and the only content on the site that will ever rank in search.
+const essays = [
+  {
+    href: "https://medium.com/@sousablde/not-for-them-us-ce7fa033568b",
+    title: "Not for them",
+    summary:
+      "Portugal exports 647 times more medical cannabis than it makes available to its own patients.",
+  },
+  {
+    href: "https://medium.com/@sousablde/pot-tech-13db07392d5d",
+    title: "Pot-Tech",
+    summary:
+      "Designing ag-tech that respects and enhances biological intelligence rather than replacing it.",
+  },
+  {
+    href: "https://medium.com/@sousablde/gattaca-7eb997a08574",
+    title: "GATTACA",
+    summary:
+      "Clone-heavy propagation skips the selection that would truly domesticate cannabis — the blueprint isn't the whole story.",
+  },
+  {
+    href: "https://medium.com/@sousablde/potato-potahto-d30cdc046255",
+    title: "Potato, Potahto",
+    summary:
+      "Why “strain” is not a mistake — the informal language of cannabis is living history.",
+  },
+  {
+    href: "https://medium.com/@sousablde/aging-gracefully-treat-your-bud-like-a-bordeaux-b677bf0820f1",
+    title: "Aging gracefully",
+    summary:
+      "Treat your bud like a Bordeaux — traditional curing ages cannabis into its most potent, aromatic form.",
+  },
+];
+---
+
+<section class='writing' aria-labelledby='writing-title'>
+  <div class='writing-head'>
+    <h2 id='writing-title'>Writing</h2>
+    <p>
+      Beatriz writes about cannabis science, agricultural technology and the
+      policy gap between what Portugal grows and what its patients receive.
+    </p>
+  </div>
+
+  <ul class='essay-list'>
+    {
+      essays.map((essay) => (
+        <li>
+          <a href={essay.href} target='_blank' rel='noopener'>
+            <h3>{essay.title}</h3>
+            <p>{essay.summary}</p>
+            <span class='essay-cue' aria-hidden='true'>
+              Read on Medium →
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .writing {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(80px, 8vw, 140px) 24px 0;
+  }
+  .writing-head {
+    max-width: 52em;
+    margin: 0 auto clamp(28px, 3vw, 44px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .writing-head h2 {
+    margin: 0;
+    font-size: clamp(30px, 3vw, 48px);
+    line-height: 1.12;
+    color: var(--color-stromboli);
+  }
+  .writing-head p {
+    margin: clamp(10px, 1vw, 16px) 0 0;
+    max-width: 36em;
+    font-size: clamp(16px, 1.35vw, 20px);
+    line-height: 1.5;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+
+  .essay-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(47, 99, 87, 0.2);
+  }
+  .essay-list li {
+    border-bottom: 1px solid rgba(47, 99, 87, 0.2);
+  }
+  .essay-list a {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) 2fr auto;
+    align-items: center;
+    gap: clamp(12px, 2.4vw, 36px);
+    padding: clamp(18px, 2vw, 26px) clamp(4px, 1vw, 12px);
+    text-decoration: none;
+    transition: background 220ms ease;
+  }
+  .essay-list a:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .essay-list h3 {
+    margin: 0;
+    font-size: clamp(21px, 1.9vw, 27px);
+    line-height: 1.2;
+    color: var(--color-stromboli);
+  }
+  .essay-list p {
+    margin: 0;
+    font-size: clamp(15px, 1.25vw, 17px);
+    line-height: 1.5;
+    color: rgba(31, 63, 55, 0.78);
+    text-wrap: pretty;
+  }
+  .essay-cue {
+    font-size: clamp(13px, 1.05vw, 15px);
+    white-space: nowrap;
+    color: var(--color-aquamarine);
+    opacity: 0;
+    transition: opacity 220ms ease;
+  }
+  .essay-list a:hover .essay-cue,
+  .essay-list a:focus-visible .essay-cue {
+    opacity: 1;
+  }
+
+  @media (max-width: 860px) {
+    .essay-list a {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    /* the hover cue never appears on touch — keep it visible instead */
+    .essay-cue {
+      opacity: 1;
+      margin-top: 4px;
+    }
+  }
+</style>

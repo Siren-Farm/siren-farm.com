@@ -2,7 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
+import Status from "../components/Status.astro";
 import Pillars from "../components/Pillars.astro";
+import Measure from "../components/Measure.astro";
+import Stages from "../components/Stages.astro";
 import Collaborate from "../components/Collaborate.astro";
 import SayHi from "../components/SayHi.astro";
 import Footer from "../components/Footer.astro";
@@ -11,8 +14,14 @@ import Footer from "../components/Footer.astro";
 <Layout>
   <Nav variant='dark' active='home' />
   <Hero />
-  <main class='relative z-2 mx-auto max-w-[1556px] px-6 pt-[clamp(40px,4vw,70px)]'>
+  <main
+    id='main'
+    class='relative z-2 mx-auto max-w-[1556px] px-6 pt-[clamp(40px,4vw,70px)]'
+  >
     <Pillars />
+    <Measure />
+    <Stages />
+    <Status />
     <Collaborate />
     <SayHi variant='green' />
   </main>

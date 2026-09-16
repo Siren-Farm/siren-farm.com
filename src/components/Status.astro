@@ -1,0 +1,141 @@
+---
+// The corroboration layer. Every line here should match, word for word, what
+// is filed in grant applications and investor material — this is the public
+// copy of record. Update the date whenever a line changes.
+//
+// Hard rules, do not soften:
+//  · the INFARMED cultivation licence is SUBMITTED, never "granted"/"licensed"
+//  · no financial projections belong on this page
+//  · no partner is named until an agreement is actually signed
+const asOf = "September 2026";
+
+const items = [
+  {
+    label: "Licence",
+    value:
+      "Cultivation licence application filed with INFARMED. Submitted, not yet issued.",
+  },
+  {
+    label: "Land",
+    value:
+      "Freehold in Tondela, owned outright. Siren has been a registered Portuguese company since 2022.",
+  },
+  {
+    label: "Science",
+    value:
+      "Genomics pipeline running end to end — sequencing through variant calling, chemotype panel and clone-fidelity screening.",
+  },
+  {
+    label: "Next",
+    value: "First outdoor field season planned for 2027.",
+  },
+];
+---
+
+<section class='status' aria-labelledby='status-title'>
+  <div class='status-inner'>
+    <div class='status-head'>
+      <h2 id='status-title'>Where we are</h2>
+      <p class='status-date'>
+        <span class='status-dot' aria-hidden='true'></span>
+        Updated {asOf}
+      </p>
+    </div>
+    <dl class='status-grid'>
+      {
+        items.map((item) => (
+          <div class='status-item'>
+            <dt>{item.label}</dt>
+            <dd>{item.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .status {
+    padding: clamp(56px, 6vw, 96px) 0 0;
+  }
+  .status-inner {
+    border: 1px solid rgba(240, 207, 135, 0.3);
+    border-radius: 1.5rem;
+    padding: clamp(24px, 2.6vw, 40px);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .status-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px 20px;
+  }
+  .status-head h2 {
+    margin: 0;
+    font-size: clamp(24px, 2vw, 32px);
+    line-height: 1.2;
+    color: var(--color-saffron-mango);
+  }
+  .status-date {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: clamp(13px, 1.05vw, 15px);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-putty);
+    opacity: 0.85;
+  }
+  /* a small live dot — the page should feel current, because it is */
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-saffron-mango);
+    box-shadow: 0 0 0 4px rgba(238, 186, 88, 0.18);
+  }
+
+  .status-grid {
+    margin: clamp(20px, 2.2vw, 30px) 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(18px, 2vw, 30px);
+  }
+  .status-item dt {
+    margin: 0 0 8px;
+    font-size: clamp(12px, 1vw, 14px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-putty);
+    opacity: 0.8;
+  }
+  .status-item dd {
+    margin: 0;
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height: 1.45;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 900px) {
+    .status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    .status-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .status-item {
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(240, 207, 135, 0.18);
+    }
+    .status-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+</style>

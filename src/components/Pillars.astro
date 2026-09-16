@@ -1,54 +1,92 @@
 ---
 import GlassCard from "./GlassCard.astro";
 
+// Deliberately not a list of virtues — every one of these is something a
+// competitor cannot copy by writing it down. Generic claims were cut.
 const pillars = [
   {
-    title: "Regenerative Agriculture",
+    title: "We own the field",
     paragraphs: [
-      "We restore soil health, boost biodiversity, and capture carbon through low-impact, outdoor cultivation.",
-      "This approach goes beyond sustainability — it regenerates ecosystems, builds long-term productivity, and aligns with EU climate goals and conscious consumer demand.",
+      "The land in Tondela is ours, freehold, bought outright and on the balance sheet. Most agricultural-AI companies are negotiating access to somebody else's crop.",
+      "We decide what gets planted, sensed and sequenced — and we can run an experiment that costs a season without asking anyone's permission.",
     ],
   },
   {
-    title: "Pharmaceutical-Grade Cannabis",
+    title: "The data is a legal obligation",
     paragraphs: [
-      "We grow fresh cannabis flowers with strict quality control, full traceability, and compliance with INFARMED and EU pharmaceutical standards.",
-      "Patient and partner trust depends on consistency, safety, and regulatory alignment. Medical-grade cannabis demands precision at every stage.",
+      "Pharmaceutical-grade cultivation requires per-plant traceability and batch records by law, not by preference.",
+      "The same regulatory regime that makes medical cannabis demanding to grow is the regime that compels the dataset into existence. Compliance and training data are the same activity here.",
     ],
   },
   {
-    title: "Agricultural Technology Integration",
+    title: "One genome, many climates",
     paragraphs: [
-      "We apply digital tools and environmental sensors to monitor crops, forecast risks, and guide decisions through data.",
-      "Technology increases efficiency, reduces waste, and ensures predictable, high-quality yields — critical in a regulated and competitive market.",
+      "Cannabis is propagated clonally, so we can hold a genotype literally constant and let the season vary around it.",
+      "That is the experimental design for genotype × environment, and almost no field crop hands it to you at scale. A clone block is a controlled experiment planted in soil.",
     ],
   },
   {
-    title: "Local Impact and Transparency",
+    title: "Outdoors on purpose",
     paragraphs: [
-      "We create fair rural jobs, support circular economies, and share our results and practices openly.",
-      "A modern farm should serve the land and its people. Transparency builds trust with investors, regulators, and the public.",
+      "Almost all medical cannabis is grown indoors. Indoor cultivation controls away the exact variance we are trying to learn.",
+      "Outdoor is lower-carbon and lower-cost, and it is the only place climate adaptation can actually be observed. An indoor grower is optimising a machine; we are learning a climate.",
     ],
   },
 ];
 ---
 
-<div id='pillar-grid'>
-  {
-    pillars.map((pillar) => (
-      <GlassCard>
-        <div class='pillar-body'>
-          <h2>{pillar.title}</h2>
-          {pillar.paragraphs.map((paragraph) => (
-            <p>{paragraph}</p>
-          ))}
-        </div>
-      </GlassCard>
-    ))
-  }
-</div>
+<section class='pillars' aria-labelledby='pillars-title'>
+  <div class='pillars-header'>
+    <h2 id='pillars-title'>Why this works</h2>
+    <p>
+      Four things that are true of Siren and of almost nobody else in European
+      agricultural technology.
+    </p>
+  </div>
+
+  <div id='pillar-grid'>
+    {
+      pillars.map((pillar) => (
+        <GlassCard>
+          <div class='pillar-body'>
+            <h3>{pillar.title}</h3>
+            {pillar.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </GlassCard>
+      ))
+    }
+  </div>
+</section>
 
 <style>
+  .pillars {
+    padding: clamp(96px, 10vw, 168px) 0 0;
+  }
+  .pillars-header {
+    max-width: 52em;
+    margin: 0 auto clamp(36px, 4vw, 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .pillars-header h2 {
+    margin: 0;
+    font-size: clamp(36px, 3.2vw, 52px);
+    line-height: 1.12;
+    color: var(--color-saffron-mango);
+  }
+  .pillars-header p {
+    margin: clamp(10px, 1vw, 16px) 0 0;
+    max-width: 34em;
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
   #pillar-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -64,7 +102,7 @@ const pillars = [
     flex-direction: column;
     gap: 20px;
   }
-  .pillar-body h2 {
+  .pillar-body h3 {
     margin: 0;
     font-size: clamp(28px, 2.4vw, 36px);
     line-height: 1.25;

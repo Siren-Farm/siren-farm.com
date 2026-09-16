@@ -1,0 +1,417 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import GlassCard from "../components/GlassCard.astro";
+import SayHi from "../components/SayHi.astro";
+import Footer from "../components/Footer.astro";
+
+// Every claim on this page carries its own confidence label. That discipline
+// is borrowed from the pipeline's own documentation and it is the point:
+// a reader should be able to tell what is routine from what is research.
+const stages = [
+  { name: "Sequence", detail: "Short-read whole-genome sequencing of each line." },
+  { name: "Align", detail: "Reads mapped against a curated Cannabis sativa reference." },
+  { name: "Call", detail: "Variants, coverage and copy number, per sample." },
+  { name: "Interpret", detail: "Read against the biosynthesis panel and across the population." },
+];
+
+const capabilities = [
+  {
+    status: "established",
+    title: "Strain identity and provenance",
+    body: "A genetic fingerprint that cuts through the notorious unreliability of cannabis strain names. It underpins authentication, intellectual property, and a supply chain a pharmacist can trace backwards.",
+  },
+  {
+    status: "established",
+    title: "Chemotype from DNA",
+    body: "Reading the cannabinoid and terpene biosynthesis panel — the THCAS/CBDAS/CBCAS synthases, the CsPT prenyltransferases, the CsTPS terpene synthase family and the MEP/MEV precursor pathways — to anticipate cannabinoid ratio and aroma profile before a plant is grown out or lab-tested. It compresses the breeding cycle from seasons to sequencing runs.",
+  },
+  {
+    status: "established",
+    title: "Clonal fidelity and quality control",
+    body: "Screening whether plants propagated as a single clone genuinely are one genetic individual, and localising where a mother line has drifted. For a clonally propagated crop, verifying that the mother has not changed is a direct quality function, not an academic one.",
+  },
+  {
+    status: "established",
+    title: "Breeding and population genomics",
+    body: "Relatedness, structure and marker discovery to guide crosses and track desirable alleles across generations — the groundwork for selecting on traits we cannot yet see.",
+  },
+];
+
+const frontier = [
+  {
+    status: "frontier",
+    title: "Epigenetic selection",
+    body: "Cannabis is propagated clonally and increasingly through tissue culture — exactly the contexts where somaclonal variation arises, and that change is often epigenetic rather than sequence-level. Two plants with identical DNA can differ in vigour, chemotype stability and stress response because their methylation landscapes differ. Short-read DNA sequencing is blind to this. Adding EM-seq would let us screen clonal lines for epigenetic drift and select for stable epigenomes, not merely stable genomes. Durable, directed epigenetic breeding is an active research area, not a turnkey technique, and we describe it that way.",
+  },
+  {
+    status: "frontier",
+    title: "Multi-omics and genotype × environment",
+    body: "The full picture is genome plus epigenome plus transcriptome plus metabolome, read against the environment a cultivar will actually face. The goal is selecting for plasticity — the capacity to perform across a range of climates — which is the trait a destabilising climate makes most valuable, and the one pure genetics under-predicts.",
+  },
+];
+
+const legend = [
+  { status: "established", note: "Routine practice. We run this today." },
+  { status: "frontier", note: "Active research. Promising, not turnkey." },
+  { status: "speculative", note: "A direction, not a plan. Labelled as such." },
+];
+---
+
+<Layout
+  title='Adaptive Genetics — the science at Siren'
+  description='Siren runs a reproducible genomics pipeline from sequencing to chemotype, clone identity and population structure — with every claim labelled established, frontier or speculative.'
+>
+  <Nav variant='dark' active='science' />
+
+  <main id='main' class='science'>
+    <header class='science-header'>
+      <p class='eyebrow'>Adaptive Genetics</p>
+      <h1>Reading the plant before we grow it</h1>
+      <p class='lede'>
+        A reproducible, manifest-driven genomics pipeline that takes raw
+        sequencing of Cannabis sativa through to variants, coverage, population
+        structure and clone identity — interpreted against a curated panel of
+        cannabinoid and terpene biosynthesis genes.
+      </p>
+      <p class='sub'>
+        Every stage hands off through a manifest, and observed evidence is kept
+        separate from computational inference and from biological
+        interpretation. That separation is what makes it auditable rather than a
+        black box.
+      </p>
+    </header>
+
+    <section class='pipeline' aria-labelledby='pipeline-title'>
+      <h2 id='pipeline-title' class='section-title'>From reads to decisions</h2>
+      <ol class='pipeline-row'>
+        {
+          stages.map((stage, index) => (
+            <li class='pipeline-step'>
+              <span class='step-index' aria-hidden='true'>
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3>{stage.name}</h3>
+              <p>{stage.detail}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class='claims' aria-labelledby='today-title'>
+      <div class='section-head'>
+        <h2 id='today-title' class='section-title'>What it does today</h2>
+        <p class='section-sub'>
+          Four capabilities we run now. Each connects genotype to something a
+          buyer, a regulator or a breeder can act on.
+        </p>
+      </div>
+      <div class='claim-grid'>
+        {
+          capabilities.map((item) => (
+            <GlassCard>
+              <div class='claim-body'>
+                <span class={`badge badge-${item.status}`}>{item.status}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            </GlassCard>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class='claims' aria-labelledby='frontier-title'>
+      <div class='section-head'>
+        <h2 id='frontier-title' class='section-title'>The frontier</h2>
+        <p class='section-sub'>
+          Where the programme is going. We flag these as research because that
+          is what they are.
+        </p>
+      </div>
+      <div class='claim-grid claim-grid-two'>
+        {
+          frontier.map((item) => (
+            <GlassCard>
+              <div class='claim-body'>
+                <span class={`badge badge-${item.status}`}>{item.status}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            </GlassCard>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class='legend' aria-labelledby='legend-title'>
+      <h2 id='legend-title'>How we label claims</h2>
+      <p class='legend-intro'>
+        Cannabis science is full of confident statements that do not survive
+        contact with a dataset. We would rather be checkable than impressive, so
+        every claim we publish carries one of three labels.
+      </p>
+      <ul class='legend-list'>
+        {
+          legend.map((item) => (
+            <li>
+              <span class={`badge badge-${item.status}`}>{item.status}</span>
+              <span class='legend-note'>{item.note}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <SayHi variant='green' />
+  </main>
+  <Footer variant='green' />
+</Layout>
+
+<style>
+  .science {
+    position: relative;
+    z-index: 2;
+    max-width: 1556px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .science-header {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: calc(clamp(150px, 14vw, 220px) + env(safe-area-inset-top, 0px)) 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .eyebrow {
+    margin: 0 0 clamp(12px, 1.2vw, 18px);
+    font-size: clamp(12px, 1.05vw, 15px);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-putty);
+    opacity: 0.85;
+  }
+  .science-header h1 {
+    margin: 0;
+    font-size: clamp(38px, 4vw, 60px);
+    line-height: 1.08;
+    color: var(--color-putty);
+    text-wrap: balance;
+  }
+  .lede {
+    margin: clamp(20px, 2vw, 28px) 0 0;
+    max-width: 38em;
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+  .sub {
+    margin: clamp(14px, 1.4vw, 20px) 0 0;
+    max-width: 40em;
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.55;
+    color: var(--color-rum-swizzle);
+    opacity: 0.82;
+    text-wrap: pretty;
+  }
+
+  .section-title {
+    margin: 0;
+    font-size: clamp(30px, 3vw, 48px);
+    line-height: 1.12;
+    color: var(--color-saffron-mango);
+  }
+  .section-head {
+    max-width: 52em;
+    margin: 0 auto clamp(30px, 3.4vw, 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .section-sub {
+    margin: clamp(10px, 1vw, 16px) 0 0;
+    max-width: 36em;
+    font-size: clamp(16px, 1.35vw, 20px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  /* ── pipeline ──────────────────────────────────────────────── */
+  .pipeline {
+    padding: clamp(80px, 8vw, 140px) 0 0;
+    text-align: center;
+  }
+  .pipeline-row {
+    margin: clamp(30px, 3.4vw, 50px) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(14px, 1.6vw, 24px);
+    text-align: left;
+  }
+  .pipeline-step {
+    position: relative;
+    padding: clamp(20px, 2.2vw, 30px);
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(240, 207, 135, 0.2);
+  }
+  /* the connective arrow between steps, drawn in the gap */
+  .pipeline-step:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    top: 50%;
+    right: calc(clamp(14px, 1.6vw, 24px) * -1);
+    width: clamp(14px, 1.6vw, 24px);
+    transform: translateY(-50%);
+    text-align: center;
+    color: var(--color-saffron-mango);
+    opacity: 0.7;
+    font-size: 15px;
+  }
+  .step-index {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--color-saffron-mango);
+    opacity: 0.75;
+    font-variant-numeric: tabular-nums;
+  }
+  .pipeline-step h3 {
+    margin: 6px 0 8px;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.2;
+    color: var(--color-putty);
+  }
+  .pipeline-step p {
+    margin: 0;
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.45;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  /* ── claims ────────────────────────────────────────────────── */
+  .claims {
+    padding: clamp(80px, 8vw, 140px) 0 0;
+  }
+  .claim-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+  }
+  .claim-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .claim-body h3 {
+    margin: 0;
+    font-size: clamp(24px, 2.2vw, 32px);
+    line-height: 1.2;
+    color: var(--color-saffron-mango);
+  }
+  .claim-body p {
+    margin: 0;
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: clamp(11px, 0.95vw, 13px);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge-established {
+    background: rgba(238, 186, 88, 0.2);
+    color: var(--color-putty);
+    border: 1px solid rgba(238, 186, 88, 0.45);
+  }
+  .badge-frontier {
+    background: rgba(64, 135, 119, 0.32);
+    color: var(--color-rum-swizzle);
+    border: 1px solid rgba(245, 245, 225, 0.35);
+  }
+  .badge-speculative {
+    background: transparent;
+    color: var(--color-rum-swizzle);
+    border: 1px dashed rgba(245, 245, 225, 0.45);
+  }
+
+  /* ── legend ────────────────────────────────────────────────── */
+  .legend {
+    margin-top: clamp(80px, 8vw, 140px);
+    border-top: 1px solid rgba(240, 207, 135, 0.28);
+    padding-top: clamp(36px, 4vw, 60px);
+  }
+  .legend h2 {
+    margin: 0;
+    font-size: clamp(24px, 2.2vw, 34px);
+    line-height: 1.15;
+    color: var(--color-saffron-mango);
+  }
+  .legend-intro {
+    margin: 12px 0 0;
+    max-width: 44em;
+    font-size: clamp(16px, 1.35vw, 19px);
+    line-height: 1.55;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+  .legend-list {
+    margin: clamp(22px, 2.4vw, 34px) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 1.8vw, 28px);
+  }
+  .legend-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .legend-note {
+    font-size: clamp(15px, 1.25vw, 17px);
+    line-height: 1.45;
+    color: var(--color-rum-swizzle);
+    opacity: 0.85;
+  }
+
+  @media (max-width: 1000px) {
+    .pipeline-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    /* only the first row's arrows still point sideways */
+    .pipeline-step:nth-child(2)::after {
+      display: none;
+    }
+  }
+  @media (max-width: 760px) {
+    .pipeline-row,
+    .claim-grid,
+    .legend-list {
+      grid-template-columns: 1fr;
+    }
+    .pipeline-step::after {
+      display: none !important;
+    }
+  }
+</style>

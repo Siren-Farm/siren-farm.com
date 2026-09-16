@@ -10,7 +10,7 @@ import heroField from "../assets/hero-field.jpg";
   <div class='hero-photo'>
     <Image
       src={heroField}
-      alt='Aerial view of the Siren Farm fields'
+      alt='Aerial view of the Siren fields in Tondela, Portugal'
       widths={[768, 1280, 1920]}
       sizes='100vw'
       loading='eager'
@@ -21,12 +21,18 @@ import heroField from "../assets/hero-field.jpg";
 
   <!-- hero copy, sitting over the field below the horizon -->
   <div class='hero-copy'>
-    <h1>Siren Farm</h1>
-    <p>
-      Siren is an outdoor medical cannabis project in Portugal that blends
-      regenerative agriculture and advanced technology to produce high-quality
-      fresh cannabis under INFARMED regulation.
+    <p class='hero-eyebrow'>Tondela · Portugal</p>
+    <h1>The farm is the instrument.</h1>
+    <p class='hero-lede'>
+      Siren builds agricultural intelligence — DNA-guided cultivar selection and
+      field-scale sensing — and trains it on medical cannabis in the Dão: a crop
+      valuable enough to fund the science, needed enough to matter, and the best
+      biological model we could have chosen.
     </p>
+    <div class='hero-actions'>
+      <a class='hero-cta primary' href='/why/'>Why cannabis?</a>
+      <a class='hero-cta' href='/science/'>See the science</a>
+    </div>
   </div>
 
   <!-- dark leaf mark below the copy — its lower branches tuck behind the cards -->
@@ -86,24 +92,71 @@ import heroField from "../assets/hero-field.jpg";
     z-index: 1;
     max-width: 1080px;
     margin: 0 auto;
-    padding: calc(clamp(370px, 26.6vw, 460px) + env(safe-area-inset-top, 0px)) 24px 0;
+    padding: calc(clamp(300px, 22vw, 400px) + env(safe-area-inset-top, 0px)) 24px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
+  .hero-eyebrow {
+    margin: 0 0 clamp(14px, 1.4vw, 20px);
+    font-size: clamp(12px, 1.05vw, 15px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-putty);
+    opacity: 0.85;
+  }
   .hero-copy h1 {
     margin: 0;
-    font-size: clamp(40px, 5.5vw, 84px);
-    line-height: 1.1;
+    font-size: clamp(38px, 5.4vw, 84px);
+    line-height: 1.08;
     color: var(--color-putty);
+    text-wrap: balance;
   }
-  .hero-copy p {
-    margin: clamp(16px, 1.5vw, 24px) 0 0;
-    max-width: 26em;
-    font-size: clamp(16px, 1.85vw, 28px);
-    line-height: 1.29;
+  .hero-lede {
+    margin: clamp(16px, 1.5vw, 26px) 0 0;
+    max-width: 30em;
+    font-size: clamp(16px, 1.55vw, 24px);
+    line-height: 1.45;
     color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  .hero-actions {
+    margin-top: clamp(26px, 2.6vw, 40px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(240, 207, 135, 0.55);
+    font-size: clamp(15px, 1.15vw, 18px);
+    line-height: 1.5;
+    color: var(--color-rum-swizzle);
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background 250ms ease,
+      color 250ms ease,
+      border-color 250ms ease;
+  }
+  .hero-cta:hover {
+    border-color: transparent;
+    background: var(--color-rum-swizzle);
+    color: var(--color-te-papa-green);
+  }
+  .hero-cta.primary {
+    border-color: transparent;
+    background: var(--color-saffron-mango);
+    color: var(--color-te-papa-green);
+  }
+  .hero-cta.primary:hover {
+    background: var(--color-putty);
   }
 
   .hero-leaf {
@@ -117,5 +170,19 @@ import heroField from "../assets/hero-field.jpg";
   }
   .hero-leaf :global(.hero-leaf-mark) {
     width: clamp(330px, 29vw, 500px);
+  }
+
+  /* the photo is the backdrop for the copy — on a narrow, tall phone the
+     text block grows, so give it more room before the green takes over */
+  @media (max-width: 760px) {
+    .hero-photo {
+      height: calc(clamp(620px, 130vw, 940px) + env(safe-area-inset-top, 0px));
+    }
+    .hero-copy {
+      padding-top: calc(clamp(210px, 46vw, 330px) + env(safe-area-inset-top, 0px));
+    }
+    .hero-leaf :global(.hero-leaf-mark) {
+      width: min(330px, 80vw);
+    }
   }
 </style>

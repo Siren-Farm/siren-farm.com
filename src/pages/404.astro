@@ -1,0 +1,115 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Logo from "../components/Logo.astro";
+import Footer from "../components/Footer.astro";
+
+const routes = [
+  { href: "/", label: "Home" },
+  { href: "/science/", label: "Science" },
+  { href: "/technology/", label: "Technology" },
+  { href: "/why/", label: "Why" },
+  { href: "/about/", label: "About" },
+];
+---
+
+<Layout
+  title='Page not found — Siren'
+  description='That page does not exist. Here is the way back.'
+>
+  <Nav variant='dark' />
+
+  <main id='main' class='notfound'>
+    <Logo tone='dark' class='notfound-leaf' />
+    <p class='code'>404</p>
+    <h1>This path grew over.</h1>
+    <p class='lede'>
+      The page you were looking for is not here. Everything else is one of
+      these.
+    </p>
+    <div class='routes'>
+      {routes.map((route) => <a href={route.href}>{route.label}</a>)}
+    </div>
+  </main>
+  <Footer variant='green' />
+</Layout>
+
+<style>
+  .notfound {
+    position: relative;
+    min-height: 72vh;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: calc(clamp(150px, 16vw, 230px) + env(safe-area-inset-top, 0px)) 24px
+      clamp(60px, 8vw, 110px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  /* the mark sits behind the copy, the way it does on every other page */
+  .notfound :global(.notfound-leaf) {
+    position: absolute;
+    top: clamp(120px, 14vw, 200px);
+    width: clamp(260px, 30vw, 420px);
+    opacity: 0.55;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .code,
+  h1,
+  .lede,
+  .routes {
+    position: relative;
+    z-index: 1;
+  }
+  .code {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: clamp(13px, 1.1vw, 16px);
+    letter-spacing: 0.3em;
+    color: var(--color-saffron-mango);
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(34px, 4.4vw, 60px);
+    line-height: 1.08;
+    color: var(--color-putty);
+    text-wrap: balance;
+  }
+  .lede {
+    margin: clamp(14px, 1.5vw, 22px) 0 0;
+    max-width: 26em;
+    font-size: clamp(16px, 1.45vw, 21px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+  .routes {
+    margin-top: clamp(26px, 3vw, 40px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .routes a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid rgba(240, 207, 135, 0.5);
+    font-size: clamp(14px, 1.1vw, 17px);
+    color: var(--color-rum-swizzle);
+    text-decoration: none;
+    transition:
+      background 250ms ease,
+      color 250ms ease,
+      border-color 250ms ease;
+  }
+  .routes a:hover {
+    border-color: transparent;
+    background: var(--color-rum-swizzle);
+    color: var(--color-te-papa-green);
+  }
+</style>

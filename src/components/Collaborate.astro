@@ -40,7 +40,7 @@ const audiences = [
       audiences.map((audience) => (
         <GlassCard>
           <div class='collab-body'>
-            <h2>{audience.title}</h2>
+            <h3>{audience.title}</h3>
             {audience.paragraphs.map((paragraph) => (
               <p>{paragraph}</p>
             ))}
@@ -96,7 +96,7 @@ const audiences = [
     flex-direction: column;
     gap: 18px;
   }
-  .collab-body h2 {
+  .collab-body h3 {
     margin: 0;
     font-size: clamp(28px, 2.4vw, 36px);
     line-height: 1.25;

@@ -1,0 +1,203 @@
+---
+// The two-stage company, stated plainly. Stage 1 is an agriculture company
+// that trains data and tests hardware; Stage 2 is platform revenue. The four
+// links are what actually joins them — without those it is just a pivot story.
+const stages = [
+  {
+    tag: "Stage one · today",
+    title: "Agriculture that trains",
+    body: "A working outdoor medical cannabis operation in the Dão. Revenue comes from flower. Every season instruments the models, labels the data and field-tests the hardware on a crop we own.",
+  },
+  {
+    tag: "Stage two · from 2029",
+    title: "Intelligence that scales",
+    body: "Platform revenue from the tools the farm proved — cultivar selection, irrigation intelligence and plant-health systems, sold into agriculture far beyond cannabis.",
+  },
+];
+
+const links = [
+  {
+    name: "Cash",
+    body: "Flower revenue funds the engineering years before the platform earns anything.",
+  },
+  {
+    name: "Data",
+    body: "Each season adds labelled genotype × environment × chemistry records that cannot be bought.",
+  },
+  {
+    name: "Model training",
+    body: "The farm is the ground truth the models are fitted against — and the place they are proven wrong.",
+  },
+  {
+    name: "Hardware testing",
+    body: "Sensors and machines are run on our own crop, at our own risk, before they reach anyone else's.",
+  },
+];
+---
+
+<section class='stages' aria-labelledby='stages-title'>
+  <div class='stages-header'>
+    <h2 id='stages-title'>One company, two stages</h2>
+    <p>
+      We are not a farm that hopes to become a technology company, and not a
+      technology company borrowing a field. The farm is how the technology gets
+      built — and it pays for itself while it does.
+    </p>
+  </div>
+
+  <div class='stage-grid'>
+    {
+      stages.map((stage, index) => (
+        <>
+          {index === 1 && (
+            <div class='stage-arrow' aria-hidden='true'>
+              <span>→</span>
+            </div>
+          )}
+          <article class='stage-card'>
+            <p class='stage-tag'>{stage.tag}</p>
+            <h3>{stage.title}</h3>
+            <p class='stage-body'>{stage.body}</p>
+          </article>
+        </>
+      ))
+    }
+  </div>
+
+  <div class='links-block'>
+    <h3 class='links-title'>What joins them</h3>
+    <ul class='links-grid'>
+      {
+        links.map((link) => (
+          <li>
+            <h4>{link.name}</h4>
+            <p>{link.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .stages {
+    padding: clamp(96px, 10vw, 168px) 0 0;
+  }
+  .stages-header {
+    max-width: 52em;
+    margin: 0 auto clamp(36px, 4vw, 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .stages-header h2 {
+    margin: 0;
+    font-size: clamp(36px, 3.2vw, 52px);
+    line-height: 1.12;
+    color: var(--color-saffron-mango);
+  }
+  .stages-header p {
+    margin: clamp(10px, 1vw, 16px) 0 0;
+    max-width: 38em;
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  .stage-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    gap: clamp(14px, 1.8vw, 26px);
+  }
+  .stage-card {
+    border-radius: 1.5rem;
+    padding: clamp(24px, 2.6vw, 40px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(240, 207, 135, 0.22);
+  }
+  .stage-tag {
+    margin: 0 0 12px;
+    font-size: clamp(12px, 1vw, 14px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-putty);
+    opacity: 0.85;
+  }
+  .stage-card h3 {
+    margin: 0 0 14px;
+    font-size: clamp(26px, 2.4vw, 36px);
+    line-height: 1.18;
+    color: var(--color-saffron-mango);
+  }
+  .stage-body {
+    margin: 0;
+    font-size: clamp(16px, 1.45vw, 20px);
+    line-height: 1.45;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+  .stage-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(28px, 2.6vw, 40px);
+    color: var(--color-saffron-mango);
+    opacity: 0.8;
+  }
+
+  .links-block {
+    margin-top: clamp(28px, 3vw, 44px);
+    border-top: 1px solid rgba(240, 207, 135, 0.28);
+    padding-top: clamp(24px, 2.6vw, 38px);
+  }
+  .links-title {
+    margin: 0 0 clamp(18px, 2vw, 28px);
+    font-size: clamp(20px, 1.7vw, 26px);
+    line-height: 1.2;
+    color: var(--color-putty);
+    text-align: center;
+  }
+  .links-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(18px, 2vw, 30px);
+  }
+  .links-grid h4 {
+    margin: 0 0 8px;
+    font-size: clamp(17px, 1.4vw, 21px);
+    line-height: 1.2;
+    color: var(--color-saffron-mango);
+  }
+  .links-grid p {
+    margin: 0;
+    font-size: clamp(15px, 1.25vw, 17px);
+    line-height: 1.45;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 900px) {
+    /* the arrow turns downward once the cards stack */
+    .stage-grid {
+      grid-template-columns: 1fr;
+    }
+    .stage-arrow {
+      transform: rotate(90deg);
+      padding: 4px 0;
+    }
+    .links-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    .links-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -4,20 +4,25 @@ import Nav from "../components/Nav.astro";
 import Logo from "../components/Logo.astro";
 import Founders from "../components/Founders.astro";
 import NameStory from "../components/NameStory.astro";
+import Writing from "../components/Writing.astro";
 import SayHi from "../components/SayHi.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<Layout title='About — Siren Farm' theme='cream'>
+<Layout
+  title='About Siren — the people and the place'
+  description='Siren is a majority women-owned agricultural intelligence company in Tondela, Portugal, bootstrapped by two founders: a molecular biologist and an industrial-systems CTO.'
+  theme='cream'
+>
   <Nav variant='light' active='about' />
 
   <!-- page header — centered, echoing the home hero -->
-  <header class='about-header'>
+  <header id='main' class='about-header'>
     <h1>Built for intelligent cultivation</h1>
     <p>
-      Siren brings together plant science, agricultural technology, and
-      pharmaceutical-grade operations to build a resilient outdoor medical
-      cannabis project in Portugal.
+      Siren is an agricultural intelligence company in Tondela, Portugal. We
+      bring together plant science, agricultural technology and
+      pharmaceutical-grade operations — and we grow the crop that trains them.
     </p>
   </header>
 
@@ -28,6 +33,7 @@ import Footer from "../components/Footer.astro";
 
   <Founders />
   <NameStory />
+  <Writing />
   <SayHi variant='cream' />
   <Footer variant='cream' />
 </Layout>

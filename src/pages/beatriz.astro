@@ -55,11 +55,11 @@ const publications = [
   >
     <!-- publications -->
     <div class='pubs'>
-      <p class='pubs-label'>Writing</p>
+      <h2 class='pubs-label'>Writing</h2>
       {
         publications.map((publication) => (
           <a class='pub-link' href={publication.href} target='_blank' rel='noopener'>
-            <h4>{publication.title}</h4>
+            <h3>{publication.title}</h3>
             <p>{publication.summary}</p>
           </a>
         ))
@@ -79,6 +79,7 @@ const publications = [
   }
   .pubs-label {
     margin: 0 0 14px;
+    font-family: var(--font-sans);
     font-size: 12px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -96,13 +97,13 @@ const publications = [
     border-bottom: none;
     padding-bottom: 2px;
   }
-  .pub-link h4 {
+  .pub-link h3 {
     margin: 0;
     font-size: 20px;
     color: var(--color-te-papa-green);
     transition: color 250ms ease;
   }
-  .pub-link:hover h4 {
+  .pub-link:hover h3 {
     color: var(--color-stromboli);
   }
   .pub-link p {

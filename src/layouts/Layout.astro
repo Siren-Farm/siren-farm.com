@@ -8,14 +8,48 @@ interface Props {
   /** Color Safari paints behind the iOS status bar — override to blend
    *  with whatever sits at the top of the page (e.g. the hero photo). */
   themeColor?: string;
+  /** Social-card image, relative to the site root. */
+  ogImage?: string;
+  /** Extra structured data (e.g. FAQPage) injected into <head>. */
+  schema?: unknown;
 }
 
 const {
-  title = "Siren Farm",
-  description = "Siren is an outdoor medical cannabis project in Portugal that blends regenerative agriculture and advanced technology to produce high-quality fresh cannabis under INFARMED regulation.",
+  title = "Siren — agricultural intelligence, grown in the Dão",
+  description = "Siren builds agricultural intelligence — DNA-guided cultivar selection and field-scale sensing — and trains it on medical cannabis in Tondela, Portugal.",
   theme = "green",
   themeColor = theme === "cream" ? "#f5f5e1" : "#2f6357",
+  ogImage = "/og-cover.png",
+  schema,
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+
+// Organization data is identical on every page, so it lives here rather than
+// being repeated per-page. Keep every claim here consistent with what is
+// filed in grant applications — this is the public corroboration layer.
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Siren",
+  alternateName: "Siren Farm",
+  url: "https://siren-farm.com",
+  logo: "https://siren-farm.com/apple-touch-icon.png",
+  email: "hi@siren-farm.com",
+  foundingDate: "2022",
+  description,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Sítio do Poço, Caparosinha",
+    addressLocality: "Tondela",
+    addressCountry: "PT",
+  },
+  founder: [
+    { "@type": "Person", name: "Beatriz Sousa", jobTitle: "CEO & Co-Founder" },
+    { "@type": "Person", name: "João Justo", jobTitle: "CTO & Co-Founder" },
+  ],
+};
 ---
 
 <!doctype html>
@@ -30,13 +64,43 @@ const {
     <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
     <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
     <meta name='generator' content={Astro.generator} />
-    <meta name='description' content={description} />
+
     <title>{title}</title>
+    <meta name='description' content={description} />
+    <link rel='canonical' href={canonical} />
+
+    <!-- social cards: without these every link pasted into an email, a DM or
+         LinkedIn renders as a naked URL -->
+    <meta property='og:type' content='website' />
+    <meta property='og:site_name' content='Siren' />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:url' content={canonical} />
+    <meta property='og:image' content={ogImageUrl} />
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='630' />
+    <meta property='og:image:alt' content='Siren — agricultural intelligence, grown in the Dão' />
+    <meta property='og:locale' content='en_GB' />
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:title' content={title} />
+    <meta name='twitter:description' content={description} />
+    <meta name='twitter:image' content={ogImageUrl} />
+
+    <script
+      type='application/ld+json'
+      set:html={JSON.stringify(organization)}
+    />
+    {
+      schema && (
+        <script type='application/ld+json' set:html={JSON.stringify(schema)} />
+      )
+    }
   </head>
   <!-- the page background lives on a wrapper, not body — iOS Safari's
        status-bar sampler falls back to the body/html background, and it
        must find the blending themeColor there, not the solid page green -->
   <body>
+    <a class='skip-link' href='#main'>Skip to content</a>
     <div
       class={`relative min-h-screen ${theme === "cream" ? "bg-rum-swizzle" : "bg-stromboli"}`}
     >
@@ -58,5 +122,39 @@ const {
   h4 {
     font-family: var(--font-display);
     font-weight: 400;
+  }
+
+  /* keyboard users land here first; invisible until focused */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 100;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: var(--color-rum-swizzle);
+    color: var(--color-te-papa-green);
+    font-size: 16px;
+  }
+  .skip-link:focus {
+    left: 50%;
+    top: 12px;
+    transform: translateX(-50%);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-saffron-mango);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 </style>
