@@ -1,52 +1,46 @@
-# Astro Starter Kit: Basics
+# siren-farm.com
+
+The Siren website. Static site, built with [Astro](https://astro.build) and
+Tailwind CSS v4.
+
+## Requirements
+
+Node 20 or newer and [pnpm](https://pnpm.io). This project is pnpm only; there
+is no `package-lock.json`, and installing with npm will produce a tree that does
+not match the lockfile.
+
+## Commands
 
 ```sh
-npm create astro@latest -- --template basics
+pnpm install     # install dependencies
+pnpm dev         # local dev server at http://localhost:4321
+pnpm build       # production build into ./dist
+pnpm preview     # serve the production build locally
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Structure
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```
+src/
+  assets/        images, plus assets/partners/ for partner logos
+  components/    page sections and shared UI
+  layouts/       Layout.astro: head, metadata, structured data
+  pages/         one file per route
+  styles/        global.css, design tokens
+public/          files served as-is, including og-cover.png and robots.txt
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Deployment
 
-## 🧞 Commands
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site
+and publishes it to GitHub Pages at https://siren-farm.com. There is no manual
+deploy step. The custom domain is configured in the repository settings, so the
+repo contains no `CNAME` file.
 
-All commands are run from the root of the project, from a terminal:
+## Editing copy
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Page copy lives in the component that renders it, usually as an array at the top
+of the `.astro` file. Several components carry comments recording wording that
+must not be changed without checking first, for example how the INFARMED
+cultivation licence is described. Read those comments before editing the copy
+around them.
