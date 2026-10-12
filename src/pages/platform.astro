@@ -24,7 +24,7 @@ const products = [
     name: "Plantologist",
     domain: "Early disease detection",
     stage: "In pilot",
-    body: `Detects disease from any camera: phone, drone or fixed mount. ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes in nine crops.`,
+    body: `Detects disease from any camera, whether a phone, a drone or something bolted to a post. It knows ${PLANTOLOGIST.classes} classes across ${PLANTOLOGIST.crops} crops, covering diseases, pests, deficiencies and healthy.`,
   },
   {
     name: "Provenance tracing",
@@ -86,7 +86,7 @@ const audiences = [
 
 <Layout
   title='Platform | Siren'
-  description='Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on nine crops and running with clients.'
+  description='Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on twenty-nine crops and running with clients.'
   theme='cream'
 >
   <Nav variant='light' active='platform' />
@@ -145,10 +145,12 @@ const audiences = [
 
     <section class='crops' aria-labelledby='crops-title'>
       <div class='markets-head'>
-        <h2 id='crops-title'>Nine crops today, validated per crop</h2>
+        <h2 id='crops-title'>Twenty-nine crops, validated one at a time</h2>
         <p>
-          Plantologist and Pluvora are trained on the same nine crops. Every
-          new crop is calibrated and validated before we claim it.
+          Plantologist and Pluvora are trained on the same set. The number
+          beside each crop is how many classes we can tell apart on it,
+          counting diseases, pests, deficiencies and healthy. Every new crop is
+          calibrated and validated before we claim it.
         </p>
       </div>
       {
@@ -156,8 +158,10 @@ const audiences = [
           <ul class='crop-grid'>
             {CROPS.map((crop) => (
               <li>
-                <span class='crop-name'>{crop}</span>
-                <span class='crop-tag'>Plantologist · Pluvora</span>
+                <span class='crop-name'>{crop.name}</span>
+                <span class='crop-tag'>
+                  {crop.classes} {crop.classes === 1 ? "class" : "classes"}
+                </span>
               </li>
             ))}
           </ul>
@@ -343,28 +347,32 @@ const audiences = [
     padding: 0;
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(12px, 1.6vw, 20px);
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: clamp(10px, 1.2vw, 16px);
   }
   .crop-grid li {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: clamp(16px, 1.8vw, 22px);
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    padding: clamp(12px, 1.3vw, 16px) clamp(14px, 1.5vw, 18px);
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.55);
     border: 1px solid rgba(47, 99, 87, 0.16);
   }
   .crop-name {
+    flex: 1 1 auto;
     font-family: var(--font-display);
-    font-size: clamp(17px, 1.5vw, 21px);
+    font-size: clamp(15px, 1.3vw, 18px);
     line-height: 1.2;
     color: var(--color-stromboli);
   }
   .crop-tag {
+    flex: 0 0 auto;
     font-size: clamp(11px, 1vw, 13px);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    white-space: nowrap;
     color: var(--color-aquamarine);
   }
 
@@ -426,9 +434,6 @@ const audiences = [
     .service-row {
       grid-template-columns: 1fr;
       gap: 8px;
-    }
-    .crop-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .product {
       grid-template-columns: 1fr;

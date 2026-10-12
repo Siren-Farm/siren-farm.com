@@ -1,5 +1,5 @@
 ---
-import { STATUS_AS_OF, PLANTOLOGIST, cropsPhrase } from "../data/facts";
+import { STATUS_AS_OF, PLANTOLOGIST, cropCountPhrase } from "../data/facts";
 
 // Dated public status. Hard rules, do not soften:
 //  . the INFARMED cultivation licence is SUBMITTED, never "granted" or
@@ -17,7 +17,7 @@ const items = [
   },
   {
     label: "Technology",
-    value: `Plantologist and Pluvora are trained on ${cropsPhrase}. Plantologist detects disease from any camera, with ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes. Pluvora, the intelligence layer of Sprout Heavy, decides when to irrigate and when to act. Sprout Heavy uses Copernicus satellite data. Provenance tracing is in development.`,
+    value: `Plantologist and Pluvora are trained on ${cropCountPhrase}, across ${PLANTOLOGIST.classes} classes covering diseases, pests and deficiencies. Plantologist detects them from any camera. Pluvora, the intelligence layer of Sprout Heavy, decides when to irrigate and when to act. Sprout Heavy uses Copernicus satellite data. Provenance tracing is in development.`,
   },
   {
     label: "Partners",
