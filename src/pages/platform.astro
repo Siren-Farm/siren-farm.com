@@ -24,7 +24,7 @@ const products = [
     name: "Plantologist",
     domain: "Early disease detection",
     stage: "In pilot",
-    body: `Detects disease from any camera, whether a phone, a drone or something bolted to a post. It knows ${PLANTOLOGIST.classes} classes across ${PLANTOLOGIST.crops} crops, covering diseases, pests, deficiencies and healthy.`,
+    body: `Detects disease from any camera, whether a phone, a drone or something bolted to a post. ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes in nine crops.`,
   },
   {
     name: "Provenance tracing",
@@ -86,7 +86,7 @@ const audiences = [
 
 <Layout
   title='Platform | Siren'
-  description='Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on twenty-nine crops and running with clients.'
+  description='Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on nine crops and running with clients.'
   theme='cream'
 >
   <Nav variant='light' active='platform' />
@@ -145,12 +145,10 @@ const audiences = [
 
     <section class='crops' aria-labelledby='crops-title'>
       <div class='markets-head'>
-        <h2 id='crops-title'>Twenty-nine crops, validated one at a time</h2>
+        <h2 id='crops-title'>Nine crops today, validated one at a time</h2>
         <p>
-          Plantologist and Pluvora are trained on the same set. The number
-          beside each crop is how many classes we can tell apart on it,
-          counting diseases, pests, deficiencies and healthy. Every new crop is
-          calibrated and validated before we claim it.
+          Plantologist and Pluvora are trained on the same nine crops. Every
+          new crop is calibrated and validated before we claim it.
         </p>
       </div>
       {
