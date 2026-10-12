@@ -3,71 +3,106 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import SayHi from "../components/SayHi.astro";
 import Footer from "../components/Footer.astro";
+import { CROPS, PLANTOLOGIST, hasCrops } from "../data/facts";
 
-// Products are named but never implied to ship. Each carries an explicit
-// stage. A named roadmap with honest dates is not the same thing as a claim,
-// and that distinction is why this page is credible.
+// Each product carries an explicit stage. Stages are facts, not ambition:
+// move one only when the thing itself has moved.
 const products = [
   {
     name: "Sprout Heavy",
-    domain: "Cultivation intelligence",
-    stage: "In development, first field trials 2027",
-    body: "Genotype, sensor and season data fused into cultivation decisions: what to plant where, when to intervene, what the crop is likely to express.",
+    domain: "Farm records and monitoring",
+    stage: "In pilot",
+    body: "Every plant or tree gets a record: position, vigour history, risk and operations, built from Copernicus satellite data, terrain, drone and field data. Includes irrigation control for farms that want it.",
   },
   {
     name: "Pluvora",
-    domain: "Water and irrigation",
-    stage: "In development, first field trials 2027",
-    body: "Irrigation control that coordinates pumps, filters, mixers and sensor data against soil moisture and forecast, optimising delivery rather than scheduling it. The intelligence layer is built by our CTO, drawing on his experience scaling farm operations.",
+    domain: "Intelligence layer",
+    stage: "In pilot",
+    body: "The layer inside Sprout Heavy that decides when to act: when to irrigate, when to hold water, when to scout and when no intervention is needed. Fitted to each farm's soil, slope and exposure. Built by our CTO, drawing on his experience scaling farm operations.",
   },
   {
     name: "Plantologist",
-    domain: "Plant health and propagation",
-    stage: "In development, first field trials 2027",
-    body: "Imaging and diagnostics for plant health, vigour and propagation quality, from verifying a mother line to grading nursery and reforestation stock.",
+    domain: "Early disease detection",
+    stage: "In pilot",
+    body: `Detects disease from any camera: phone, drone or fixed mount. ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes in nine crops.`,
+  },
+  {
+    name: "Provenance tracing",
+    domain: "Certification layer",
+    stage: "In development",
+    body: "Traces where a plant came from and what happened to it, for certification today and forensic checks in future.",
   },
 ];
 
-const markets = [
+// Problem first, then what we do about it. Growers recognise the problem
+// before they recognise the product name.
+const services = [
   {
-    name: "Medical cannabis producers",
-    body: "Traceability, chemotype consistency and clone verification, under the regime we operate in ourselves.",
+    problem: "You find disease when you can see it",
+    answer:
+      "By the time a leaf tells you, the spread is already decided. Plantologist reads the crop from any camera and flags the plants worth walking to, before symptoms are obvious.",
   },
   {
-    name: "Smallholders and growers",
-    body: "The decision layer, priced for farms that were never going to buy an enterprise agronomy platform.",
+    problem: "You irrigate on a schedule, not on need",
+    answer:
+      "Pluvora fits your soil, slope and exposure, then says when to water, when to hold and when to do nothing. Water is usually the largest cost and the largest footprint on a high-value farm.",
   },
   {
-    name: "Nurseries and reforestation",
-    body: "Propagation quality and plant-health grading at the point where a bad batch is cheapest to catch.",
+    problem: "Your records are block averages, or on paper",
+    answer:
+      "Sprout Heavy gives every plant a record: where it is, how it has performed, what was done to it and what it cost. Decisions next season rest on what actually happened this one.",
   },
   {
-    name: "Turf and sports grounds",
-    body: "Water intelligence for managed grass, where irrigation is the dominant cost and the dominant footprint.",
+    problem: "You cannot prove where a plant came from",
+    answer:
+      "Provenance tracing follows a plant from its origin through everything done to it, for certification now and forensic checks later. In development.",
+  },
+  {
+    problem: "You have more alerts than people to chase them",
+    answer:
+      "Everything is ranked. You get a short list in priority order, not a dashboard to interpret, and we report how many alerts were real and how many real cases we caught.",
+  },
+];
+
+const audiences = [
+  {
+    name: "Estates and growers",
+    body: "High-value crops where one lost plant costs years of yield. Start with a pilot.",
+  },
+  {
+    name: "Agri-groups and cooperatives",
+    body: "Many farms, one record system, and alerts ranked by what to check first.",
+  },
+  {
+    name: "Forestry and restoration",
+    body: "Plant health and survival tracking for nurseries, planting and restoration projects.",
+  },
+  {
+    name: "Equipment and robotics makers",
+    body: "Our detection models, embedded in your cameras and machines.",
   },
 ];
 ---
 
 <Layout
-  title='Technology | Siren'
-  description='Sprout Heavy, Pluvora and Plantologist: the cultivation, water and plant-health systems Siren is building, trained and field-tested on its own crop in Portugal.'
+  title='Platform | Siren'
+  description='Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on nine crops and running with clients.'
   theme='cream'
 >
-  <Nav variant='light' active='technology' />
+  <Nav variant='light' active='platform' />
 
   <main id='main' class='tech'>
     <header class='tech-header'>
-      <p class='eyebrow'>Technology</p>
-      <h1>Built on our own crop, at our own risk</h1>
+      <p class='eyebrow'>Platform</p>
+      <h1>Tested on our land, running on yours</h1>
       <p class='lede'>
-        Three systems in development, each trained and field-tested on the farm
-        we own before it is offered to anyone else. We carry the cost of being
-        wrong first.
+        Three tools that work together. Each was tested on our own land before
+        it reached a client, and each is now in pilot.
       </p>
     </header>
 
     <section class='products' aria-labelledby='products-title'>
-      <h2 id='products-title' class='visually-hidden'>Products in development</h2>
+      <h2 id='products-title' class='visually-hidden'>What we build</h2>
       {
         products.map((product) => (
           <article class='product'>
@@ -82,21 +117,64 @@ const markets = [
       }
     </section>
 
+    <section class='services' aria-labelledby='services-title'>
+      <div class='markets-head'>
+        <h2 id='services-title'>What we solve</h2>
+        <p>
+          Five problems we hear on almost every farm, and what we do about
+          each one.
+        </p>
+      </div>
+      <dl class='service-list'>
+        {
+          services.map((service) => (
+            <div class='service-row'>
+              <dt>{service.problem}</dt>
+              <dd>{service.answer}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class='services-cta'>
+        If any of those sound like your season, start with a pilot. We map your
+        farm from open data first, so you can see what we already know before
+        you commit to anything.
+        <a href='/pilots/#map'>Map my farm</a>
+      </p>
+    </section>
+
+    <section class='crops' aria-labelledby='crops-title'>
+      <div class='markets-head'>
+        <h2 id='crops-title'>Nine crops today, validated per crop</h2>
+        <p>
+          Plantologist and Pluvora are trained on the same nine crops. Every
+          new crop is calibrated and validated before we claim it.
+        </p>
+      </div>
+      {
+        hasCrops && (
+          <ul class='crop-grid'>
+            {CROPS.map((crop) => (
+              <li>
+                <span class='crop-name'>{crop}</span>
+                <span class='crop-tag'>Plantologist · Pluvora</span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+
     <section class='markets' aria-labelledby='markets-title'>
       <div class='markets-head'>
-        <h2 id='markets-title'>Where it goes beyond cannabis</h2>
-        <p>
-          Almost nothing we are building is species-specific. A model of how a
-          genotype behaves across a season does not care what is in the
-          ground.
-        </p>
+        <h2 id='markets-title'>Who it's for</h2>
       </div>
       <ul class='market-grid'>
         {
-          markets.map((market) => (
+          audiences.map((audience) => (
             <li>
-              <h3>{market.name}</h3>
-              <p>{market.body}</p>
+              <h3>{audience.name}</h3>
+              <p>{audience.body}</p>
             </li>
           ))
         }
@@ -203,6 +281,93 @@ const markets = [
     text-wrap: pretty;
   }
 
+  /* services */
+  .services {
+    margin-top: clamp(80px, 8vw, 140px);
+  }
+  .service-list {
+    margin: 0;
+    border-top: 1px solid rgba(47, 99, 87, 0.22);
+  }
+  .service-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 1.6fr;
+    gap: clamp(8px, 2.4vw, 44px);
+    padding: clamp(20px, 2.4vw, 30px) clamp(4px, 1vw, 12px);
+    border-bottom: 1px solid rgba(47, 99, 87, 0.22);
+  }
+  .service-row dt {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(19px, 1.7vw, 25px);
+    line-height: 1.2;
+    color: var(--color-stromboli);
+    text-wrap: pretty;
+  }
+  .service-row dd {
+    margin: 0;
+    align-self: center;
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height: 1.55;
+    color: rgba(31, 63, 55, 0.82);
+    text-wrap: pretty;
+  }
+  .services-cta {
+    margin: clamp(26px, 3vw, 40px) auto 0;
+    max-width: 44em;
+    text-align: center;
+    font-size: clamp(16px, 1.35vw, 19px);
+    line-height: 1.6;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+  .services-cta a {
+    display: inline-block;
+    margin-left: 6px;
+    color: var(--color-stromboli);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(47, 99, 87, 0.35);
+    transition: border-color 200ms ease;
+  }
+  .services-cta a:hover {
+    border-bottom-color: var(--color-stromboli);
+  }
+
+  /* crops */
+  .crops {
+    margin-top: clamp(80px, 8vw, 140px);
+  }
+  .crop-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(12px, 1.6vw, 20px);
+  }
+  .crop-grid li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: clamp(16px, 1.8vw, 22px);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(47, 99, 87, 0.16);
+  }
+  .crop-name {
+    font-family: var(--font-display);
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.2;
+    color: var(--color-stromboli);
+  }
+  .crop-tag {
+    font-size: clamp(11px, 1vw, 13px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-aquamarine);
+  }
+
   /* markets */
   .markets {
     margin-top: clamp(80px, 8vw, 140px);
@@ -258,6 +423,13 @@ const markets = [
   }
 
   @media (max-width: 860px) {
+    .service-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .crop-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     .product {
       grid-template-columns: 1fr;
       gap: 14px;
