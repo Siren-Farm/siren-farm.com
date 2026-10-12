@@ -12,13 +12,13 @@ const products = [
     name: "Sprout Heavy",
     domain: "Farm records and monitoring",
     stage: "In pilot",
-    body: "Every plant or tree gets a record: position, vigour history, risk and operations, built from Copernicus satellite data, terrain, drone and field data. Includes irrigation control for farms that want it.",
+    body: "Every plant or tree gets its own record, built from Copernicus satellite data, terrain, drones and whatever we find on the ground: where it is, how it has performed and what was done to it. Irrigation control too, for farms that want it.",
   },
   {
     name: "Pluvora",
     domain: "Intelligence layer",
     stage: "In pilot",
-    body: "The layer inside Sprout Heavy that decides when to act: when to irrigate, when to hold water, when to scout and when no intervention is needed. Fitted to each farm's soil, slope and exposure. Built by our CTO, drawing on his experience scaling farm operations.",
+    body: "The part of Sprout Heavy that decides when to act, and just as often when not to. Whether to irrigate, whether to hold the water back, whether something is worth walking out to look at. Fitted to each farm's own soil, slope and exposure. Built by our CTO, drawing on his experience scaling farm operations.",
   },
   {
     name: "Plantologist",
@@ -30,7 +30,7 @@ const products = [
     name: "Provenance tracing",
     domain: "Certification layer",
     stage: "In development",
-    body: "Traces where a plant came from and what happened to it, for certification today and forensic checks in future.",
+    body: "Follows a plant from wherever it started through everything that happened to it afterwards. Useful for certification now, and for answering harder questions later.",
   },
 ];
 
@@ -50,7 +50,7 @@ const services = [
   {
     problem: "Your records are block averages, or on paper",
     answer:
-      "Sprout Heavy gives every plant a record: where it is, how it has performed, what was done to it and what it cost. Decisions next season rest on what actually happened this one.",
+      "Sprout Heavy gives every plant a record: where it is, how it has performed and what was done to it. Next season's decisions then rest on what actually happened this one.",
   },
   {
     problem: "You cannot prove where a plant came from",
@@ -67,19 +67,19 @@ const services = [
 const audiences = [
   {
     name: "Estates and growers",
-    body: "High-value crops where one lost plant costs years of yield. Start with a pilot.",
+    body: "High-value crops, where losing one plant costs you years of yield rather than one season. Start with a pilot.",
   },
   {
     name: "Agri-groups and cooperatives",
-    body: "Many farms, one record system, and alerts ranked by what to check first.",
+    body: "Many farms on one record system, with the alerts ranked so your people know where to go first.",
   },
   {
     name: "Forestry and restoration",
-    body: "Plant health and survival tracking for nurseries, planting and restoration projects.",
+    body: "Tracking plant health and survival through nurseries, planting and restoration, where nobody is watching every tree.",
   },
   {
     name: "Equipment and robotics makers",
-    body: "Our detection models, embedded in your cameras and machines.",
+    body: "Our detection models, running inside your cameras and machines rather than alongside them.",
   },
 ];
 ---
@@ -121,8 +121,8 @@ const audiences = [
       <div class='markets-head'>
         <h2 id='services-title'>What we solve</h2>
         <p>
-          Five problems we hear on almost every farm, and what we do about
-          each one.
+          Five things we hear on almost every farm we walk onto, and what we do
+          about each one.
         </p>
       </div>
       <dl class='service-list'>
