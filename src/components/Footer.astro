@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import { LEGAL } from "../data/facts";
 
 // "With love, from Tondela" · leaf · address. Gold leaf on the green home
 // gradient; the About page flips it; dark-green leaf on the cream page.
@@ -14,7 +15,6 @@ const { variant = "green" } = Astro.props;
 const elsewhere = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/sirenagtech" },
   { label: "YouTube", href: "https://www.youtube.com/@SirenAgTech" },
-  { label: "GitHub", href: "https://github.com/Siren-Farm" },
   { label: "Bea on LinkedIn", href: "" },
   { label: "João on LinkedIn", href: "" },
 ].filter((link) => link.href);
@@ -40,6 +40,16 @@ const elsewhere = [
       ))
     }
   </ul>
+
+  <p class='legal'>
+    {LEGAL.name} · NIPC {LEGAL.nipc} · Registered office: {
+      LEGAL.registeredOffice
+    } · <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a> · <a
+      href='https://www.livroreclamacoes.pt/inicio'
+      target='_blank'
+      rel='noopener'>Livro de Reclamações</a
+    >
+  </p>
 </footer>
 
 <style>
@@ -128,6 +138,30 @@ const elsewhere = [
   }
   .on-cream .elsewhere a:hover {
     border-bottom-color: var(--color-stromboli);
+  }
+
+  /* company identification, required by Decreto-Lei 7/2004 art. 10 */
+  .legal {
+    max-width: 1280px;
+    margin: clamp(18px, 2vw, 26px) auto 0;
+    padding: 0 0 4px;
+    text-align: center;
+    font-size: clamp(11px, 0.95vw, 13px);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .on-green .legal {
+    color: var(--color-rum-swizzle);
+    opacity: 0.62;
+  }
+  .on-cream .legal {
+    color: var(--color-te-papa-green);
+    opacity: 0.68;
+  }
+  .legal a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   @media (max-width: 760px) {
