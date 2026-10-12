@@ -3,21 +3,27 @@ import GlassCard from "./GlassCard.astro";
 
 const audiences = [
   {
-    title: "Pharmaceutical companies",
+    title: "Growers and estates",
     paragraphs: [
-      "We produce high-grade outdoor cannabis flower under EU-GACP compliance, aimed at full EU-GMP compatibility through controlled post-harvest curing. Talk to us about supply or long-term sourcing agreements.",
+      "Start with a short pilot: a first map of your farm from open data, checked on the ground, with our tools running on your land. You see what we get right and what we miss, then we decide together whether to run a full season.",
     ],
   },
   {
-    title: "Seed banks and breeders",
+    title: "Research and breeding partners",
     paragraphs: [
-      "We are building a genetic and chemotype library with full tracking of genotype, phenotype and environment. We welcome research collaborations, joint breeding programmes and field trials under formal agreement.",
+      "We are building a genetic and environmental record that tracks genotype, phenotype and conditions plant by plant. We welcome research collaborations, joint programmes and field trials under formal agreement.",
     ],
   },
   {
-    title: "Investors and partners",
+    title: "Investors",
     paragraphs: [
-      "We are building Siren with people who see cannabis as a stable, medical-grade crop, and Portugal as the place to prove it. If that sounds like you, we would like to talk.",
+      "We are building the intelligence layer for high-value crops, with a client pilot running and our own land to test on. Write to us for the deck.",
+    ],
+  },
+  {
+    title: "Pharmaceutical buyers",
+    paragraphs: [
+      "Once our INFARMED licence is issued, our research farm will grow outdoor medical cannabis flower to EU-GACP, aiming at EU-GMP compatibility through controlled post-harvest curing. Talk to us about supply.",
     ],
   },
 ];
@@ -25,10 +31,8 @@ const audiences = [
 
 <div class='collab'>
   <div class='collab-header'>
-    <h2>How we collaborate</h2>
-    <p>
-      Long-term relationships across the medical cannabis chain.
-    </p>
+    <h2>How we work with people</h2>
+    <p>Growers first, and everyone who helps us get there.</p>
   </div>
 
   <div id='collab-grid'>
@@ -78,11 +82,11 @@ const audiences = [
   #collab-grid {
     margin-top: clamp(36px, 4vw, 60px);
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(20px, 2.2vw, 32px);
     align-items: stretch;
   }
-  @media (max-width: 1100px) {
+  @media (max-width: 860px) {
     #collab-grid {
       grid-template-columns: 1fr;
     }

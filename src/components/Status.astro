@@ -1,38 +1,53 @@
 ---
-// The corroboration layer. Every line here should match, word for word, what
-// is filed in grant applications and investor material. This is the public
-// copy of record. Update the date whenever a line changes.
-//
-// Hard rules, do not soften:
-//  . the INFARMED cultivation licence is SUBMITTED, never "granted" or "licensed"
-//  . no financial projections, and no figure for what friends and family put in
-//  . no partner is named until an agreement is actually signed
-const asOf = "September 2026";
+import { STATUS_AS_OF, PLANTOLOGIST, cropsPhrase } from "../data/facts";
+
+// Dated public status. Hard rules, do not soften:
+//  . the INFARMED cultivation licence is SUBMITTED, never "granted" or
+//    "licensed", and it covers medical cannabis only
+//  . no projections: no revenue, EBITDA, yield or market-share figures
+//  . a partner is named only once an agreement is signed
+//  . no figure for what friends and family put in
+const asOf = STATUS_AS_OF;
 
 const items = [
   {
-    label: "Licence",
+    label: "Clients",
     value:
-      "Cultivation licence application filed with INFARMED. Submitted, not yet issued.",
+      "First client pilot running since October 2026, using our tools on a commercial farm.",
   },
   {
-    label: "Land",
-    value:
-      "Freehold in Tondela, owned outright. Siren has been a registered Portuguese company since 2022.",
+    label: "Technology",
+    value: `Plantologist and Pluvora are trained on ${cropsPhrase}. Plantologist detects disease from any camera, with ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes. Pluvora, the intelligence layer of Sprout Heavy, decides when to irrigate and when to act. Sprout Heavy uses Copernicus satellite data. Provenance tracing is in development.`,
   },
   {
-    label: "Science",
+    label: "Partners",
     value:
-      "Genomics pipeline running end to end. The selection tools built on it, including the chemotype panel and clone-fidelity screening, are in development and under pilot.",
+      "Collaboration protocol signed with Universidade Politécnica de Viseu. Testbed agreement signed with ViTEB, Visabeira's test bed.",
+  },
+  {
+    label: "Recognition",
+    value:
+      "One of five finalists in the AI Summit Barcelona 2026 Pitch Competition. Selected for 2080 Ventures' Global Startup Showcase 2026. Tech Foundry Portugal, deep-tech edition. Endorsed by AIRV.",
+  },
+  {
+    label: "Demand",
+    value:
+      "Expressions of interest from international agri-groups covering about 40,000 hectares.",
+  },
+  {
+    label: "Research farm",
+    value:
+      "Freehold land in Tondela. INFARMED cultivation licence application filed, not yet issued. Letter of intent from an EU-GMP manufacturer for the farm's output.",
   },
   {
     label: "Funding",
     value:
-      "Bootstrapped on founder capital and friends and family. The goal has been to de-risk as much as possible before raising.",
+      "Bootstrapped by the founders, friends and family. Now raising our first external round.",
   },
   {
     label: "Next",
-    value: "First outdoor field season planned for 2027.",
+    value:
+      "First licensed field season on our research farm planned for 2027, subject to the licence.",
   },
 ];
 ---
