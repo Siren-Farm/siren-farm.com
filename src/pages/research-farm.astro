@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import SayHi from "../components/SayHi.astro";
 import Footer from "../components/Footer.astro";
-import { PLANTOLOGIST, cropsPhrase } from "../data/facts";
 
 // One source of truth: the same array renders the page and the FAQPage
 // structured data, so search results can never drift from the copy.
@@ -64,18 +63,6 @@ const faqs: Faq[] = [
       "Partly because it is home, and because the land was securable. We own it freehold, which means we can run an experiment that costs a season without asking anyone's permission.",
       "And partly because the Dão is a serious growing region. Granite soils, shelter from the Caramulo and Estrela ranges, and a wide swing between day and night temperature are what made it one of Portugal's great wine regions. For a plant whose value sits in its volatile chemistry, that swing is not a romantic detail.",
       "It also means the jobs and the spending land in a part of Portugal that needs them.",
-    ],
-  },
-  {
-    q: "Which crops do you work with?",
-    intro: [`Plantologist and Pluvora are trained on ${cropsPhrase}.`],
-    bullets: [
-      `Plantologist detects disease from any camera, with ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes.`,
-      "Pluvora, inside Sprout Heavy, decides when to irrigate and when to act.",
-      "Every new crop is calibrated and validated before we claim it.",
-    ],
-    close: [
-      "All three tools are in pilot today, on our own land and on a client farm.",
     ],
   },
   {
@@ -165,7 +152,7 @@ const schema = {
     font-size: clamp(12px, 1.05vw, 15px);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-aquamarine);
+    color: var(--color-stromboli);
   }
   .why-header h1 {
     margin: 0;

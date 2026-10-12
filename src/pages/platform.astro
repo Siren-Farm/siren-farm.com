@@ -143,29 +143,33 @@ const audiences = [
       </p>
     </section>
 
-    <section class='crops' aria-labelledby='crops-title'>
-      <div class='markets-head'>
-        <h2 id='crops-title'>Nine crops today, validated one at a time</h2>
-        <p>
-          Plantologist and Pluvora are trained on the same nine crops. Every
-          new crop is calibrated and validated before we claim it.
-        </p>
-      </div>
-      {
-        hasCrops && (
-          <ul class='crop-grid'>
-            {CROPS.map((crop) => (
-              <li>
-                <span class='crop-name'>{crop.name}</span>
-                <span class='crop-tag'>
-                  {crop.classes} {crop.classes === 1 ? "class" : "classes"}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )
-      }
-    </section>
+    {
+      hasCrops && (
+        <section class='crops' aria-labelledby='crops-title'>
+          <div class='markets-head'>
+            <h2 id='crops-title'>Nine crops today, validated one at a time</h2>
+            <p>
+              Plantologist and Pluvora are trained on the same nine crops. Every
+              new crop is calibrated and validated before we claim it.
+            </p>
+          </div>
+          {
+            hasCrops && (
+              <ul class='crop-grid'>
+                {CROPS.map((crop) => (
+                  <li>
+                    <span class='crop-name'>{crop.name}</span>
+                    <span class='crop-tag'>
+                      {crop.classes} {crop.classes === 1 ? "class" : "classes"}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </section>
+      )
+    }
 
     <section class='markets' aria-labelledby='markets-title'>
       <div class='markets-head'>
@@ -211,7 +215,7 @@ const audiences = [
     font-size: clamp(12px, 1.05vw, 15px);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-aquamarine);
+    color: var(--color-stromboli);
   }
   .tech-header h1 {
     margin: 0;
@@ -255,7 +259,7 @@ const audiences = [
     font-size: clamp(12px, 1vw, 14px);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-aquamarine);
+    color: var(--color-stromboli);
   }
   .product-side h3 {
     margin: 0;
@@ -371,7 +375,7 @@ const audiences = [
     letter-spacing: 0.08em;
     text-transform: uppercase;
     white-space: nowrap;
-    color: var(--color-aquamarine);
+    color: var(--color-stromboli);
   }
 
   /* markets */
