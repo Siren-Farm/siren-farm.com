@@ -1,0 +1,78 @@
+---
+import { PLANTOLOGIST } from "../data/facts";
+
+// Five short proof points between the hero and the pillars. Big value,
+// small label. Text only, matching Status and Measure: no icons, no logos.
+const items = [
+  { value: "First client pilot", label: "running since October 2026" },
+  {
+    value: `${PLANTOLOGIST.crops} crops`,
+    label: "Plantologist and Pluvora, trained on the same set",
+  },
+  {
+    value: `${PLANTOLOGIST.classes} classes`,
+    label: "diseases, pests, deficiencies and healthy",
+  },
+  {
+    value: "2 signed partners",
+    label: "Universidade Politécnica de Viseu · ViTEB, Visabeira's testbed",
+  },
+  { value: "Finalist", label: "AI Summit Barcelona 2026" },
+];
+---
+
+<section class='proof' aria-label='Where Siren stands today'>
+  <ul>
+    {
+      items.map((item) => (
+        <li>
+          <p class='proof-value'>{item.value}</p>
+          <p class='proof-label'>{item.label}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .proof {
+    padding: clamp(48px, 5vw, 80px) 0 0;
+  }
+  .proof ul {
+    margin: 0;
+    padding: clamp(24px, 2.6vw, 36px) 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(18px, 2vw, 32px);
+    border-top: 1px solid rgba(240, 207, 135, 0.28);
+    border-bottom: 1px solid rgba(240, 207, 135, 0.28);
+  }
+  .proof-value {
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    font-size: clamp(20px, 1.9vw, 28px);
+    line-height: 1.15;
+    color: var(--color-saffron-mango);
+    text-wrap: balance;
+  }
+  .proof-label {
+    margin: 0;
+    font-size: clamp(13px, 1.1vw, 15px);
+    line-height: 1.45;
+    color: var(--color-white);
+    opacity: 0.85;
+    text-wrap: pretty;
+  }
+
+  /* two columns on phones, with the last item spanning the full width */
+  @media (max-width: 900px) {
+    .proof ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px clamp(18px, 4vw, 32px);
+    }
+    .proof li:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

@@ -1,0 +1,446 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import SayHi from "../components/SayHi.astro";
+import Footer from "../components/Footer.astro";
+import { CROPS, PLANTOLOGIST, hasCrops } from "../data/facts";
+
+// Each product carries an explicit stage. Stages are facts, not ambition:
+// move one only when the thing itself has moved.
+const products = [
+  {
+    name: "Sprout Heavy",
+    domain: "Farm records and monitoring",
+    stage: "In pilot",
+    body: "Every plant or tree gets its own record, built from Copernicus satellite data, terrain, drones and whatever we find on the ground: where it is, how it has performed and what was done to it. Irrigation control too, for farms that want it.",
+  },
+  {
+    name: "Pluvora",
+    domain: "Intelligence layer",
+    stage: "In pilot",
+    body: "The part of Sprout Heavy that decides when to act, and just as often when not to. Whether to irrigate, whether to hold the water back, whether something is worth walking out to look at. Fitted to each farm's own soil, slope and exposure. Built by our CTO, drawing on his experience scaling farm operations.",
+  },
+  {
+    name: "Plantologist",
+    domain: "Early disease detection",
+    stage: "In pilot",
+    body: `Detects disease from any camera, whether a phone, a drone or something bolted to a post. It knows ${PLANTOLOGIST.classes} classes across ${PLANTOLOGIST.crops} crops, covering diseases, pests, deficiencies and healthy.`,
+  },
+  {
+    name: "Provenance tracing",
+    domain: "Certification layer",
+    stage: "In development",
+    body: "Follows a plant from wherever it started through everything that happened to it afterwards. Useful for certification now, and for answering harder questions later.",
+  },
+];
+
+// Problem first, then what we do about it. Growers recognise the problem
+// before they recognise the product name.
+const services = [
+  {
+    problem: "You find disease when you can see it",
+    answer:
+      "By the time a leaf tells you, the spread is already decided. Plantologist reads the crop from any camera and flags the plants worth walking to, before symptoms are obvious.",
+  },
+  {
+    problem: "You irrigate on a schedule, not on need",
+    answer:
+      "Pluvora fits your soil, slope and exposure, then says when to water, when to hold and when to do nothing. Water is usually the largest cost and the largest footprint on a high-value farm.",
+  },
+  {
+    problem: "Your records are block averages, or on paper",
+    answer:
+      "Sprout Heavy gives every plant a record: where it is, how it has performed and what was done to it. Next season's decisions then rest on what actually happened this one.",
+  },
+  {
+    problem: "You cannot prove where a plant came from",
+    answer:
+      "Provenance tracing follows a plant from its origin through everything done to it, for certification now and forensic checks later. In development.",
+  },
+  {
+    problem: "You have more alerts than people to chase them",
+    answer:
+      "Everything is ranked. You get a short list in priority order, not a dashboard to interpret, and we report how many alerts were real and how many real cases we caught.",
+  },
+];
+
+const audiences = [
+  {
+    name: "Estates and growers",
+    body: "High-value crops, where losing one plant costs you years of yield rather than one season. Start with a pilot.",
+  },
+  {
+    name: "Agri-groups and cooperatives",
+    body: "Many farms on one record system, with the alerts ranked so your people know where to go first.",
+  },
+  {
+    name: "Forestry and restoration",
+    body: "Tracking plant health and survival through nurseries, planting and restoration, where nobody is watching every tree.",
+  },
+  {
+    name: "Equipment and robotics makers",
+    body: "Our detection models, running inside your cameras and machines rather than alongside them.",
+  },
+];
+---
+
+<Layout
+  title='Platform | Siren'
+  description='Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on twenty-nine crops and running with clients.'
+  theme='cream'
+>
+  <Nav variant='light' active='platform' />
+
+  <main id='main' class='tech'>
+    <header class='tech-header'>
+      <p class='eyebrow'>Platform</p>
+      <h1>Tested on our land, running on yours</h1>
+      <p class='lede'>
+        Three tools that work together. Each was tested on our own land before
+        it reached a client, and each is now in pilot.
+      </p>
+    </header>
+
+    <section class='products' aria-labelledby='products-title'>
+      <h2 id='products-title' class='visually-hidden'>What we build</h2>
+      {
+        products.map((product) => (
+          <article class='product'>
+            <div class='product-side'>
+              <p class='product-domain'>{product.domain}</p>
+              <h3>{product.name}</h3>
+              <p class='product-stage'>{product.stage}</p>
+            </div>
+            <p class='product-body'>{product.body}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class='services' aria-labelledby='services-title'>
+      <div class='markets-head'>
+        <h2 id='services-title'>What we solve</h2>
+        <p>
+          Five things we hear on almost every farm we walk onto, and what we do
+          about each one.
+        </p>
+      </div>
+      <dl class='service-list'>
+        {
+          services.map((service) => (
+            <div class='service-row'>
+              <dt>{service.problem}</dt>
+              <dd>{service.answer}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class='services-cta'>
+        If any of those sound like your season, start with a pilot. We map your
+        farm from open data first, so you can see what we already know before
+        you commit to anything.
+        <a href='/pilots/#map'>Map my farm</a>
+      </p>
+    </section>
+
+    <section class='crops' aria-labelledby='crops-title'>
+      <div class='markets-head'>
+        <h2 id='crops-title'>Twenty-nine crops, validated one at a time</h2>
+        <p>
+          Plantologist and Pluvora are trained on the same set. The number
+          beside each crop is how many classes we can tell apart on it,
+          counting diseases, pests, deficiencies and healthy. Every new crop is
+          calibrated and validated before we claim it.
+        </p>
+      </div>
+      {
+        hasCrops && (
+          <ul class='crop-grid'>
+            {CROPS.map((crop) => (
+              <li>
+                <span class='crop-name'>{crop.name}</span>
+                <span class='crop-tag'>
+                  {crop.classes} {crop.classes === 1 ? "class" : "classes"}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+
+    <section class='markets' aria-labelledby='markets-title'>
+      <div class='markets-head'>
+        <h2 id='markets-title'>Who it's for</h2>
+      </div>
+      <ul class='market-grid'>
+        {
+          audiences.map((audience) => (
+            <li>
+              <h3>{audience.name}</h3>
+              <p>{audience.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <SayHi variant='cream' />
+  </main>
+  <Footer variant='cream' />
+</Layout>
+
+<style>
+  .tech {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .tech-header {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: calc(clamp(150px, 14vw, 220px) + env(safe-area-inset-top, 0px)) 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .eyebrow {
+    margin: 0 0 clamp(12px, 1.2vw, 18px);
+    font-size: clamp(12px, 1.05vw, 15px);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-aquamarine);
+  }
+  .tech-header h1 {
+    margin: 0;
+    font-size: clamp(38px, 4vw, 60px);
+    line-height: 1.08;
+    color: var(--color-stromboli);
+    text-wrap: balance;
+  }
+  .lede {
+    margin: clamp(20px, 2vw, 28px) 0 0;
+    max-width: 38em;
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.5;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* products */
+  .products {
+    margin-top: clamp(56px, 6vw, 96px);
+    border-top: 1px solid rgba(47, 99, 87, 0.22);
+  }
+  .product {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 2fr;
+    gap: clamp(18px, 3vw, 56px);
+    padding: clamp(28px, 3.2vw, 48px) 0;
+    border-bottom: 1px solid rgba(47, 99, 87, 0.22);
+  }
+  .product-domain {
+    margin: 0 0 8px;
+    font-size: clamp(12px, 1vw, 14px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-aquamarine);
+  }
+  .product-side h3 {
+    margin: 0;
+    font-size: clamp(28px, 2.8vw, 42px);
+    line-height: 1.1;
+    color: var(--color-stromboli);
+  }
+  .product-stage {
+    margin: 12px 0 0;
+    display: inline-block;
+    padding: 6px 13px;
+    border-radius: 999px;
+    border: 1px dashed rgba(47, 99, 87, 0.45);
+    font-size: clamp(12px, 1vw, 14px);
+    line-height: 1.3;
+    color: var(--color-te-papa-green);
+    opacity: 0.85;
+  }
+  .product-body {
+    margin: 0;
+    align-self: center;
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.55;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+
+  /* services */
+  .services {
+    margin-top: clamp(80px, 8vw, 140px);
+  }
+  .service-list {
+    margin: 0;
+    border-top: 1px solid rgba(47, 99, 87, 0.22);
+  }
+  .service-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 1.6fr;
+    gap: clamp(8px, 2.4vw, 44px);
+    padding: clamp(20px, 2.4vw, 30px) clamp(4px, 1vw, 12px);
+    border-bottom: 1px solid rgba(47, 99, 87, 0.22);
+  }
+  .service-row dt {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(19px, 1.7vw, 25px);
+    line-height: 1.2;
+    color: var(--color-stromboli);
+    text-wrap: pretty;
+  }
+  .service-row dd {
+    margin: 0;
+    align-self: center;
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height: 1.55;
+    color: rgba(31, 63, 55, 0.82);
+    text-wrap: pretty;
+  }
+  .services-cta {
+    margin: clamp(26px, 3vw, 40px) auto 0;
+    max-width: 44em;
+    text-align: center;
+    font-size: clamp(16px, 1.35vw, 19px);
+    line-height: 1.6;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+  .services-cta a {
+    display: inline-block;
+    margin-left: 6px;
+    color: var(--color-stromboli);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(47, 99, 87, 0.35);
+    transition: border-color 200ms ease;
+  }
+  .services-cta a:hover {
+    border-bottom-color: var(--color-stromboli);
+  }
+
+  /* crops */
+  .crops {
+    margin-top: clamp(80px, 8vw, 140px);
+  }
+  .crop-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: clamp(10px, 1.2vw, 16px);
+  }
+  .crop-grid li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    padding: clamp(12px, 1.3vw, 16px) clamp(14px, 1.5vw, 18px);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(47, 99, 87, 0.16);
+  }
+  .crop-name {
+    flex: 1 1 auto;
+    font-family: var(--font-display);
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height: 1.2;
+    color: var(--color-stromboli);
+  }
+  .crop-tag {
+    flex: 0 0 auto;
+    font-size: clamp(11px, 1vw, 13px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-aquamarine);
+  }
+
+  /* markets */
+  .markets {
+    margin-top: clamp(80px, 8vw, 140px);
+  }
+  .markets-head {
+    max-width: 52em;
+    margin: 0 auto clamp(30px, 3.4vw, 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .markets-head h2 {
+    margin: 0;
+    font-size: clamp(30px, 3vw, 48px);
+    line-height: 1.12;
+    color: var(--color-stromboli);
+  }
+  .markets-head p {
+    margin: clamp(10px, 1vw, 16px) 0 0;
+    max-width: 38em;
+    font-size: clamp(16px, 1.35vw, 20px);
+    line-height: 1.5;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+  .market-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+  }
+  .market-grid li {
+    border-radius: 1.5rem;
+    padding: clamp(22px, 2.4vw, 34px);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(47, 99, 87, 0.16);
+  }
+  .market-grid h3 {
+    margin: 0 0 10px;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.2;
+    color: var(--color-stromboli);
+  }
+  .market-grid p {
+    margin: 0;
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height: 1.5;
+    color: var(--color-te-papa-green);
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 860px) {
+    .service-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .product {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .market-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

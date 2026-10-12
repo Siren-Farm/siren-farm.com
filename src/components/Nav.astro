@@ -11,15 +11,16 @@ import Logo from "./Logo.astro";
 interface Props {
   variant?: "dark" | "light";
   /** omitted on pages that are not in the menu, e.g. 404 */
-  active?: "home" | "technology" | "why" | "about";
+  active?: "home" | "platform" | "pilots" | "research-farm" | "about";
 }
 
 const { variant = "dark", active } = Astro.props;
 
 const links = [
   { href: "/", label: "Home", key: "home" },
-  { href: "/technology/", label: "Technology", key: "technology" },
-  { href: "/why/", label: "Why", key: "why" },
+  { href: "/platform/", label: "Platform", key: "platform" },
+  { href: "/pilots/", label: "Pilots", key: "pilots" },
+  { href: "/research-farm/", label: "Research farm", key: "research-farm" },
   { href: "/about/", label: "About", key: "about" },
 ];
 ---
