@@ -25,7 +25,7 @@ const products = [
     name: "Plantologist",
     domain: "Early disease detection",
     stage: "In pilot",
-    body: `Detects disease from any camera, whether a phone, a drone or something bolted to a post. ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes in nine crops.`,
+    body: `Detects disease from any camera, whether a phone, a drone or something bolted to a post. ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes in ${PLANTOLOGIST.crops} crops, ${PLANTOLOGIST.measuredOn}.`,
   },
   {
     name: "Provenance tracing",
@@ -87,7 +87,7 @@ const audiences = [
 
 <Layout
   title='Platform | Siren'
-  description='Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on nine crops and running with clients.'
+  description={`Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on ${PLANTOLOGIST.crops} crops and running with clients.`}
   theme='cream'
 >
   <Nav variant='light' active='platform' />
