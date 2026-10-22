@@ -281,7 +281,7 @@ const deployedNames = DEPLOYED_CROPS.map((c) => c.name);
     color: var(--color-rum-swizzle);
   }
 
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion: no-preference-TEMP-NATIVE-TEST) {
     .anim {
       display: none;
     }
@@ -310,13 +310,16 @@ const deployedNames = DEPLOYED_CROPS.map((c) => c.name);
 <script>
   // One ticker per page is expected, but everything is keyed off the root so
   // a second instance would not clash.
+  (window.__tickerDebug ||= []).push({t: Math.round(performance.now()), ev: "script-ran", ready: document.readyState}); /* TEMP-DEBUG */
   document.querySelectorAll<HTMLElement>("[data-crop-ticker]").forEach((root) => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    (window.__tickerDebug ||= []).push({t: Math.round(performance.now()), ev: "root-found"}); /* TEMP-DEBUG */
+    if (false && matchMedia("(prefers-reduced-motion: reduce)").matches) return; /* TEMP-NATIVE-TEST */
 
     const crops: string[] = JSON.parse(root.dataset.testing ?? "[]");
     const nameEl = root.querySelector<HTMLElement>("[data-testing-name]");
     const countEl = root.querySelector<HTMLElement>("[data-testing-count]");
     const items = [...root.querySelectorAll<HTMLElement>("[data-deployed-item]")];
+    (window.__tickerDebug ||= []).push({t: Math.round(performance.now()), ev: "after-guards", crops: crops.length, hasName: !!nameEl}); /* TEMP-DEBUG */
     if (!nameEl || !countEl || crops.length < 2) return;
 
     let i = 0;
@@ -325,6 +328,7 @@ const deployedNames = DEPLOYED_CROPS.map((c) => c.name);
     let tB: number | undefined;
 
     const stepTesting = () => {
+      (window.__tickerDebug ||= []).push({t: Math.round(performance.now()), ev: "step", i}); /* TEMP-DEBUG */
       nameEl.style.opacity = "0";
       window.setTimeout(() => {
         i = (i + 1) % crops.length;
@@ -344,6 +348,7 @@ const deployedNames = DEPLOYED_CROPS.map((c) => c.name);
     // i and j are kept, so it resumes where it stopped
     let visible = false;
     const start = () => {
+      (window.__tickerDebug ||= []).push({t: Math.round(performance.now()), ev: "start-called", already: tA !== undefined}); /* TEMP-DEBUG */
       if (tA !== undefined) return;
       tA = window.setInterval(stepTesting, 1400);
       tB = window.setInterval(stepDeployed, 2200);
@@ -356,9 +361,27 @@ const deployedNames = DEPLOYED_CROPS.map((c) => c.name);
     const sync = () => (visible && !document.hidden ? start() : stop());
 
     new IntersectionObserver(([entry]) => {
+      (window.__tickerDebug ||= []).push({t: Math.round(performance.now()), ev: "io", isIntersecting: entry.isIntersecting}); /* TEMP-DEBUG */
       visible = entry.isIntersecting;
       sync();
     }).observe(root);
     document.addEventListener("visibilitychange", sync);
+
+    // The observer is the primary signal, but do not depend on when it
+    // delivers. Check visibility from the bounding rect once now, and again
+    // on scroll, throttled to one check per frame. start() is guarded, so a
+    // duplicate call is a no-op; stop() corrects any mismatch either way.
+    const checkRect = () => {
+      const rect = root.getBoundingClientRect();
+      visible = rect.bottom > 0 && rect.top < window.innerHeight;
+      (window.__tickerDebug ||= []).push({t: Math.round(performance.now()), ev: "checkRect", visible, top: Math.round(rect.top), innerH: window.innerHeight, hidden: document.hidden}); /* TEMP-DEBUG */
+      sync();
+    };
+    // Deliberately not throttled through requestAnimationFrame: a frame
+    // callback that is never delivered would leave the handler disabled for
+    // the life of the page. Browsers already coalesce scroll events, and one
+    // getBoundingClientRect per event is cheap.
+    window.addEventListener("scroll", checkRect, { passive: true });
+    checkRect();
   });
 </script>
