@@ -1,0 +1,364 @@
+---
+import { TESTING_CROPS, DEPLOYED_CROPS, formatList, type CropIcon } from "../data/facts";
+import Chestnut from "../assets/crops/chestnut.svg";
+import Grape from "../assets/crops/grape.svg";
+import Citrus from "../assets/crops/citrus.svg";
+import Avocado from "../assets/crops/avocado.svg";
+
+// Two panels. Testing cycles through every crop the models are trained on;
+// Deployed cycles through crops where the tools run in the field. Both lists
+// come from facts.ts. The animated copy is hidden from assistive tech and
+// each panel carries one plain sentence with the full information instead.
+//
+//  - "cream" sits on the cream pages (green text, pale card)
+//  - "green" sits on the green home page (gold and cream text, frosted card)
+interface Props {
+  variant?: "green" | "cream";
+}
+const { variant = "cream" } = Astro.props;
+
+const ICONS: Record<CropIcon, typeof Chestnut> = {
+  chestnut: Chestnut,
+  grape: Grape,
+  citrus: Citrus,
+  avocado: Avocado,
+};
+
+const total = TESTING_CROPS.length;
+const hasDeployed = DEPLOYED_CROPS.length > 0;
+const deployedNames = DEPLOYED_CROPS.map((c) => c.name);
+---
+
+<div
+  class:list={["ticker", `on-${variant}`, { single: !hasDeployed }]}
+  data-crop-ticker
+  data-testing={JSON.stringify(TESTING_CROPS)}
+>
+  <div class='panel'>
+    <p class='eyebrow'>Testing</p>
+
+    <div class='anim' aria-hidden='true'>
+      <p class='line'>
+        <span class='lead'>Model trained for</span>
+        <span class='slot'>
+          <!-- every name, stacked invisibly in one cell, so the slot is
+               exactly as wide as the widest and nothing ever reflows -->
+          <span class='sizer'>{TESTING_CROPS.map((crop) => <span>{crop}</span>)}</span>
+          <span class='name' data-testing-name>{TESTING_CROPS[0]}</span>
+        </span>
+      </p>
+      <p class='count'><span data-testing-count>1</span> of {total} crops</p>
+    </div>
+
+    <div class='static' aria-hidden='true'>
+      <p class='line'>Models trained for {total} crops</p>
+      <p class='list'>{TESTING_CROPS.join(", ")}</p>
+    </div>
+
+    <p class='sr-only'>Models trained for {total} crops: {formatList(TESTING_CROPS)}.</p>
+  </div>
+
+  {
+    hasDeployed && (
+      <div class='panel'>
+        <p class='eyebrow'>Deployed</p>
+
+        <div class='anim stage' aria-hidden='true'>
+          {DEPLOYED_CROPS.map((crop, index) => {
+            const Icon = ICONS[crop.icon];
+            return (
+              <div class:list={["item", { "is-on": index === 0 }]} data-deployed-item>
+                <span class='icon'>
+                  <Icon />
+                </span>
+                <span class='dname'>{crop.name}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        <div class='static' aria-hidden='true'>
+          <ul class='static-row'>
+            {DEPLOYED_CROPS.map((crop) => {
+              const Icon = ICONS[crop.icon];
+              return (
+                <li>
+                  <span class='icon small'>
+                    <Icon />
+                  </span>
+                  <span>{crop.name}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <p class='sr-only'>Deployed on: {formatList(deployedNames)}.</p>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .ticker {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 2vw, 28px);
+  }
+  .ticker.single {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    padding: clamp(24px, 2.6vw, 40px);
+    border-radius: 1.5rem;
+    /* fixed so nothing below moves while the copy changes */
+    min-height: clamp(188px, 20vw, 240px);
+  }
+  .on-cream .panel {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(47, 99, 87, 0.16);
+  }
+  .on-green .panel {
+    background: var(--color-glass);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 80px rgba(31, 63, 55, 0.08);
+  }
+
+  .eyebrow {
+    margin: 0;
+    font-size: clamp(12px, 1vw, 14px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .on-cream .eyebrow {
+    color: var(--color-stromboli);
+  }
+  .on-green .eyebrow {
+    color: var(--color-putty);
+  }
+
+  /* ── testing ─────────────────────────────────────────────── */
+  .line {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 0.3em;
+    font-family: var(--font-display);
+    font-size: clamp(24px, 2.3vw, 34px);
+    line-height: 1.2;
+  }
+  .on-cream .line {
+    color: var(--color-te-papa-green);
+  }
+  .on-green .line {
+    color: var(--color-white);
+  }
+  .slot {
+    position: relative;
+    display: inline-grid;
+  }
+  .sizer {
+    display: grid;
+    visibility: hidden;
+  }
+  .sizer > span,
+  .name {
+    grid-area: 1 / 1;
+    white-space: nowrap;
+  }
+  .sizer > span {
+    display: block;
+  }
+  .name {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.4s ease;
+  }
+  .on-cream .name {
+    color: var(--color-stromboli);
+  }
+  .on-green .name {
+    color: var(--color-putty);
+  }
+  .count {
+    margin: 0;
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums;
+  }
+  .on-cream .count {
+    color: rgba(31, 63, 55, 0.75);
+  }
+  .on-green .count {
+    color: var(--color-rum-swizzle);
+  }
+
+  /* ── deployed ────────────────────────────────────────────── */
+  .stage {
+    position: relative;
+    height: clamp(96px, 9vw, 120px);
+  }
+  .item {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2vw, 28px);
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  .item.is-on {
+    opacity: 1;
+  }
+  .icon {
+    flex: 0 0 auto;
+    width: clamp(96px, 9vw, 120px);
+    height: clamp(96px, 9vw, 120px);
+  }
+  .icon.small {
+    width: 48px;
+    height: 48px;
+  }
+  .icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .dname {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 2.6vw, 38px);
+    line-height: 1.15;
+  }
+  .on-cream .dname {
+    color: var(--color-stromboli);
+  }
+  .on-green .dname {
+    color: var(--color-rum-swizzle);
+  }
+
+  /* ── static fallback, shown only when motion is reduced ───── */
+  .static {
+    display: none;
+  }
+  .list {
+    margin: 0;
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.55;
+  }
+  .on-cream .list {
+    color: rgba(31, 63, 55, 0.8);
+  }
+  .on-green .list {
+    color: var(--color-rum-swizzle);
+  }
+  .static-row {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+  }
+  .static-row li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: clamp(18px, 1.5vw, 22px);
+  }
+  .on-cream .static-row li {
+    color: var(--color-stromboli);
+  }
+  .on-green .static-row li {
+    color: var(--color-rum-swizzle);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim {
+      display: none;
+    }
+    .static {
+      display: block;
+    }
+    .panel {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ticker {
+      grid-template-columns: 1fr;
+    }
+    .stage,
+    .icon {
+      height: 72px;
+    }
+    .icon {
+      width: 72px;
+    }
+  }
+</style>
+
+<script>
+  // One ticker per page is expected, but everything is keyed off the root so
+  // a second instance would not clash.
+  document.querySelectorAll<HTMLElement>("[data-crop-ticker]").forEach((root) => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const crops: string[] = JSON.parse(root.dataset.testing ?? "[]");
+    const nameEl = root.querySelector<HTMLElement>("[data-testing-name]");
+    const countEl = root.querySelector<HTMLElement>("[data-testing-count]");
+    const items = [...root.querySelectorAll<HTMLElement>("[data-deployed-item]")];
+    if (!nameEl || !countEl || crops.length < 2) return;
+
+    let i = 0;
+    let j = 0;
+    let tA: number | undefined;
+    let tB: number | undefined;
+
+    const stepTesting = () => {
+      nameEl.style.opacity = "0";
+      window.setTimeout(() => {
+        i = (i + 1) % crops.length;
+        nameEl.textContent = crops[i];
+        countEl.textContent = String(i + 1);
+        nameEl.style.opacity = "1";
+      }, 400);
+    };
+    const stepDeployed = () => {
+      if (items.length < 2) return;
+      items[j].classList.remove("is-on");
+      j = (j + 1) % items.length;
+      items[j].classList.add("is-on");
+    };
+
+    // timers only run while the section is on screen and the tab is visible;
+    // i and j are kept, so it resumes where it stopped
+    let visible = false;
+    const start = () => {
+      if (tA !== undefined) return;
+      tA = window.setInterval(stepTesting, 1400);
+      tB = window.setInterval(stepDeployed, 2200);
+    };
+    const stop = () => {
+      window.clearInterval(tA);
+      window.clearInterval(tB);
+      tA = tB = undefined;
+    };
+    const sync = () => (visible && !document.hidden ? start() : stop());
+
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    }).observe(root);
+    document.addEventListener("visibilitychange", sync);
+  });
+</script>
