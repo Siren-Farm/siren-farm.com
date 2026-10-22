@@ -63,6 +63,32 @@ export const PENDING_V2 = {
   ] satisfies Crop[],
 };
 
+/** Crops our models are trained on (models in testing). Source: training
+ *  report v2, Oct 2026. Alphabetical; the ticker cycles them in this order.
+ *  This is the full training set. PENDING_V2 above is the narrower list of
+ *  crops with commercial classes, which is a different claim. */
+export const TESTING_CROPS: string[] = [
+  "Apple", "Banana", "Basil", "Bean", "Bell pepper", "Blueberry", "Broccoli",
+  "Cabbage", "Carrot", "Cashew", "Cassava", "Cauliflower", "Celery", "Cherry",
+  "Chestnut", "Chili", "Citrus", "Coffee", "Corn", "Cucumber", "Date palm",
+  "Eggplant", "Garlic", "Ginger", "Grape", "Groundnut", "Guava", "Lettuce",
+  "Mango", "Olive", "Papaya", "Peach", "Plum", "Potato", "Pumpkin", "Raspberry",
+  "Rice", "Soybean", "Strawberry", "Sugarcane", "Tobacco", "Tomato", "Wheat",
+];
+
+export type CropIcon = "chestnut" | "grape" | "citrus" | "avocado";
+
+/** Crops where our tools are running in the field. Each entry is confirmed
+ *  individually before it is added, and each needs an icon in
+ *  src/assets/crops/<icon>.svg. While empty, the Deployed panel does not
+ *  render and the Testing panel takes the full width. */
+export const DEPLOYED_CROPS: { name: string; icon: CropIcon }[] = [
+  // { name: "Chestnut", icon: "chestnut" },
+  // { name: "Grapes", icon: "grape" },
+  // { name: "Citrus", icon: "citrus" },
+  // { name: "Avocado", icon: "avocado" },
+];
+
 export const STATUS_AS_OF = "October 2026";
 
 export const LEGAL = {
