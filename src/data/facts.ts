@@ -1,33 +1,26 @@
 // Public facts used across the site. Update here, not in components.
 //
-// Only publish what is actually serving. The v2 model is prepared below but
-// is NOT live; see PENDING_V2.
+// These figures describe the v2 model (training report v2, 5 October 2026).
+// They are published on the assumption that v2 is the serving default.
+// Do not merge a branch carrying them until that is confirmed.
 
 export type Crop = { name: string; classes: number };
 
-/** Crop names for the serving model. Empty because the names have not been
- *  supplied, so components say "nine crops" and hide the list. */
-export const CROPS: Crop[] = [];
-
-/** The serving model. */
+/** The model behind every published figure. The accuracy is measured on a
+ *  held-out image set, not in the field, and `measuredOn` must travel with
+ *  `top1` wherever the figure appears so it is never read as field accuracy.
+ *  Pluvora never gets this figure; it is the irrigation and timing layer. */
 export const PLANTOLOGIST = {
-  crops: 9,
-  diseaseClasses: 64,
-  top1: "90.3%",
+  crops: 43,
+  diseaseClasses: 248,
+  top1: "93.1%",
+  measuredOn: "on a held-out image set",
 };
 
-/** NOT LIVE. The commercial v2 model, ready for when it becomes the serving
- *  default. To switch: set CROPS to PENDING_V2.crops, set PLANTOLOGIST.crops
- *  to 29 and the class count to 157, and replace the accuracy figure with one
- *  measured on THIS model. The 90.3% above was measured on the 9-crop,
- *  64-class model and does not describe v2.
- *
- *  Note the wording changes too: v2's classes cover diseases, pests,
- *  deficiencies and healthy, so they are "classes", not "disease classes".
- *
- *  The research model covers more crops than these, but fourteen of them have
- *  no commercial classes, so that wider count is not for publication. */
-export const PENDING_V2 = {
+/** Crops with commercial classes, 29 of the 43, with the number of classes
+ *  per crop. This is coverage a client can be served on, which is a narrower
+ *  claim than "trained on". Not rendered anywhere at present. */
+export const COMMERCIAL_CROPS = {
   cropCount: 29,
   classCount: 157,
   crops: [
@@ -63,6 +56,32 @@ export const PENDING_V2 = {
   ] satisfies Crop[],
 };
 
+/** Crops our models are trained on (models in testing). Source: training
+ *  report v2, Oct 2026. Alphabetical; the ticker cycles them in this order.
+ *  This is the full training set; COMMERCIAL_CROPS above is the narrower
+ *  list a client can be served on, which is a different claim. */
+export const TESTING_CROPS: string[] = [
+  "Apple", "Banana", "Basil", "Bean", "Bell pepper", "Blueberry", "Broccoli",
+  "Cabbage", "Carrot", "Cashew", "Cassava", "Cauliflower", "Celery", "Cherry",
+  "Chestnut", "Chili", "Citrus", "Coffee", "Corn", "Cucumber", "Date palm",
+  "Eggplant", "Garlic", "Ginger", "Grape", "Groundnut", "Guava", "Lettuce",
+  "Mango", "Olive", "Papaya", "Peach", "Plum", "Potato", "Pumpkin", "Raspberry",
+  "Rice", "Soybean", "Strawberry", "Sugarcane", "Tobacco", "Tomato", "Wheat",
+];
+
+export type CropIcon = "chestnut" | "grape" | "citrus" | "avocado";
+
+/** Crops where our tools are running in the field. Each entry is confirmed
+ *  individually before it is added, and each needs an icon in
+ *  src/assets/crops/<icon>.svg. While empty, the Deployed panel does not
+ *  render and the Testing panel takes the full width. */
+export const DEPLOYED_CROPS: { name: string; icon: CropIcon }[] = [
+  // { name: "Chestnut", icon: "chestnut" },
+  // { name: "Grapes", icon: "grape" },
+  // { name: "Citrus", icon: "citrus" },
+  // { name: "Avocado", icon: "avocado" },
+];
+
 export const STATUS_AS_OF = "October 2026";
 
 export const LEGAL = {
@@ -80,13 +99,13 @@ export function formatList(items: string[]): string {
   return `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
 }
 
-export const hasCrops = CROPS.length > 0;
+/** "43 crops" */
+export const cropsPhrase = `${PLANTOLOGIST.crops} crops`;
 
-/** "nine crops: a, b and c" when the names exist, otherwise "nine crops". */
-export const cropsPhrase = hasCrops
-  ? `nine crops: ${formatList(CROPS.map((c) => c.name.toLowerCase()))}`
-  : "nine crops";
-
-if (!hasCrops) {
-  console.warn("facts.ts: CROPS is empty – crop list hidden");
+// The published count and the ticker's list describe the same model. If one
+// is updated without the other, fail the build rather than ship a mismatch.
+if (TESTING_CROPS.length !== PLANTOLOGIST.crops) {
+  throw new Error(
+    `facts.ts: PLANTOLOGIST.crops is ${PLANTOLOGIST.crops} but TESTING_CROPS has ${TESTING_CROPS.length} entries`
+  );
 }

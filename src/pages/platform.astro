@@ -3,7 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import SayHi from "../components/SayHi.astro";
 import Footer from "../components/Footer.astro";
-import { CROPS, PLANTOLOGIST, hasCrops } from "../data/facts";
+import CropTicker from "../components/CropTicker.astro";
+import { PLANTOLOGIST, TESTING_CROPS } from "../data/facts";
 
 // Each product carries an explicit stage. Stages are facts, not ambition:
 // move one only when the thing itself has moved.
@@ -24,7 +25,7 @@ const products = [
     name: "Plantologist",
     domain: "Early disease detection",
     stage: "In pilot",
-    body: `Detects disease from any camera, whether a phone, a drone or something bolted to a post. ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes in nine crops.`,
+    body: `Detects disease from any camera, whether a phone, a drone or something bolted to a post. ${PLANTOLOGIST.top1} top-1 accuracy across ${PLANTOLOGIST.diseaseClasses} disease classes in ${PLANTOLOGIST.crops} crops, ${PLANTOLOGIST.measuredOn}.`,
   },
   {
     name: "Provenance tracing",
@@ -86,7 +87,7 @@ const audiences = [
 
 <Layout
   title='Platform | Siren'
-  description='Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on nine crops and running with clients.'
+  description={`Sprout Heavy, Pluvora and Plantologist: farm records, irrigation intelligence and early disease detection, trained on ${PLANTOLOGIST.crops} crops and running with clients.`}
   theme='cream'
 >
   <Nav variant='light' active='platform' />
@@ -143,33 +144,16 @@ const audiences = [
       </p>
     </section>
 
-    {
-      hasCrops && (
-        <section class='crops' aria-labelledby='crops-title'>
-          <div class='markets-head'>
-            <h2 id='crops-title'>Nine crops today, validated one at a time</h2>
-            <p>
-              Plantologist and Pluvora are trained on the same nine crops. Every
-              new crop is calibrated and validated before we claim it.
-            </p>
-          </div>
-          {
-            hasCrops && (
-              <ul class='crop-grid'>
-                {CROPS.map((crop) => (
-                  <li>
-                    <span class='crop-name'>{crop.name}</span>
-                    <span class='crop-tag'>
-                      {crop.classes} {crop.classes === 1 ? "class" : "classes"}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )
-          }
-        </section>
-      )
-    }
+    <section class='crops' aria-labelledby='crops-title'>
+      <div class='markets-head'>
+        <h2 id='crops-title'>{TESTING_CROPS.length} crops in testing, validated per crop</h2>
+        <p>
+          Our models are trained on {TESTING_CROPS.length} crops. Every new crop is
+          calibrated and validated in the field before we claim it.
+        </p>
+      </div>
+      <CropTicker variant='cream' />
+    </section>
 
     <section class='markets' aria-labelledby='markets-title'>
       <div class='markets-head'>
@@ -344,40 +328,6 @@ const audiences = [
   .crops {
     margin-top: clamp(80px, 8vw, 140px);
   }
-  .crop-grid {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: clamp(10px, 1.2vw, 16px);
-  }
-  .crop-grid li {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 10px;
-    padding: clamp(12px, 1.3vw, 16px) clamp(14px, 1.5vw, 18px);
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(47, 99, 87, 0.16);
-  }
-  .crop-name {
-    flex: 1 1 auto;
-    font-family: var(--font-display);
-    font-size: clamp(15px, 1.3vw, 18px);
-    line-height: 1.2;
-    color: var(--color-stromboli);
-  }
-  .crop-tag {
-    flex: 0 0 auto;
-    font-size: clamp(11px, 1vw, 13px);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: var(--color-stromboli);
-  }
-
   /* markets */
   .markets {
     margin-top: clamp(80px, 8vw, 140px);
