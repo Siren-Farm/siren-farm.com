@@ -1,54 +1,102 @@
 ---
 import { Image } from "astro:assets";
+import airv from "../assets/partners/airv.svg";
+import upv from "../assets/partners/upv.png";
+import viteb from "../assets/partners/viteb.svg";
 
-// A plain row of partner marks, no text. Drop files into
-// src/assets/partners/ and they appear here, ordered by filename:
-//   1-tech-foundry.png   2-upv.png   3-omplo.png
-//
-// Requirements for each file, or the row will look wrong:
-//  . dark or full-colour version, NOT the white-on-dark variant. This sits
-//    on the cream page and a white logo is invisible on it.
-//  . transparent background, trimmed, no padding baked in.
-//  . svg preferred, otherwise png at 3x the display height (~180px tall).
-//
-// The folder is read at build time, so an empty folder renders nothing
-// rather than a broken row. Only add a mark once that organisation has
-// agreed to appear: a logo reads as endorsement in a way a sentence does not.
-const files = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/partners/*.{png,jpg,jpeg,svg,webp}",
-  { eager: true }
-);
+// Recognition, then partner logos, on /about. Rules:
+//  . partners appear as logos only, with no text about the nature of the
+//    relationship
+//  . each logo uses the organisation's own published dark or colour file,
+//    never a white-on-dark variant (invisible on the cream page)
+//  . a logo reads as endorsement, so only organisations that agreed appear
+const recognition = [
+  { name: "AI Summit Barcelona 2026", note: "One of five finalists in the Pitch Competition" },
+  { name: "2080 Ventures", note: "Selected for the Global Startup Showcase 2026" },
+  { name: "Tech Foundry Portugal", note: "Deep-tech edition" },
+];
 
-const logos = Object.entries(files)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([path, mod]) => ({
-    src: mod.default,
-    // filename without the ordering prefix or extension, for the alt text
-    alt: path.split("/").pop()!.replace(/^\d+[-_]/, "").replace(/\.\w+$/, "").replace(/[-_]/g, " "),
-  }));
+const logos = [
+  { src: airv, alt: "AIRV, Associação Empresarial da Região de Viseu" },
+  { src: upv, alt: "Universidade Politécnica de Viseu" },
+  { src: viteb, alt: "ViTEB, Visabeira's testbed" },
+];
 ---
 
-{
-  logos.length > 0 && (
-    <section class='partners' aria-label='Organisations we work with'>
-      <ul>
-        {logos.map((logo) => (
-          <li>
-            <Image src={logo.src} alt={logo.alt} height={60} densities={[1, 2]} />
-          </li>
-        ))}
-      </ul>
-    </section>
-  )
-}
+<section class='recognition' aria-labelledby='recognition-title'>
+  <h2 id='recognition-title'>Recognition</h2>
+  <ul class='list'>
+    {
+      recognition.map((item) => (
+        <li>
+          <span class='name'>{item.name}</span>
+          <span class='note'>{item.note}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<section class='partners' aria-labelledby='partners-title'>
+  <h2 id='partners-title'>Partners</h2>
+  <ul class='logos'>
+    {
+      logos.map((logo) => (
+        <li>
+          <Image src={logo.src} alt={logo.alt} height={60} densities={[1, 2]} />
+        </li>
+      ))
+    }
+  </ul>
+</section>
 
 <style>
+  .recognition,
   .partners {
     max-width: 1080px;
     margin: 0 auto;
-    padding: clamp(56px, 6vw, 96px) 24px 0;
+    padding: clamp(80px, 8vw, 140px) 24px 0;
   }
-  .partners ul {
+  .partners {
+    padding-top: clamp(56px, 6vw, 96px);
+  }
+  h2 {
+    margin: 0 0 clamp(24px, 2.6vw, 36px);
+    text-align: center;
+    font-size: clamp(30px, 3vw, 48px);
+    line-height: 1.12;
+    color: var(--color-stromboli);
+  }
+
+  .list {
+    margin: 0;
+    padding: clamp(24px, 2.6vw, 36px) 0 0;
+    list-style: none;
+    border-top: 1px solid rgba(47, 99, 87, 0.2);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 48px);
+    text-align: center;
+  }
+  .list li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .name {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 1.5vw, 22px);
+    line-height: 1.25;
+    color: var(--color-te-papa-green);
+  }
+  .note {
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.45;
+    color: rgba(31, 63, 55, 0.78);
+    text-wrap: pretty;
+  }
+
+  .logos {
     margin: 0;
     padding: clamp(28px, 3vw, 44px) 0 0;
     list-style: none;
@@ -59,26 +107,26 @@ const logos = Object.entries(files)
     justify-content: center;
     gap: clamp(28px, 5vw, 72px);
   }
-  .partners li {
+  .logos li {
     display: flex;
   }
-  /* height-matched rather than width-matched, so marks of different
-     proportions read as one row */
-  .partners :global(img) {
+  /* height-matched, so marks of different proportions read as one row */
+  .logos :global(img) {
     height: clamp(34px, 3.4vw, 50px);
     width: auto;
-    opacity: 0.75;
-    transition: opacity 250ms ease;
-  }
-  .partners :global(img:hover) {
-    opacity: 1;
   }
 
+  @media (max-width: 760px) {
+    .list {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
   @media (max-width: 560px) {
-    .partners ul {
+    .logos {
       gap: 26px 32px;
     }
-    .partners :global(img) {
+    .logos :global(img) {
       height: 30px;
     }
   }
