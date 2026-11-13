@@ -1,10 +1,13 @@
 ---
 import { PLANTOLOGIST } from "../data/facts";
 
-// Five short proof points between the hero and the pillars. Big value,
+// Three short proof points between the hero and the pillars. Big value,
 // small label. Text only, matching Status and Measure: no icons, no logos.
 const items = [
-  { value: "First client pilot", label: "running since October 2026" },
+  {
+    value: "Pilots across Europe",
+    label: "running now, with southeastern Africa and the South Caucasus in preparation",
+  },
   {
     value: `${PLANTOLOGIST.crops} crops`,
     label: "Plantologist and Pluvora, trained on the same set",
@@ -13,11 +16,6 @@ const items = [
     value: PLANTOLOGIST.top1,
     label: `Plantologist top-1 across ${PLANTOLOGIST.diseaseClasses} disease classes, ${PLANTOLOGIST.measuredOn}`,
   },
-  {
-    value: "2 signed partners",
-    label: "Universidade Politécnica de Viseu · ViTEB, Visabeira's testbed",
-  },
-  { value: "Finalist", label: "AI Summit Barcelona 2026" },
 ];
 ---
 
@@ -43,7 +41,7 @@ const items = [
     padding: clamp(24px, 2.6vw, 36px) 0;
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(18px, 2vw, 32px);
     border-top: 1px solid rgba(240, 207, 135, 0.28);
     border-bottom: 1px solid rgba(240, 207, 135, 0.28);

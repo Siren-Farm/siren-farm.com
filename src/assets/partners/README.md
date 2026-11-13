@@ -1,12 +1,14 @@
-Partner logo files. Drop them here and they appear at the bottom of /about,
-ordered by filename:
-
-  1-tech-foundry.png    2-upv.png    3-omplo.png
+Partner logo files, shown at the bottom of the Partners section on /about.
+Each file is imported by name in src/components/Partners.astro, which also
+holds its alt text.
 
 Each file must be:
-  - the dark or full-colour version, NOT white-on-dark. The About page is
-    cream, so a white logo is invisible on it.
+  - the organisation's own dark or full-colour version, NOT white-on-dark.
+    The About page is cream, so a white logo is invisible on it.
   - transparent background, trimmed, no baked-in padding.
-  - svg if possible, otherwise png about 180px tall.
+  - svg if possible, otherwise png about 240px tall.
+
+Sources (November 2026): airv.svg from airv.pt, upv.png from univiseu.pt
+(official black version, trimmed), viteb.svg from vitebtestbed.com.
 
 Only add a mark once that organisation has agreed to appear.

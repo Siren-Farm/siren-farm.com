@@ -82,7 +82,7 @@ export const DEPLOYED_CROPS: { name: string; icon: CropIcon }[] = [
   // { name: "Avocado", icon: "avocado" },
 ];
 
-export const STATUS_AS_OF = "October 2026";
+export const STATUS_AS_OF = "November 2026";
 
 export const LEGAL = {
   name: "Siren - Agricultura e Tecnologia, Lda",
