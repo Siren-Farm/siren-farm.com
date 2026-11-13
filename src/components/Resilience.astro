@@ -1,0 +1,175 @@
+---
+// How Siren works, set against the two labels it is usually filed under.
+// The strike lines are drawn by default; the script only animates them in
+// when motion is allowed, so without JS the message still reads correctly.
+const points = [
+  {
+    title: "More is not better",
+    body: "Precision agriculture often means more passes, more inputs and more sensors than a crop can pay back. We start from open data and add hardware only where it changes a decision.",
+  },
+  {
+    title: "The past is a weak guide",
+    body: "Predictive models learn from last decade's weather and are then asked about a climate that no longer behaves like it. We check alerts on the ground and keep the models learning from what we find, so they track the climate your farm has now.",
+  },
+  {
+    title: "Some seasons have no fix",
+    body: "In a drought there is no water to dose precisely, and no sensor makes more of it. Then the useful answer is a plan: which blocks to save, what to stop spending on, what to plant next.",
+  },
+];
+---
+
+<section class='resilience' aria-labelledby='resilience-title' data-resilience>
+  <div class='labels'>
+    <p class='crossed'>
+      <span class='sr-only'>Not </span><s>Precision agriculture</s>
+    </p>
+    <p class='crossed'>
+      <span class='sr-only'>Not </span><s>Predictive agriculture</s>
+    </p>
+    <h2 id='resilience-title'>Resilience agriculture</h2>
+    <p class='lede'>
+      Farming for a climate that no longer repeats itself: fewer, better-timed
+      decisions, and a plan for the seasons nothing can fix.
+    </p>
+  </div>
+
+  <ul class='points'>
+    {
+      points.map((point) => (
+        <li>
+          <h3>{point.title}</h3>
+          <p>{point.body}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .resilience {
+    padding: clamp(96px, 10vw, 168px) 0 0;
+  }
+  .labels {
+    max-width: 52em;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .crossed {
+    margin: 0 0 clamp(4px, 0.5vw, 8px);
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 46px);
+    line-height: 1.15;
+    /* large text on the green: 3.6:1, above the 3:1 needed */
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .crossed s {
+    position: relative;
+    text-decoration: none;
+  }
+  .crossed s::after {
+    content: "";
+    position: absolute;
+    left: -3%;
+    right: -3%;
+    top: 54%;
+    height: clamp(3px, 0.28vw, 5px);
+    border-radius: 3px;
+    background: var(--color-saffron-mango);
+    transform-origin: left center;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .crossed + .crossed s::after {
+    transition-delay: 0.3s;
+  }
+  /* set by the script only when motion is allowed */
+  .resilience.armed .crossed s::after {
+    transform: scaleX(0);
+  }
+  .resilience.armed.drawn .crossed s::after {
+    transform: scaleX(1);
+  }
+
+  h2 {
+    margin: clamp(10px, 1.2vw, 18px) 0 0;
+    font-size: clamp(40px, 4.4vw, 68px);
+    line-height: 1.08;
+    color: var(--color-saffron-mango);
+  }
+  .lede {
+    margin: clamp(14px, 1.4vw, 22px) 0 0;
+    max-width: 34em;
+    font-size: clamp(17px, 1.45vw, 22px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  .points {
+    margin: clamp(40px, 4.5vw, 68px) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 48px);
+  }
+  .points li {
+    padding-top: clamp(18px, 2vw, 26px);
+    border-top: 1px solid rgba(240, 207, 135, 0.28);
+  }
+  .points h3 {
+    margin: 0 0 10px;
+    font-size: clamp(22px, 2vw, 30px);
+    line-height: 1.2;
+    color: var(--color-putty);
+  }
+  .points p {
+    margin: 0;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.5;
+    color: var(--color-white);
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 900px) {
+    .points {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-resilience]").forEach((root) => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    root.classList.add("armed");
+    const draw = () => root.classList.add("drawn");
+
+    const inView = () => {
+      const rect = root.getBoundingClientRect();
+      return rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
+    };
+    const check = () => {
+      if (inView()) {
+        draw();
+        window.removeEventListener("scroll", check);
+      }
+    };
+    new IntersectionObserver(
+      ([entry], observer) => {
+        if (entry.isIntersecting) {
+          draw();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -15% 0px" }
+    ).observe(root);
+    window.addEventListener("scroll", check, { passive: true });
+    check();
+    // never leave the labels uncrossed: the message depends on the line
+    window.setTimeout(draw, 4000);
+  });
+</script>

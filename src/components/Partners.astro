@@ -4,18 +4,12 @@ import airv from "../assets/partners/airv.svg";
 import upv from "../assets/partners/upv.png";
 import viteb from "../assets/partners/viteb.svg";
 
-// Partners and recognition, on /about. Moved off the home page in
-// November 2026. Rules:
-//  . a partner is described as "signed" only when an agreement is signed
+// Recognition, then partner logos, on /about. Rules:
+//  . partners appear as logos only, with no text about the nature of the
+//    relationship
 //  . each logo uses the organisation's own published dark or colour file,
 //    never a white-on-dark variant (invisible on the cream page)
 //  . a logo reads as endorsement, so only organisations that agreed appear
-const partners = [
-  { name: "Universidade Politécnica de Viseu", note: "Collaboration protocol signed" },
-  { name: "ViTEB, Visabeira's testbed", note: "Testbed agreement signed" },
-  { name: "AIRV, Associação Empresarial da Região de Viseu", note: "Endorses our work" },
-];
-
 const recognition = [
   { name: "AI Summit Barcelona 2026", note: "One of five finalists in the Pitch Competition" },
   { name: "2080 Ventures", note: "Selected for the Global Startup Showcase 2026" },
@@ -29,38 +23,22 @@ const logos = [
 ];
 ---
 
+<section class='recognition' aria-labelledby='recognition-title'>
+  <h2 id='recognition-title'>Recognition</h2>
+  <ul class='list'>
+    {
+      recognition.map((item) => (
+        <li>
+          <span class='name'>{item.name}</span>
+          <span class='note'>{item.note}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
 <section class='partners' aria-labelledby='partners-title'>
   <h2 id='partners-title'>Partners</h2>
-
-  <div class='lists'>
-    <div>
-      <h3>Who we work with</h3>
-      <ul>
-        {
-          partners.map((item) => (
-            <li>
-              <span class='name'>{item.name}</span>
-              <span class='note'>{item.note}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-    <div>
-      <h3>Recognition</h3>
-      <ul>
-        {
-          recognition.map((item) => (
-            <li>
-              <span class='name'>{item.name}</span>
-              <span class='note'>{item.note}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </div>
-
   <ul class='logos'>
     {
       logos.map((logo) => (
@@ -73,47 +51,37 @@ const logos = [
 </section>
 
 <style>
+  .recognition,
   .partners {
     max-width: 1080px;
     margin: 0 auto;
     padding: clamp(80px, 8vw, 140px) 24px 0;
   }
+  .partners {
+    padding-top: clamp(56px, 6vw, 96px);
+  }
   h2 {
-    margin: 0 0 clamp(28px, 3vw, 44px);
+    margin: 0 0 clamp(24px, 2.6vw, 36px);
     text-align: center;
     font-size: clamp(30px, 3vw, 48px);
     line-height: 1.12;
     color: var(--color-stromboli);
   }
 
-  .lists {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(28px, 4vw, 64px);
-    border-top: 1px solid rgba(47, 99, 87, 0.2);
-    padding-top: clamp(24px, 2.6vw, 36px);
-  }
-  h3 {
-    margin: 0 0 14px;
-    font-family: var(--font-sans);
-    font-size: clamp(12px, 1vw, 14px);
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-stromboli);
-  }
-  .lists ul {
+  .list {
     margin: 0;
-    padding: 0;
+    padding: clamp(24px, 2.6vw, 36px) 0 0;
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    border-top: 1px solid rgba(47, 99, 87, 0.2);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 48px);
+    text-align: center;
   }
-  .lists li {
+  .list li {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
   }
   .name {
     font-family: var(--font-display);
@@ -125,10 +93,11 @@ const logos = [
     font-size: clamp(15px, 1.2vw, 17px);
     line-height: 1.45;
     color: rgba(31, 63, 55, 0.78);
+    text-wrap: pretty;
   }
 
   .logos {
-    margin: clamp(40px, 4.5vw, 64px) 0 0;
+    margin: 0;
     padding: clamp(28px, 3vw, 44px) 0 0;
     list-style: none;
     border-top: 1px solid rgba(47, 99, 87, 0.2);
@@ -147,9 +116,10 @@ const logos = [
     width: auto;
   }
 
-  @media (max-width: 700px) {
-    .lists {
+  @media (max-width: 760px) {
+    .list {
       grid-template-columns: 1fr;
+      gap: 18px;
     }
   }
   @media (max-width: 560px) {
