@@ -48,12 +48,13 @@ const routes = [
     justify-content: center;
     text-align: center;
   }
-  /* the mark sits behind the copy, the way it does on every other page */
+  /* the mark sits behind the copy, the way it does on every other page.
+     Full-strength dark green: at half opacity it faded into the page, and the
+     dark shape keeps the gold and cream text on top readable */
   .notfound :global(.notfound-leaf) {
     position: absolute;
     top: clamp(120px, 14vw, 200px);
     width: clamp(260px, 30vw, 420px);
-    opacity: 0.55;
     z-index: 0;
     pointer-events: none;
   }
